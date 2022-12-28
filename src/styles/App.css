@@ -32,6 +32,24 @@ header {
   overflow: hidden;
 }
 
+.bg-chat {
+  background-image: url('bg-light.jfif');
+  background-repeat: repeat;
+  background-size: 30%;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
 }

@@ -1,0 +1,46 @@
+.msgBubble {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.msgBubble .msgContent {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background-color: white;
+  border-radius: 0.5em;
+  padding: 6px 7px 8px 9px;
+  font-size: 14px;
+  @apply text-dark;
+}
+.msgBubble .msgContent time {
+  display: flex;
+  align-items: flex-end;
+  font-size: 11px;
+  @apply text-gray-400;
+}
+.msgBubble .msgContent .triangle {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: -8px;
+  height: 0px;
+  width: 0px;
+  border-right: solid 16px white;
+  border-bottom: solid 20px transparent;
+  margin-bottom: 20px;
+}
+.msgBubble.sender {
+  flex-direction: row-reverse;
+}
+.msgBubble.sender .msgContent {
+  @apply bg-primary-90;
+}
+.msgBubble.sender .triangle {
+  left: auto;
+  right: -8px;
+  border-left: solid 16px #E0FCD6;
+  border-right: 0px;
+}/*# sourceMappingURL=Chatbubble.css.map */
