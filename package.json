@@ -7,7 +7,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "postinstall": "husky install",
+    "commit":"git-cz"
+  },
+  "config":{
+    "commitizen":{
+     "path":"cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
@@ -25,8 +32,11 @@
     "@typescript-eslint/parser": "^5.47.0",
     "@vitejs/plugin-react": "^3.0.0",
     "autoprefixer": "^10.4.13",
+    "commitizen": "^4.2.6",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.30.0",
     "eslint-plugin-react": "^7.31.11",
+    "husky": "^8.0.2",
     "postcss": "^8.4.20",
     "sass": "^1.57.1",
     "tailwindcss": "^3.2.4",
