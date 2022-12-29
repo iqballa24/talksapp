@@ -4,16 +4,16 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { MdArrowBack } from 'react-icons/md';
 
-const Header: React.FC<{ path: string; name: string }> = ({ path, name }) => {
+const Header: React.FC<{ pathBack: string; name: string }> = ({ pathBack, name }) => {
   return (
-    <header className="flex flex-col-reverse bg-primary-100 md:h-full md:max-h-[108px] p-5">
+    <header className="flex flex-col-reverse bg-primary-100 md:h-full md:max-h-[108px] p-5 z-20">
       <motion.div
         initial={{ x: -30 }}
         animate={{ x: 0 }}
         transition={{ ease: 'easeOut', duration: 0.4 }}
         className="flex flex-row space-x-5 items-center"
       >
-        <Link to={path}>
+        <Link to={pathBack}>
           <MdArrowBack id='back' size={24} className="text-white cursor-pointer" />
         </Link>
         <h1 className="text-white text-lg font-medium">{name}</h1>

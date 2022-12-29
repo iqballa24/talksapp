@@ -3,6 +3,19 @@ import Input from '@/components/UI/Input';
 import Popover from '@/components/UI/Popoveritem';
 import Header from '@/components/UI/Header';
 import ModalSettingTheme from '@/components/UI/Modal/SettingTheme';
+import ModalSettingLang from '@/components/UI/Modal/SettingLang';
+import ModalSettingColors from '@/components/UI/Modal/SettingColor';
 import Buttons from '@/components/UI/Buttons';
+import Loader from '@/components/UI/Loader';
 
-export { Searchbar, Input, Popover, Header, ModalSettingTheme, Buttons };
+export {
+  Searchbar,
+  Input,
+  Popover,
+  Header,
+  ModalSettingTheme,
+  ModalSettingLang,
+  ModalSettingColors,
+  Buttons,
+  Loader,
+};

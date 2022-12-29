@@ -1,0 +1,47 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { HiLockOpen } from 'react-icons/hi';
+import { Header } from '@/components/UI';
+import { securityPageContent } from '@/constant';
+
+const SecurityPage = () => {
+  return (
+    <>
+      <Header name="Security" pathBack="/settings" />
+      <motion.section
+        initial={{ y: 70 }}
+        animate={{ y: 0 }}
+        className="flex flex-col space-y-5 py-5 px-5 sm:px-7 overflow-scroll"
+      >
+        <div className="flex justify-center py-5">
+          <div className="flex justify-center items-center bg-primary-50 h-[84px] w-[84px] rounded-[50%]">
+            <HiLockOpen size={46} className="text-white"/>
+          </div>
+        </div>
+        <h1 className="text-lg text-dark font-medium select-none">
+          {securityPageContent.title}
+        </h1>
+        <p className="text-sm text-dark-secondary leading-6">
+          {securityPageContent.description}
+        </p>
+        <ul className="flex flex-col space-y-3">
+          {securityPageContent.featured.map((feature) => (
+            <li
+              key={feature.id}
+              className="flex flex-row space-x-2 items-center text-dark-secondary"
+            >
+              <feature.icon />
+              <p>{feature.text}</p>
+            </li>
+          ))}
+        </ul>
+        <div
+          className="text-sm text-dark-secondary leading-6"
+          dangerouslySetInnerHTML={{ __html: securityPageContent.content }}
+        />
+      </motion.section>
+    </>
+  );
+};
+
+export default React.memo(SecurityPage);
