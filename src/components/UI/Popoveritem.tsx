@@ -1,12 +1,9 @@
 import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react';
-import { MenuProfileTypes } from '@/lib/types';
+import { PopoverProps } from '@/lib/types/PropTypes';
 
-const PopOverItem: React.FC<{
-  className: string;
-  menus: MenuProfileTypes[];
-}> = ({ className, menus }) => {
+const PopOverItem: React.FC<PopoverProps> = ({ className, menus }) => {
   const navigate = useNavigate();
   const classes = [
     'absolute z-20 mt-5 w-full max-w-[180px] -translate-x-1/2 transform px-4 sm:px-0',

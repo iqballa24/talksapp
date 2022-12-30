@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ItemMenuSettingTypes } from '@/lib/types';
+import { ItemSettingProps } from '@/lib/types/PropTypes';
 
-const ItemMenuSetting: React.FC<ItemMenuSettingTypes> = ({
+const ItemMenuSetting: React.FC<ItemSettingProps> = ({
   children,
   duration,
   onClick,

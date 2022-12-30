@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isDarkMode: !!localStorage.getItem('darkMode'),
+  accentColor: localStorage.getItem('accentColor') ?? 'primary',
   showModalTheme: false,
   showModalLang: false,
   showModalColors: false,
@@ -13,6 +14,9 @@ const uiSlice = createSlice({
   reducers: {
     toggleTheme(state, { payload }) {
       state.isDarkMode = payload;
+    },
+    changeAccentColor(state, { payload }) {
+      state.accentColor = payload;
     },
     toggleModalTheme(state) {
       state.showModalTheme = !state.showModalTheme;

@@ -1,15 +1,25 @@
 import React, { Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { Buttons } from '@/components/UI';
 import { CirclePicker } from 'react-color';
+import { Dialog, Transition } from '@headlessui/react';
 import { colors } from '@/constant';
+import { Buttons } from '@/components/UI';
+import { ModalSettingProps } from '@/lib/types/PropTypes';
+import { uiActions } from '@/store/ui';
+import { useAppDispatch } from '@/lib/hooks/useRedux';
+import namedHexColor from '@/util/namedHexColor';
 
-const ModalSettingColors: React.FC<{
-  onClose: () => void;
-  isShow: boolean;
-}> = ({ onClose, isShow }) => {
-  const handleChangeComplete = (color: unknown) => {
-    console.log(color);
+const ModalSettingColors: React.FC<ModalSettingProps> = ({
+  onClose,
+  isShow,
+}) => {
+  const dispatch = useAppDispatch();
+
+  const handleChangeComplete = (color: { hex: string }) => {
+    const selectedColor = namedHexColor(color.hex);
+
+    localStorage.setItem('accentColor', selectedColor);
+
+    dispatch(uiActions.changeAccentColor(selectedColor));
   };
 
   return (

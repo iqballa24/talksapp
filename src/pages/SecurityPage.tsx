@@ -3,8 +3,13 @@ import { motion } from 'framer-motion';
 import { HiLockOpen } from 'react-icons/hi';
 import { Header } from '@/components/UI';
 import { securityPageContent } from '@/constant';
+import { useAppSelector } from '@/lib/hooks/useRedux';
+import { configColors } from '@/constant/configColors';
 
 const SecurityPage = () => {
+  const { accentColor } = useAppSelector((state) => state.ui);
+  const bgColor = configColors[accentColor as keyof typeof configColors].bgColor[50];
+
   return (
     <>
       <Header name="Security" pathBack="/settings" />
@@ -14,7 +19,7 @@ const SecurityPage = () => {
         className="flex flex-col space-y-5 py-5 px-5 sm:px-7 overflow-y-scroll"
       >
         <div className="flex justify-center py-5">
-          <div className="flex justify-center items-center bg-primary-50 h-[84px] w-[84px] rounded-[50%]">
+          <div className={`flex justify-center items-center ${bgColor} h-[84px] w-[84px] rounded-[50%]`}>
             <HiLockOpen size={46} className="text-white"/>
           </div>
         </div>

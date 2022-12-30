@@ -3,8 +3,9 @@ import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { Dialog, Transition } from '@headlessui/react';
 import { Buttons } from '@/components/UI';
 import { uiActions } from '@/store/ui';
+import { ModalSettingProps } from '@/lib/types/PropTypes';
 
-const ModalSettingTheme: React.FC<{ onClose: () => void; isShow: boolean }> = ({
+const ModalSettingTheme: React.FC<ModalSettingProps> = ({
   onClose,
   isShow,
 }) => {
@@ -15,6 +16,13 @@ const ModalSettingTheme: React.FC<{ onClose: () => void; isShow: boolean }> = ({
 
   const changeThemeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isDark = e.target.value === 'Dark';
+
+    if (isDark) {
+      localStorage.setItem('darkMode', 'dark');
+    } else {
+      localStorage.removeItem('darkMode');
+    }
+
     themeSelected.current = e.target.value;
     dispatch(uiActions.toggleTheme(isDark));
   };
@@ -54,7 +62,10 @@ const ModalSettingTheme: React.FC<{ onClose: () => void; isShow: boolean }> = ({
                 </Dialog.Title>
                 <div className="flex flex-col space-y-2 mt-4">
                   {theme.map((item, index) => (
-                    <div key={index} className="flex space-x-2 text-dark dark:text-grey">
+                    <div
+                      key={index}
+                      className="flex space-x-2 text-dark dark:text-grey"
+                    >
                       <input
                         type="radio"
                         id={item}

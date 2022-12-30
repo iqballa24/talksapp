@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Buttons } from '@/components/UI';
+import { ModalSettingProps } from '@/lib/types/PropTypes';
 
-const ModalSettingLang: React.FC<{ onClose: () => void; isShow: boolean }> = ({
-  onClose,
-  isShow,
-}) => {
+const ModalSettingLang: React.FC<ModalSettingProps> = ({ onClose, isShow }) => {
   const theme = ['Indonesia', 'English'];
 
   return (
@@ -43,14 +41,19 @@ const ModalSettingLang: React.FC<{ onClose: () => void; isShow: boolean }> = ({
                 </Dialog.Title>
                 <div className="flex flex-col space-y-2 mt-4">
                   {theme.map((item, index) => (
-                    <div key={index} className="flex space-x-2 text-dark dark:text-grey">
-                      <input type="radio" id={item} name="theme" value={item}/>
+                    <div
+                      key={index}
+                      className="flex space-x-2 text-dark dark:text-grey"
+                    >
+                      <input type="radio" id={item} name="theme" value={item} />
                       <label htmlFor={item}>{item}</label>
                     </div>
                   ))}
                 </div>
                 <div className="flex justify-end space-x-2 mt-4">
-                  <Buttons type='button' title='OK' onClick={onClose} isPrimary>OK</Buttons>
+                  <Buttons type="button" title="OK" onClick={onClose} isPrimary>
+                    OK
+                  </Buttons>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

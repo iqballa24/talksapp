@@ -1,10 +1,8 @@
 import React from 'react';
 import { MdInsertPhoto } from 'react-icons/md';
+import { EditAvatarProps } from '@/lib/types/PropTypes';
 
-const EditAvatar: React.FC<{
-  img: string;
-  onImgChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}> = ({ img, onImgChange }) => {
+const EditAvatar: React.FC<EditAvatarProps> = ({ img, onImgChange }) => {
   return (
     <div className="w-full py-7 flex justify-center transition-all relative">
       <label

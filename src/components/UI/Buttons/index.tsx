@@ -1,7 +1,9 @@
 import React from 'react';
-import { ButtonsTypes } from '@/lib/types';
+import { ButtonsProps } from '@/lib/types/PropTypes';
+import { useAppSelector } from '@/lib/hooks/useRedux';
+import { configColors } from '@/constant/configColors';
 
-const Buttons: React.FC<ButtonsTypes> = ({
+const Buttons: React.FC<ButtonsProps> = ({
   title,
   children,
   type,
@@ -9,13 +11,21 @@ const Buttons: React.FC<ButtonsTypes> = ({
   isPrimary,
   isSecondary,
 }) => {
+  const { accentColor } = useAppSelector((state) => state.ui);
   const className = [
     'inline-flex justify-center rounded px-4 py-2 text-sm font-medium ',
   ];
 
-  isPrimary && className.push('bg-primary text-white hover:bg-primary-100');
+  isPrimary &&
+    className.push(
+      `${
+        configColors[accentColor as keyof typeof configColors].button
+      } text-white`
+    );
   isSecondary &&
-    className.push('bg-transparent border border-grey text-primary hover:shadow-md dark:hover:bg-dark-third');
+    className.push(
+      'bg-transparent border border-grey text-primary hover:shadow-md dark:hover:bg-dark-third'
+    );
 
   return (
     <>
