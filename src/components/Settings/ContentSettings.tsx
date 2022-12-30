@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
 import {
   MdColorLens,
@@ -15,22 +15,26 @@ import {
   ModalSettingColors,
 } from '@/components/UI';
 
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
+import { uiActions } from '@/store/ui';
+
 const ContentSettings = () => {
   const navigate = useNavigate();
-  const [showModalTheme, setShowModalTheme] = useState(false);
-  const [showModalLang, setShowModalLang] = useState(false);
-  const [showModalColors, setShowModalColors] = useState(false);
+  const dispatch = useAppDispatch();
+  const { showModalColors, showModalLang, showModalTheme } = useAppSelector(
+    (state) => state.ui
+  );
 
   const toggleModalTheme = () => {
-    setShowModalTheme((prev) => !prev);
+    dispatch(uiActions.toggleModalTheme());
   };
 
   const toggleModalLang = () => {
-    setShowModalLang((prev) => !prev);
+    dispatch(uiActions.toggleModalLang());
   };
 
   const toggleModalColors = () => {
-    setShowModalColors((prev) => !prev);
+    dispatch(uiActions.toggleModalColors());
   };
 
   return (

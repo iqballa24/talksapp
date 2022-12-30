@@ -28,7 +28,7 @@ const HeaderProfile = () => {
         onClick={() => navigate('/profile')}
       />
       <Tooltip className="z-20" anchorId="profile" content="Profile" />
-      <ul className="relative flex flex-row space-x-7 text-dark-secondary dark:text-grey">
+      <ul className="relative flex flex-row items-center space-x-7 text-dark-secondary dark:text-grey">
         <li id="group" className="cursor-pointer">
           <MdGroups size={22} role="button" />
           <Tooltip className="z-20" anchorId="group" content="Create group" />
@@ -42,13 +42,11 @@ const HeaderProfile = () => {
           <Tooltip className="z-20" anchorId="newChat" content="New chat" />
         </li>
         <li id="menu" className="cursor-pointer">
-          <Popover>
-            <>
-              <Popover.Button>
-                <MdMoreVert size={22} role="button" />
-              </Popover.Button>
-              <PopOverItem className="-right-[86px]" menus={menuProfile} />
-            </>
+          <Popover className='flex items-center'>
+            <Popover.Button>
+              <MdMoreVert size={22} role="button" />
+            </Popover.Button>
+            <PopOverItem className="-right-[86px] top-4" menus={menuProfile} />
           </Popover>
           <Tooltip className="z-20" anchorId="menu" content="Menu" />
         </li>

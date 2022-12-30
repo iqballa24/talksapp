@@ -11,7 +11,7 @@ const AboutPage = () => {
       <motion.section
         initial={{ y: 70 }}
         animate={{ y: 0 }}
-        className="flex flex-col text-dark-secondary dark:text-grey/50 space-y-5 py-5 px-5 sm:px-7 overflow-scroll select-none"
+        className="flex flex-col text-dark-secondary dark:text-grey/50 space-y-5 py-5 px-5 sm:px-7 overflow-y-scroll select-none"
       >
         <div className="flex flex-col items-center space-y-2 py-5">
           <img

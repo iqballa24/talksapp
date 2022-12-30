@@ -11,7 +11,7 @@ const SecurityPage = () => {
       <motion.section
         initial={{ y: 70 }}
         animate={{ y: 0 }}
-        className="flex flex-col space-y-5 py-5 px-5 sm:px-7 overflow-scroll"
+        className="flex flex-col space-y-5 py-5 px-5 sm:px-7 overflow-y-scroll"
       >
         <div className="flex justify-center py-5">
           <div className="flex justify-center items-center bg-primary-50 h-[84px] w-[84px] rounded-[50%]">
