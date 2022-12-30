@@ -18,10 +18,10 @@ const Editbox: React.FC<{
   };
 
   return (
-    <div className="flex flex-col px-4 sm:px-7 py-3 space-y-3 bg-white shadow-sm">
-      <h1 className="text-sm text-dark-secondary">{title}</h1>
+    <div className="flex flex-col px-4 sm:px-7 py-3 space-y-3 bg-white dark:bg-dark-third shadow-sm">
+      <h1 className="text-sm text-primary">{title}</h1>
       <div className="flex flex-row items-center justify-between">
-        <span className="text-dark text-[17px] w-full pr-4">
+        <span className="text-dark dark:text-grey text-[17px] w-full pr-4">
           <input
             type="text"
             value={value}

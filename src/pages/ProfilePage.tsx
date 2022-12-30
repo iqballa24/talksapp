@@ -40,7 +40,7 @@ const ProfilePage = () => {
         transition={{
           default: { ease: 'linear' },
         }}
-        className="flex flex-col bg-grey-secondary h-full"
+        className="flex flex-col bg-grey-secondary dark:bg-dark-third h-full"
       >
         <EditAvatar img={img} onImgChange={imgChangeHandler} />
         <Editbox title="Your name" value={name} onChange={nameChangeHandler} />

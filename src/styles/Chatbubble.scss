@@ -9,17 +9,17 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    background-color: white;
     border-radius: 0.5em;
     padding: 6px 7px 8px 9px;
     font-size: 14px;
-    @apply text-dark;
+    @apply bg-white dark:bg-dark;
+    @apply text-dark dark:text-grey-secondary;
 
     time {
       display: flex;
       align-items: flex-end;
       font-size: 11px;
-      @apply text-gray-400;
+      @apply text-gray-400 dark:text-grey;
     }
 
     .triangle {
@@ -29,9 +29,9 @@
       left: -8px;
       height: 0px;
       width: 0px;
-      border-right: solid 16px white;
       border-bottom: solid 20px transparent;
       margin-bottom: 20px;
+      @apply border-r-[16px] border-r-white dark:border-r-dark;
     }
   }
 
@@ -39,14 +39,14 @@
     flex-direction: row-reverse;
 
     .msgContent {
-      @apply bg-primary-25;
+      @apply bg-primary-25 dark:bg-primary-100;
     }
 
     .triangle {
       left: auto;
       right: -8px;
-      border-left: solid 16px #E0FCD6;
       border-right: 0px;
+      @apply border-l-[16px] border-l-primary-25 dark:border-l-primary-100;
     }
   }
 }

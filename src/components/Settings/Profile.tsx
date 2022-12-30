@@ -10,7 +10,7 @@ const Profile = () => {
     <div
       id="profile"
       onClick={() => navigate('/profile')}
-      className="flex flex-row items-center  p-3 md:p-5 hover:bg-gray-50 cursor-pointer"
+      className="flex flex-row items-center  p-3 md:p-5 hover:bg-gray-50 dark:hover:bg-dark cursor-pointer"
       role="figure"
     >
       <motion.div
@@ -25,8 +25,8 @@ const Profile = () => {
         />
       </motion.div>
       <div className="w-8/12 flex flex-col">
-        <h1 className="text-dark text-lg">Mikasa</h1>
-        <p className="text-dark-secondary">Can`t talk talksapp only!</p>
+        <h1 className="text-dark dark:text-grey text-lg">Mikasa</h1>
+        <p className="text-dark-secondary dark:text-grey/50">Can`t talk talksapp only!</p>
       </div>
       <Tooltip className="z-30" anchorId="profile" content="Setting profile" place="bottom"/>
     </div>

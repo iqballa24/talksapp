@@ -2,7 +2,7 @@ import React from 'react';
 
 const Input = () => {
   return (
-    <div className="relative pl-5 pr-4 py-2 rounded-lg w-full bg-white text-dark-secondary">
+    <div className="relative pl-5 pr-4 py-2 rounded-lg w-full bg-white text-dark-secondary dark:bg-dark-secondary/30">
       <input
         type="text"
         placeholder="Type a message"

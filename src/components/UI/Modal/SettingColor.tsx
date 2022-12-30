@@ -38,10 +38,10 @@ const ModalSettingColors: React.FC<{
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded bg-white dark:bg-dark p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 pb-5"
+                  className="text-lg font-medium leading-6 text-dark dark:text-grey pb-5"
                 >
                   Choose Accent Colors
                 </Dialog.Title>

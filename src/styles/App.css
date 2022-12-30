@@ -4,13 +4,17 @@
 @tailwind utilities;
 
 :root {
-  --font-color: #131b20;
+  --font-color: #1f2c33;
   --background-color: #4ba485;
+  --scrollbar-color: #eff2f5;
+  --background-img: url('bg-light.jfif');
 }
 
 .dark {
   --font-color: #ffffff;
-  --background-color: #131b20;
+  --background-color: #1f2c33;
+  --scrollbar-color: #54646F;
+  --background-img: url('bg-dark.jpg');
 }
 
 * {
@@ -33,7 +37,7 @@ header {
 }
 
 .bg-chat {
-  background-image: url('bg-light.jfif');
+  background-image: var(--background-img);
   background-repeat: repeat;
   background-size: 30%;
 }
@@ -43,7 +47,7 @@ header {
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -51,5 +55,5 @@ header {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300;
+  background-color: var(--scrollbar-color);
 }

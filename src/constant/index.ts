@@ -1,4 +1,4 @@
-import { MenuProfileTypes, securityContentTypes, aboutPage } from '@/util/type';
+import { MenuProfileTypes, securityContentTypes, aboutPage } from '@/lib/types';
 import {
   HiOutlineChatAlt2,
   HiOutlinePhone,

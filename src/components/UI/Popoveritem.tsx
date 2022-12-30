@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react';
-import { MenuProfileTypes } from '@/util/type';
+import { MenuProfileTypes } from '@/lib/types';
 
 const PopOverItem: React.FC<{
   className: string;
@@ -9,7 +9,7 @@ const PopOverItem: React.FC<{
 }> = ({ className, menus }) => {
   const navigate = useNavigate();
   const classes = [
-    'absolute z-20 mt-3 w-full max-w-[180px] -translate-x-1/2 transform px-4 sm:px-0',
+    'absolute z-20 mt-5 w-full max-w-[180px] -translate-x-1/2 transform px-4 sm:px-0',
   ];
   classes.push(className);
 
@@ -25,11 +25,11 @@ const PopOverItem: React.FC<{
     >
       <Popover.Panel className={classes.join(' ')}>
         <div className="overflow-hidden rounded shadow-xl ring-1 ring-black ring-opacity-5">
-          <ul className="bg-white py-2 w-full text-sm text-dark">
+          <ul className="bg-white py-2 w-full text-sm text-dark dark:text-grey dark:bg-dark shadow-sm">
             {menus.map((menu) => (
               <li
                 key={menu.id}
-                className="pl-6 py-3 hover:bg-gray-50"
+                className="pl-6 py-3 hover:bg-gray-50 dark:hover:bg-dark-third"
                 onClick={() => navigate(menu.path)}
               >
                 {menu.name}

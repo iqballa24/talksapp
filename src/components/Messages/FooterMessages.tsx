@@ -6,7 +6,7 @@ import { Input } from '@/components/UI';
 
 const FooterMessages = () => {
   return (
-    <div className="flex flex-row px-4 py-1 justify-between min-h-[62px] items-center text-dark-secondary bg-grey-secondary space-x-5">
+    <div className="flex flex-row px-4 py-1 justify-between min-h-[62px] items-center text-dark-secondary bg-grey-secondary space-x-5 dark:text-grey/50 dark:bg-dark">
       <MdOutlineEmojiEmotions size={30} />
       <FiPaperclip size={24} />
       <Input />

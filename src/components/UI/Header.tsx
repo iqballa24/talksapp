@@ -6,7 +6,7 @@ import { MdArrowBack } from 'react-icons/md';
 
 const Header: React.FC<{ pathBack: string; name: string }> = ({ pathBack, name }) => {
   return (
-    <header className="flex flex-col-reverse bg-primary-100 md:h-full md:max-h-[108px] p-5 z-20">
+    <header className="flex flex-col-reverse bg-primary-100 dark:bg-dark md:h-full md:max-h-[108px] p-5 z-20">
       <motion.div
         initial={{ x: -30 }}
         animate={{ x: 0 }}
@@ -14,9 +14,9 @@ const Header: React.FC<{ pathBack: string; name: string }> = ({ pathBack, name }
         className="flex flex-row space-x-5 items-center"
       >
         <Link to={pathBack}>
-          <MdArrowBack id='back' size={24} className="text-white cursor-pointer" />
+          <MdArrowBack id='back' size={24} className="text-white dark:text-grey cursor-pointer" />
         </Link>
-        <h1 className="text-white text-lg font-medium">{name}</h1>
+        <h1 className="text-white dark:text-grey text-lg font-medium">{name}</h1>
       </motion.div>
       <Tooltip
         className="z-30"

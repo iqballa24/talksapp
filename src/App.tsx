@@ -1,5 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 
 import Layout from '@/components/Layout';
 import { Loader } from '@/components/UI';
@@ -11,6 +12,14 @@ const SecurityPage = React.lazy(() => import('./pages/SecurityPage'));
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 
 function App() {
+  const dispatch = useAppDispatch();
+  const { ui } = useAppSelector((state) => state);
+
+  useEffect(() => {
+    if (ui.isDarkMode) document.body.classList.add('dark');
+    else document.body.classList.remove('dark');
+  }, [ui.isDarkMode]);
+
   return (
     <Layout>
       <Suspense fallback={<Loader />}>

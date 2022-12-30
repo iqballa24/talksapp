@@ -18,25 +18,25 @@ const SecurityPage = () => {
             <HiLockOpen size={46} className="text-white"/>
           </div>
         </div>
-        <h1 className="text-lg text-dark font-medium select-none">
+        <h1 className="text-lg text-dark dark:text-grey font-medium select-none">
           {securityPageContent.title}
         </h1>
-        <p className="text-sm text-dark-secondary leading-6">
+        <p className="text-sm text-dark-secondary dark:text-grey/50 leading-6">
           {securityPageContent.description}
         </p>
         <ul className="flex flex-col space-y-3">
           {securityPageContent.featured.map((feature) => (
             <li
               key={feature.id}
-              className="flex flex-row space-x-2 items-center text-dark-secondary"
+              className="flex flex-row space-x-2 items-center text-dark-secondary dark:text-grey/50"
             >
-              <feature.icon />
+              <feature.icon size={22}/>
               <p>{feature.text}</p>
             </li>
           ))}
         </ul>
         <div
-          className="text-sm text-dark-secondary leading-6"
+          className="text-sm text-dark-secondary dark:text-grey/50 leading-6"
           dangerouslySetInnerHTML={{ __html: securityPageContent.content }}
         />
       </motion.section>

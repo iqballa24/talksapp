@@ -11,7 +11,7 @@ const AboutPage = () => {
       <motion.section
         initial={{ y: 70 }}
         animate={{ y: 0 }}
-        className="flex flex-col space-y-5 py-5 px-5 sm:px-7 overflow-scroll select-none"
+        className="flex flex-col text-dark-secondary dark:text-grey/50 space-y-5 py-5 px-5 sm:px-7 overflow-scroll select-none"
       >
         <div className="flex flex-col items-center space-y-2 py-5">
           <img
@@ -20,15 +20,15 @@ const AboutPage = () => {
             className="w-[180px] h-[180px]"
             loading="lazy"
           />
-          <span className="text-dark-secondary text-xs">
+          <span className="text-xs">
             {aboutPageContent.en.version}
           </span>
         </div>
         <div
-          className="text-dark-secondary text-sm leading-6"
+          className="text-sm leading-6"
           dangerouslySetInnerHTML={{ __html: aboutPageContent.en.content }}
         />
-        <ul className="flex flex-col space-y-3 text-dark-secondary text-sm">
+        <ul className="flex flex-col space-y-3 text-sm">
           {aboutPageContent.en.contactList.map((contact) => (
             <li
               key={contact.id}

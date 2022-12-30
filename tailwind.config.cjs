@@ -24,9 +24,9 @@ module.exports = {
           100: '#008069',
         },
         dark: {
-          DEFAULT: '#4b4e53',
+          DEFAULT: '#1f2c33',
           secondary: '#54646F',
-          third: '#2D3941',
+          third: '#111b21',
         },
         grey: {
           DEFAULT: '#DDDDDC',

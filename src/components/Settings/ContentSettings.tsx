@@ -34,7 +34,7 @@ const ContentSettings = () => {
   };
 
   return (
-    <section className="flex flex-col w-full h-full">
+    <section className="flex flex-col w-full h-full bg-white dark:bg-dark-third">
       <Profile />
       <ul className="flex flex-col">
         <ItemMenuSetting duration={0.4} onClick={toggleModalTheme}>

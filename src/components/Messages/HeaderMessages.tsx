@@ -6,7 +6,7 @@ import { MdSearch,
 const HeaderMessages = () => {
   return (
     <div
-      className="flex flex-row items-center justify-between min-h-[72px] px-4 bg-grey-secondary"
+      className="flex flex-row items-center justify-between min-h-[62px] px-4 bg-grey-secondary dark:bg-dark"
       role="figure"
     >
       <div className="flex flex-row items-center space-x-5">
@@ -15,9 +15,9 @@ const HeaderMessages = () => {
           alt="profile picture"
           className="rounded-[50%] w-10 h-10"
         />
-        <h1 className="text-dark text-base">Iqbal Nugraha</h1>
+        <h1 className="text-dark dark:text-grey text-base">Iqbal Nugraha</h1>
       </div>
-      <div className="flex flex-row space-x-7 text-dark-secondary">
+      <div className="flex flex-row space-x-7 text-dark-secondary dark:text-grey">
         <MdSearch className='cursor-pointer' size={24} role="button" />
         <MdMoreVert className='cursor-pointer' size={24} role="button" />
       </div>

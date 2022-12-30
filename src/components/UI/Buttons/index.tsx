@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonsTypes } from '@/util/type';
+import { ButtonsTypes } from '@/lib/types';
 
 const Buttons: React.FC<ButtonsTypes> = ({
   title,
@@ -15,7 +15,7 @@ const Buttons: React.FC<ButtonsTypes> = ({
 
   isPrimary && className.push('bg-primary text-white hover:bg-primary-100');
   isSecondary &&
-    className.push('bg-transparent border text-primary hover:shadow-md');
+    className.push('bg-transparent border border-grey text-primary hover:shadow-md dark:hover:bg-dark-third');
 
   return (
     <>
