@@ -7,8 +7,9 @@ import { EditBoxProps } from '@/lib/types/PropTypes';
 
 const Editbox: React.FC<EditBoxProps> = ({ title, value, onChange }) => {
   const { accentColor } = useAppSelector((state) => state.ui);
-  const textColor =
-    configColors[accentColor as keyof typeof configColors].textColor.default;
+  const selectedColor = configColors[accentColor as keyof typeof configColors];
+  const textColor = selectedColor.textColor.default;
+  const borderBInput = selectedColor.borderInput;
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -30,7 +31,7 @@ const Editbox: React.FC<EditBoxProps> = ({ title, value, onChange }) => {
             value={value}
             onChange={changeHandler}
             className={`w-full py-1 bg-transparent outline-none ${
-              isEdit && 'border-b border-primary'
+              isEdit && borderBInput
             }`}
             disabled={!isEdit}
           />

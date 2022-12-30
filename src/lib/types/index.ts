@@ -53,6 +53,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   orange: {
     bgColor: colorsTypes;
@@ -61,6 +62,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   merigold: {
     bgColor: colorsTypes;
@@ -69,6 +71,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   yellow: {
     bgColor: colorsTypes;
@@ -77,6 +80,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   softblue: {
     bgColor: colorsTypes;
@@ -85,6 +89,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   blue: {
     bgColor: colorsTypes;
@@ -93,6 +98,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   red: {
     bgColor: colorsTypes;
@@ -101,6 +107,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   pink: {
     bgColor: colorsTypes;
@@ -109,6 +116,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   purple: {
     bgColor: colorsTypes;
@@ -117,6 +125,7 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
   brown: {
     bgColor: colorsTypes;
@@ -125,5 +134,6 @@ export type configColorsTypes = {
     bgLayout: string;
     bgChatBubble: string;
     borderTriangle: string;
+    borderInput: string;
   };
 };

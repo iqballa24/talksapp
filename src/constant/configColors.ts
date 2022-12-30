@@ -18,6 +18,7 @@ export const configColors: configColorsTypes = {
     bgLayout: 'after:bg-primary',
     bgChatBubble: '!bg-primary-25 dark:!bg-primary-100',
     borderTriangle: '!border-l-primary-25 dark:!border-l-primary-100',
+    borderInput: 'border-b border-primary',
   },
   orange: {
     bgColor: {
@@ -36,6 +37,7 @@ export const configColors: configColorsTypes = {
     bgLayout: 'after:bg-orange',
     bgChatBubble: '!bg-orange-25 dark:!bg-orange-100',
     borderTriangle: '!border-l-orange-25 dark:!border-l-orange-100',
+    borderInput: 'border-b border-orange',
   },
   merigold: {
     bgColor: {
@@ -54,6 +56,7 @@ export const configColors: configColorsTypes = {
     bgLayout: 'after:bg-merigold',
     bgChatBubble: '!bg-merigold-25 dark:!bg-merigold-100',
     borderTriangle: '!border-l-merigold-25 dark:!border-l-merigold-100',
+    borderInput: 'border-b border-merigold',
   },
   yellow: {
     bgColor: {
@@ -72,6 +75,7 @@ export const configColors: configColorsTypes = {
     bgLayout: 'after:bg-yellow',
     bgChatBubble: '!bg-yellow-25 dark:!bg-yellow-100',
     borderTriangle: '!border-l-yellow-25 dark:!border-l-yellow-100',
+    borderInput: 'border-b border-yellow',
   },
   softblue: {
     bgColor: {
@@ -90,6 +94,7 @@ export const configColors: configColorsTypes = {
     bgLayout: 'after:bg-softblue',
     bgChatBubble: '!bg-softblue-25 dark:!bg-softblue-100',
     borderTriangle: '!border-l-softblue-25 dark:!border-l-softblue-100',
+    borderInput: 'border-b border-softblue',
   },
   blue: {
     bgColor: {
@@ -108,6 +113,7 @@ export const configColors: configColorsTypes = {
     bgLayout: 'after:bg-blue',
     bgChatBubble: '!bg-blue-25 dark:!bg-blue-100',
     borderTriangle: '!border-l-blue-25 dark:!border-l-blue-100',
+    borderInput: 'border-b border-blue',
   },
   red: {
     bgColor: {
@@ -126,6 +132,7 @@ export const configColors: configColorsTypes = {
     bgLayout: 'after:bg-red',
     bgChatBubble: '!bg-red-25 dark:!bg-red-100',
     borderTriangle: '!border-l-red-25 dark:!border-l-red-100',
+    borderInput: 'border-b border-red',
   },
   pink: {
     bgColor: {
@@ -144,6 +151,7 @@ export const configColors: configColorsTypes = {
     bgLayout: 'after:bg-pink',
     bgChatBubble: '!bg-pink-25 dark:!bg-pink-100',
     borderTriangle: '!border-l-pink-25 dark:!border-l-pink-100',
+    borderInput: 'border-b border-pink',
   },
   purple: {
     bgColor: {
@@ -161,7 +169,8 @@ export const configColors: configColorsTypes = {
     button: 'bg-purple hover:bg-purple-100',
     bgLayout: 'after:bg-purple',
     bgChatBubble: '!bg-purple-25 dark:!bg-purple-100',
-    borderTriangle: '!border-l-purple-25 dark:!border-l-purple-100'
+    borderTriangle: '!border-l-purple-25 dark:!border-l-purple-100',
+    borderInput: 'border-b border-purple',
   },
   brown: {
     bgColor: {
@@ -179,6 +188,7 @@ export const configColors: configColorsTypes = {
     button: 'bg-brown hover:bg-brown-100',
     bgLayout: 'after:bg-brown',
     bgChatBubble: '!bg-brown-25 dark:!bg-brown-100',
-    borderTriangle: '!border-l-brown-25 dark:!border-l-brown-100'
+    borderTriangle: '!border-l-brown-25 dark:!border-l-brown-100',
+    borderInput: 'border-b border-brown',
   },
 };
