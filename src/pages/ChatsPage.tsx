@@ -1,10 +1,10 @@
 import React from 'react';
-import { ChatsList, HeaderProfile, FilterBar } from '@/components/Chats';
+import { ChatsList, ChatsHeader, FilterBar } from '@/components/Chats';
 
 const Chats = () => {
   return (
     <>
-      <HeaderProfile />
+      <ChatsHeader />
       <FilterBar />
       <ChatsList />
     </>

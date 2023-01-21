@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '@/lib/hooks/useRedux';
 import { Popover, Transition } from '@headlessui/react';
 import { PopoverProps } from '@/lib/types/PropTypes';
 
 const PopOverItem: React.FC<PopoverProps> = ({ className, menus }) => {
+  const { language } = useAppSelector((state) => state.ui);
   const navigate = useNavigate();
   const classes = [
     'absolute z-20 mt-5 w-full max-w-[180px] -translate-x-1/2 transform px-4 sm:px-0',
@@ -29,7 +31,7 @@ const PopOverItem: React.FC<PopoverProps> = ({ className, menus }) => {
                 className="pl-6 py-3 hover:bg-gray-50 dark:hover:bg-dark-third"
                 onClick={() => navigate(menu.path)}
               >
-                {menu.name}
+                {menu.name[language as keyof typeof menu.name]}
               </li>
             ))}
           </ul>

@@ -12,53 +12,88 @@ import Logo from '@/images/logo.svg';
 const menuProfile: MenuProfileTypes[] = [
   {
     id: 1,
-    name: 'Settings',
+    name: { en: 'Settings', id: 'Pengaturan' },
     path: '/settings',
   },
   {
     id: 2,
-    name: 'Profile',
+    name: { en: 'Profile', id: 'Profil' },
     path: '/profile',
   },
   {
     id: 3,
-    name: 'Log out',
+    name: { en: 'Log out', id: 'Keluar' },
     path: '/logout',
   },
 ];
 
 const securityPageContent: securityContentTypes = {
-  title: 'Your chats aren`t private',
-  description:
-    'End-to-end encryption keeps your personal messages and calls between you and the people you choose. Not even WhatsApp can read or listen to them. This includes your:',
-  featured: [
-    {
-      id: 1,
-      icon: HiOutlineChatAlt2,
-      text: 'Text and voice messages',
-    },
-    {
-      id: 2,
-      icon: HiOutlinePhone,
-      text: 'Audio and video calls',
-    },
-    {
-      id: 3,
-      icon: HiPaperClip,
-      text: 'Photos, videos and documents',
-    },
-    {
-      id: 4,
-      icon: HiOutlineLocationMarker,
-      text: 'Location sharing',
-    },
-    {
-      id: 5,
-      icon: HiOutlineStatusOnline,
-      text: 'Status updates',
-    },
-  ],
-  content: `<p>Yupp, those are the benefits will you get if you are using WhatsApp Web &#128513;. TalksApp web does not secure your chats and not using End-to-end encryption for keeps your personal messages. TalksApp web is just for a personal project and not used for commercialization</p>`,
+  en: {
+    title: 'Your chats aren`t private',
+    description:
+      'End-to-end encryption keeps your personal messages and calls between you and the people you choose. Not even WhatsApp can read or listen to them. This includes your:',
+    featured: [
+      {
+        id: 1,
+        icon: HiOutlineChatAlt2,
+        text: 'Text and voice messages',
+      },
+      {
+        id: 2,
+        icon: HiOutlinePhone,
+        text: 'Audio and video calls',
+      },
+      {
+        id: 3,
+        icon: HiPaperClip,
+        text: 'Photos, videos and documents',
+      },
+      {
+        id: 4,
+        icon: HiOutlineLocationMarker,
+        text: 'Location sharing',
+      },
+      {
+        id: 5,
+        icon: HiOutlineStatusOnline,
+        text: 'Status updates',
+      },
+    ],
+    content: `<p>Yupp, those are the benefits will you get if you are using WhatsApp Web &#128513;. TalksApp web does not secure your chats and not using End-to-end encryption for keeps your personal messages. TalksApp web is just for a personal project and not used for commercialization</p>`,
+  },
+  id: {
+    title: 'Obrolan Anda tidak bersifat pribadi',
+    description:
+      'Enkripsi end-to-end menyimpan pesan dan panggilan pribadi Anda antara Anda dan orang yang Anda pilih. Bahkan WhatsApp tidak dapat membaca atau mendengarkannya. Ini termasuk Anda:',
+    featured: [
+      {
+        id: 1,
+        icon: HiOutlineChatAlt2,
+        text: 'Pesan teks dan suara',
+      },
+      {
+        id: 2,
+        icon: HiOutlinePhone,
+        text: 'Panggilan audio dan video',
+      },
+      {
+        id: 3,
+        icon: HiPaperClip,
+        text: 'Foto, video, dan dokumen',
+      },
+      {
+        id: 4,
+        icon: HiOutlineLocationMarker,
+        text: 'Berbagi lokasi',
+      },
+      {
+        id: 5,
+        icon: HiOutlineStatusOnline,
+        text: 'Pembaruan status',
+      },
+    ],
+    content: `<p>Yupp, itulah keuntungan yang akan kamu dapatkan jika menggunakan WhatsApp Web &#128513;. Web TalksApp tidak mengamankan obrolan Anda dan tidak menggunakan enkripsi End-to-end untuk menyimpan pesan pribadi Anda. Web TalksApp hanya untuk proyek pribadi dan tidak digunakan untuk komersialisasi</p>`,
+  },
 };
 
 const aboutPageContent: aboutPage = {
@@ -86,6 +121,34 @@ const aboutPageContent: aboutPage = {
         icon: AiFillGithub,
         contact: 'iqballa24',
         tooltip: 'Open github',
+        link: 'https://github.com/iqballa24',
+      },
+    ],
+  },
+  id: {
+    logo: Logo,
+    version: 'Versi 1.0',
+    content: `<p>TalksApp adalah web yang dapat digunakan untuk mengirim pesan dan tetap berhubungan dengan teman dan keluarga, kapan pun dan di mana pun. Antarmuka pengguna TalksApp mirip dengan WhatsApp, tetapi tidak semua fitur WhatsApp ada di TalksApp. Ini hanya digunakan untuk proyek pribadi dan bukan untuk tujuan komersial.</p><br/><p>Jika Anda memiliki pertanyaan atau minat untuk bekerja sama dengan saya, Anda dapat menghubungi saya di bawah ini:</p>`,
+    contactList: [
+      {
+        id: 'email',
+        icon: AiOutlineGoogle,
+        contact: 'iqbalnugraha347@gmail.com',
+        tooltip: 'Kirim email',
+        link: 'mailto:iqbalnugraha347@gmail.com',
+      },
+      {
+        id: 'linkedin',
+        icon: AiFillLinkedin,
+        contact: 'tiqbalnugraha',
+        tooltip: 'Buka Linkedin',
+        link: 'https://www.linkedin.com/in/tiqbalnugraha/',
+      },
+      {
+        id: 'github',
+        icon: AiFillGithub,
+        contact: 'iqballa24',
+        tooltip: 'Buka github',
         link: 'https://github.com/iqballa24',
       },
     ],

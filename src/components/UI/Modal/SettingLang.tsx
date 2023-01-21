@@ -1,10 +1,32 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { Dialog, Transition } from '@headlessui/react';
 import { Buttons } from '@/components/UI';
 import { ModalSettingProps } from '@/lib/types/PropTypes';
+import { uiActions } from '@/store/ui';
 
 const ModalSettingLang: React.FC<ModalSettingProps> = ({ onClose, isShow }) => {
-  const theme = ['Indonesia', 'English'];
+  const dispatch = useAppDispatch();
+  const { language } = useAppSelector((state) => state.ui);
+  const languageSelected = useRef(language);
+
+  const theme = [
+    { id: 'id', name: 'Indonesia' },
+    { id: 'en', name: 'English' },
+  ];
+
+  const changeLanguageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const language = e.target.value;
+
+    if (language === 'en') {
+      localStorage.setItem('language', language);
+    } else {
+      localStorage.setItem('language', language);
+    }
+
+    languageSelected.current = language;
+    dispatch(uiActions.changeLanguage(language));
+  };
 
   return (
     <Transition appear show={isShow} as={Fragment}>
@@ -45,8 +67,15 @@ const ModalSettingLang: React.FC<ModalSettingProps> = ({ onClose, isShow }) => {
                       key={index}
                       className="flex space-x-2 text-dark dark:text-grey"
                     >
-                      <input type="radio" id={item} name="theme" value={item} />
-                      <label htmlFor={item}>{item}</label>
+                      <input
+                        type="radio"
+                        id={item.id}
+                        name="theme"
+                        value={item.id}
+                        onChange={changeLanguageHandler}
+                        checked={languageSelected.current === item.id}
+                      />
+                      <label htmlFor={item.id}>{item.name}</label>
                     </div>
                   ))}
                 </div>

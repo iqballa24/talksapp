@@ -11,8 +11,10 @@ import {
   MdMoreVert,
 } from 'react-icons/md';
 import { menuProfile } from '@/constant';
+import { useAppSelector } from '@/lib/hooks/useRedux';
 
-const HeaderProfile = () => {
+const ChatsHeader = () => {
+  const { language } = useAppSelector((state) => state.ui);
   const navigate = useNavigate();
 
   return (
@@ -27,11 +29,19 @@ const HeaderProfile = () => {
         className="rounded-[50%] w-10 h-10 cursor-pointer"
         onClick={() => navigate('/profile')}
       />
-      <Tooltip className="z-20" anchorId="profile" content="Profile" />
+      <Tooltip
+        className="z-20"
+        anchorId="profile"
+        content={language === 'en' ? 'Profile' : 'Profil'}
+      />
       <ul className="relative flex flex-row items-center space-x-7 text-dark-secondary dark:text-grey">
         <li id="group" className="cursor-pointer">
           <MdGroups size={22} role="button" />
-          <Tooltip className="z-20" anchorId="group" content="Create group" />
+          <Tooltip
+            className="z-20"
+            anchorId="group"
+            content={language === 'en' ? 'Create group' : 'Buat grup'}
+          />
         </li>
         <li id="status" className="cursor-pointer">
           <MdOutlineDonutLarge size={22} role="button" />
@@ -39,10 +49,14 @@ const HeaderProfile = () => {
         </li>
         <li id="newChat" className="cursor-pointer">
           <MdChat size={22} role="button" />
-          <Tooltip className="z-20" anchorId="newChat" content="New chat" />
+          <Tooltip
+            className="z-20"
+            anchorId="newChat"
+            content={language === 'en' ? 'New chat' : 'Buat chat'}
+          />
         </li>
         <li id="menu" className="cursor-pointer">
-          <Popover className='flex items-center'>
+          <Popover className="flex items-center">
             <Popover.Button>
               <MdMoreVert size={22} role="button" />
             </Popover.Button>
@@ -55,4 +69,4 @@ const HeaderProfile = () => {
   );
 };
 
-export default React.memo(HeaderProfile);
+export default React.memo(ChatsHeader);

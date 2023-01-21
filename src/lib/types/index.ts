@@ -2,7 +2,7 @@ import { IconType } from 'react-icons/lib';
 
 export type MenuProfileTypes = {
   id: number;
-  name: string;
+  name: { en: string; id: string };
   path: string;
 };
 
@@ -13,10 +13,18 @@ export type featuredSecurityTypes = {
 };
 
 export type securityContentTypes = {
-  title: string;
-  description: string;
-  featured: featuredSecurityTypes[];
-  content: string;
+  en: {
+    title: string;
+    description: string;
+    featured: featuredSecurityTypes[];
+    content: string;
+  };
+  id: {
+    title: string;
+    description: string;
+    featured: featuredSecurityTypes[];
+    content: string;
+  };
 };
 
 export type contactsTypes = {
@@ -36,6 +44,7 @@ export type aboutContentTypes = {
 
 export type aboutPage = {
   en: aboutContentTypes;
+  id: aboutContentTypes
 };
 
 export type colorsTypes = {

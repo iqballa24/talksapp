@@ -8,7 +8,7 @@ import { configColors } from '@/constant/configColors';
 import { HeaderProps } from '@/lib/types/PropTypes';
 
 const Header: React.FC<HeaderProps> = ({ pathBack, name }) => {
-  const { accentColor } = useAppSelector((state) => state.ui);
+  const { accentColor, language } = useAppSelector((state) => state.ui);
   const bgColor =
     configColors[accentColor as keyof typeof configColors].bgColor[100];
 
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ pathBack, name }) => {
           {name}
         </h1>
       </motion.div>
-      <Tooltip className="z-30" anchorId="back" content="Back" place="bottom" />
+      <Tooltip className="z-30" anchorId="back" content={language === 'en' ? "Back" : "Kembali"} place="bottom" />
     </header>
   );
 };

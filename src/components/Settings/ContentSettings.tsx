@@ -21,9 +21,8 @@ import { uiActions } from '@/store/ui';
 const ContentSettings = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { showModalColors, showModalLang, showModalTheme } = useAppSelector(
-    (state) => state.ui
-  );
+  const { showModalColors, showModalLang, showModalTheme, language } =
+    useAppSelector((state) => state.ui);
 
   const toggleModalTheme = () => {
     dispatch(uiActions.toggleModalTheme());
@@ -37,30 +36,58 @@ const ContentSettings = () => {
     dispatch(uiActions.toggleModalColors());
   };
 
+  const menusSetting = [
+    {
+      id: 1,
+      name: language === 'en' ? 'Theme' : 'Tema',
+      onClick: toggleModalTheme,
+      duration: 0.4,
+      icon: MdInvertColors,
+    },
+    {
+      id: 2,
+      name: language === 'en' ? 'Accent Colors' : 'Warna Aksen',
+      onClick: toggleModalColors,
+      duration: 0.7,
+      icon: MdColorLens,
+    },
+    {
+      id: 3,
+      name: language === 'en' ? 'Language' : 'Bahasa',
+      onClick: toggleModalLang,
+      duration: 1,
+      icon: MdLanguage,
+    },
+    {
+      id: 1,
+      name: language === 'en' ? 'Security' : 'Keamanan',
+      onClick: () => navigate('/security'),
+      duration: 1.3,
+      icon: MdSecurity,
+    },
+    {
+      id: 1,
+      name: language === 'en' ? 'About' : 'Tentang',
+      onClick: () => navigate('/about'),
+      duration: 1.6,
+      icon: MdOutlineHelp,
+    },
+  ];
+
   return (
     <section className="flex flex-col w-full h-full bg-white dark:bg-dark-third">
       <Profile />
       <ul className="flex flex-col">
-        <ItemMenuSetting duration={0.4} onClick={toggleModalTheme}>
-          <MdInvertColors size={22} className="text-gray-400" />
-          <span>Theme</span>
-        </ItemMenuSetting>
-        <ItemMenuSetting duration={0.7} onClick={toggleModalColors}>
-          <MdColorLens size={22} className="text-gray-400" />
-          <span>Accent color</span>
-        </ItemMenuSetting>
-        <ItemMenuSetting duration={1} onClick={toggleModalLang}>
-          <MdLanguage size={22} className="text-gray-400" />
-          <span>Language</span>
-        </ItemMenuSetting>
-        <ItemMenuSetting duration={1.3} onClick={() => navigate('/security')}>
-          <MdSecurity size={22} className="text-gray-400" />
-          <span>Security</span>
-        </ItemMenuSetting>
-        <ItemMenuSetting duration={1.6} onClick={() => navigate('/about')}>
-          <MdOutlineHelp size={22} className="text-gray-400" />
-          <span>About</span>
-        </ItemMenuSetting>
+        {menusSetting.map((menu) => (
+          <ItemMenuSetting
+            key={menu.id}
+            duration={menu.duration}
+            onClick={menu.onClick}
+          >
+            <menu.icon size={22} className="text-gray-400" />
+            <span>{menu.name}</span>
+          </ItemMenuSetting>
+        ))}
       </ul>
       <ModalSettingTheme onClose={toggleModalTheme} isShow={showModalTheme} />
       <ModalSettingLang onClose={toggleModalLang} isShow={showModalLang} />
