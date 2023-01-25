@@ -28,16 +28,14 @@ const Buttons: React.FC<ButtonsProps> = ({
     );
 
   return (
-    <>
-      <button
-        id={`button-${title}`}
-        type={type}
-        onClick={onClick}
-        className={className.join(' ')}
-      >
-        {children}
-      </button>
-    </>
+    <button
+      id={`button-${title}`}
+      type={type}
+      onClick={onClick}
+      className={className.join(' ')}
+    >
+      {children}
+    </button>
   );
 };
 

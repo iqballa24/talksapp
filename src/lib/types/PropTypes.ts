@@ -1,4 +1,10 @@
-import { MenuProfileTypes } from "@/lib/types";
+import { MenuProfileTypes } from '@/lib/types';
+
+export type InputProps = {
+  id: string;
+  name: string;
+  placeholder: string;
+};
 
 export type EditBoxProps = {
   title: string;

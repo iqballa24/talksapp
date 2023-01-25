@@ -5,7 +5,7 @@ const WrapperMessages: React.FC<{ children: React.ReactElement[] }> = ({
   children,
 }) => {
   const { language } = useAppSelector((state) => state.ui);
-  const data = false;
+  const data = true;
 
   return (
     <div className="relative hidden md:flex flex-col md:w-6/12 lg:w-8/12 bg-grey-secondary dark:bg-dark">

@@ -59,14 +59,14 @@ const ContentSettings = () => {
       icon: MdLanguage,
     },
     {
-      id: 1,
+      id: 4,
       name: language === 'en' ? 'Security' : 'Keamanan',
       onClick: () => navigate('/security'),
       duration: 1.3,
       icon: MdSecurity,
     },
     {
-      id: 1,
+      id: 5,
       name: language === 'en' ? 'About' : 'Tentang',
       onClick: () => navigate('/about'),
       duration: 1.6,
