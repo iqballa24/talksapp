@@ -7,6 +7,7 @@ import ModalSettingLang from '@/components/UI/Modal/SettingLang';
 import ModalSettingColors from '@/components/UI/Modal/SettingColor';
 import Buttons from '@/components/UI/Buttons';
 import Loader from '@/components/UI/Loader';
+import BoxMessage from '@/components/UI/BoxMessage';
 
 export {
   Searchbar,
@@ -18,4 +19,5 @@ export {
   ModalSettingColors,
   Buttons,
   Loader,
+  BoxMessage,
 };

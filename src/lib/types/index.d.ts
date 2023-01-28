@@ -1,5 +1,20 @@
 import { IconType } from 'react-icons/lib';
 
+export type FormLoginTypes = {
+  email: string;
+  password: string;
+};
+
+export type registerTypes = {
+  username: string;
+  email: string;
+  password: string;
+};
+
+export interface FormRegisterTypes extends registerTypes {
+  confirmPassword: string;
+}
+
 export type MenuProfileTypes = {
   id: number;
   name: { en: string; id: string };
@@ -44,7 +59,7 @@ export type aboutContentTypes = {
 
 export type aboutPage = {
   en: aboutContentTypes;
-  id: aboutContentTypes
+  id: aboutContentTypes;
 };
 
 export type colorsTypes = {

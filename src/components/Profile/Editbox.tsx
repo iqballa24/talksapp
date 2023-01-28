@@ -39,14 +39,14 @@ const Editbox: React.FC<EditBoxProps> = ({ title, value, onChange }) => {
         {isEdit ? (
           <>
             <MdDone
-              id="done"
+              id={`${title}-edit`}
               size={22}
               className="text-gray-400 cursor-pointer"
               onClick={editInputToggler}
             />
             <Tooltip
               className="z-20"
-              anchorId="done"
+              anchorId={`${title}-edit`}
               content="Click to save"
               place="right"
             />
@@ -54,14 +54,14 @@ const Editbox: React.FC<EditBoxProps> = ({ title, value, onChange }) => {
         ) : (
           <>
             <MdEdit
-              id="edit"
+              id={`${title}-done`}
               size={22}
               className="text-gray-400 cursor-pointer"
               onClick={editInputToggler}
             />
             <Tooltip
               className="z-20"
-              anchorId="edit"
+              anchorId={`${title}-done`}
               content="Click to edit"
               place="right"
             />
