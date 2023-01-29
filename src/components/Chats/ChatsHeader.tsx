@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { Tooltip } from 'react-tooltip';
 import { Popover } from '@headlessui/react';
 import PopOverItem from '@/components/UI/Popoveritem';
+import ModalAddNewFriends from '@/components/UI/Modal/AddNewFriends';
 
 import {
   MdGroups,
@@ -11,11 +12,23 @@ import {
   MdMoreVert,
 } from 'react-icons/md';
 import { menuProfile } from '@/constant';
-import { useAppSelector } from '@/lib/hooks/useRedux';
+import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
+import { uiActions } from '@/store/ui';
 
 const ChatsHeader = () => {
-  const { language } = useAppSelector((state) => state.ui);
+  const dispatch = useAppDispatch();
+  const { ui, auth } = useAppSelector((state) => state);
+  const { language } = ui;
+  const { photoURL, displayName } = auth.user;
   const navigate = useNavigate();
+
+  const srcImage = photoURL
+    ? photoURL
+    : `https://ui-avatars.com/api/?name=${displayName}&background=09A683&color=fff`;
+
+  const toggleModal = () => {
+    dispatch(uiActions.toggleModalAddNewFriends());
+  };
 
   return (
     <div
@@ -24,7 +37,7 @@ const ChatsHeader = () => {
     >
       <img
         id="profile"
-        src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=461&q=80"
+        src={srcImage}
         alt="profile picture"
         className="rounded-[50%] w-10 h-10 cursor-pointer"
         onClick={() => navigate('/profile')}
@@ -47,7 +60,7 @@ const ChatsHeader = () => {
           <MdOutlineDonutLarge size={22} role="button" />
           <Tooltip className="z-20" anchorId="status" content="Status" />
         </li>
-        <li id="newChat" className="cursor-pointer">
+        <li id="newChat" className="cursor-pointer" onClick={toggleModal}>
           <MdChat size={22} role="button" />
           <Tooltip
             className="z-20"
@@ -65,6 +78,10 @@ const ChatsHeader = () => {
           <Tooltip className="z-20" anchorId="menu" content="Menu" />
         </li>
       </ul>
+      <ModalAddNewFriends
+        isShow={ui.showModalAddNewFriends}
+        onClose={toggleModal}
+      />
     </div>
   );
 };
