@@ -15,12 +15,23 @@ const uiSlice = createSlice({
   reducers: {
     toggleTheme(state, { payload }) {
       state.isDarkMode = payload;
+      if (payload) {
+        localStorage.setItem('darkMode', 'dark');
+      } else {
+        localStorage.removeItem('darkMode');
+      }
     },
     changeAccentColor(state, { payload }) {
       state.accentColor = payload;
+      localStorage.setItem('accentColor', payload);
     },
     changeLanguage(state, { payload }) {
       state.language = payload;
+      if (payload === 'en') {
+        localStorage.setItem('language', payload);
+      } else {
+        localStorage.setItem('language', payload);
+      }
     },
     toggleModalTheme(state) {
       state.showModalTheme = !state.showModalTheme;

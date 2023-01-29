@@ -32,7 +32,7 @@ export type ButtonsProps = {
   onClick: () => void;
 };
 
-export type ModalSettingProps = {
+export type ModalProps = {
   onClose: () => void;
   isShow: boolean;
 };

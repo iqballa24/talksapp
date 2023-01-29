@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isAuthenticate: false,
-  user: null,
+  isAuthenticate: !!localStorage.getItem('isAuthenticate'),
+  user: {
+    uid: '',
+    displayName: '',
+    email: '',
+    photoURL: '',
+    about: '',
+  },
 };
 
 const authSlice = createSlice({
@@ -13,14 +19,17 @@ const authSlice = createSlice({
       state.user = payload;
       if (payload.emailVerified) {
         state.isAuthenticate = true;
-      }else{
+        localStorage.setItem('isAuthenticate', 'true');
+      } else {
         state.isAuthenticate = false;
+        localStorage.removeItem('isAuthenticate');
       }
     },
 
     unSetCurrentUser(state) {
-      state.user = null;
+      state.user = initialState.user;
       state.isAuthenticate = false;
+      localStorage.removeItem('isAuthenticate');
     },
   },
 });
