@@ -8,6 +8,7 @@ import ModalSettingColors from '@/components/UI/Modal/SettingColor';
 import Buttons from '@/components/UI/Buttons';
 import Loader from '@/components/UI/Loader';
 import BoxMessage from '@/components/UI/BoxMessage';
+import NewFriendsItem from '@/components/UI/NewFriendsItem';
 
 export {
   Searchbar,
@@ -20,4 +21,5 @@ export {
   Buttons,
   Loader,
   BoxMessage,
+  NewFriendsItem
 };

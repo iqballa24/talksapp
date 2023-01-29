@@ -5,11 +5,13 @@ import { Editbox, EditAvatar } from '@/components/Profile';
 import { useAppSelector } from '@/lib/hooks/useRedux';
 
 const ProfilePage = () => {
-  const { language } = useAppSelector((state) => state.ui);
+  const { ui, auth } = useAppSelector((state) => state);
+  const { language } = ui;
+  const { displayName, about: aboutUser } = auth.user;
   const nameHeader = language === 'en' ? 'Profile' : 'Profil';
 
-  const [name, setName] = useState<string>('Mikasa');
-  const [about, setAbout] = useState<string>('Can`t talk, WhatsApp only');
+  const [name, setName] = useState<string>(displayName || '-');
+  const [about, setAbout] = useState<string>(aboutUser || '-');
   const [img, setImg] = useState<string>(
     'https://www.w3schools.com/howto/img_avatar.png'
   );

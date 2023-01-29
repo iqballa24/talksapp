@@ -9,7 +9,6 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     searchUsers(state, { payload }) {
-      console.log(payload);
       state.resultSearch = payload;
     },
   },

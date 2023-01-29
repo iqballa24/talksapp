@@ -1,14 +1,13 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment } from 'react';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { Dialog, Transition } from '@headlessui/react';
 import { Buttons } from '@/components/UI';
-import { ModalSettingProps } from '@/lib/types/PropTypes';
+import { ModalProps } from '@/lib/types/PropTypes';
 import { uiActions } from '@/store/ui';
 
-const ModalSettingLang: React.FC<ModalSettingProps> = ({ onClose, isShow }) => {
+const ModalSettingLang: React.FC<ModalProps> = ({ onClose, isShow }) => {
   const dispatch = useAppDispatch();
   const { language } = useAppSelector((state) => state.ui);
-  const languageSelected = useRef(language);
 
   const theme = [
     { id: 'id', name: 'Indonesia' },
@@ -17,14 +16,6 @@ const ModalSettingLang: React.FC<ModalSettingProps> = ({ onClose, isShow }) => {
 
   const changeLanguageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const language = e.target.value;
-
-    if (language === 'en') {
-      localStorage.setItem('language', language);
-    } else {
-      localStorage.setItem('language', language);
-    }
-
-    languageSelected.current = language;
     dispatch(uiActions.changeLanguage(language));
   };
 
@@ -73,9 +64,10 @@ const ModalSettingLang: React.FC<ModalSettingProps> = ({ onClose, isShow }) => {
                         name="theme"
                         value={item.id}
                         onChange={changeLanguageHandler}
-                        checked={languageSelected.current === item.id}
+                        checked={language === item.id}
+                        className="cursor-pointer"
                       />
-                      <label htmlFor={item.id}>{item.name}</label>
+                      <label htmlFor={item.id} className="cursor-pointer">{item.name}</label>
                     </div>
                   ))}
                 </div>

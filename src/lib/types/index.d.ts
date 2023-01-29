@@ -11,6 +11,14 @@ export type registerTypes = {
   password: string;
 };
 
+export type userTypes = {
+  uid: string;
+  displayName: string;
+  photoURL: string;
+  about: string;
+  email: string;
+};
+
 export interface FormRegisterTypes extends registerTypes {
   confirmPassword: string;
 }

@@ -100,7 +100,7 @@ const aboutPageContent: aboutPage = {
   en: {
     logo: Logo,
     version: 'Version 1.0',
-    content: `<p>TalksApp is a web that can be used to send messages and stay in touch with friends and family, anytime and anywhere. The user interface TalksApp is similar to WhatsApp, but not all WhatsApp features are in TalksApp. It is only used for personal projects and not for commercial purposes.</p><br/><p>If you have any questions or interest in working with me, you can contact me contact the below:</p>`,
+    content: `<p>TalksApp is a web that can be used to send messages and stay in touch with friends and family, anytime and anywhere. The user interface TalksApp is similar to WhatsApp, but not all WhatsApp features are in TalksApp. It is only used for personal projects and not for commercial purposes.</p><br/><p>If you have any questions or interest in working with me, you can contact me on contact below:</p>`,
     contactList: [
       {
         id: 'email',

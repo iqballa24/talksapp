@@ -24,7 +24,7 @@ const Buttons: React.FC<ButtonsProps> = ({
     );
   isSecondary &&
     className.push(
-      'bg-transparent border border-grey text-primary hover:shadow-md dark:hover:bg-dark-third'
+      `bg-transparent border border-grey text-${accentColor} hover:shadow-md dark:hover:bg-dark-third`
     );
 
   return (

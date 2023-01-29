@@ -3,12 +3,12 @@ import { CirclePicker } from 'react-color';
 import { Dialog, Transition } from '@headlessui/react';
 import { colors } from '@/constant';
 import { Buttons } from '@/components/UI';
-import { ModalSettingProps } from '@/lib/types/PropTypes';
+import { ModalProps } from '@/lib/types/PropTypes';
 import { uiActions } from '@/store/ui';
 import { useAppDispatch } from '@/lib/hooks/useRedux';
 import namedHexColor from '@/util/namedHexColor';
 
-const ModalSettingColors: React.FC<ModalSettingProps> = ({
+const ModalSettingColors: React.FC<ModalProps> = ({
   onClose,
   isShow,
 }) => {
@@ -16,9 +16,6 @@ const ModalSettingColors: React.FC<ModalSettingProps> = ({
 
   const handleChangeComplete = (color: { hex: string }) => {
     const selectedColor = namedHexColor(color.hex);
-
-    localStorage.setItem('accentColor', selectedColor);
-
     dispatch(uiActions.changeAccentColor(selectedColor));
   };
 

@@ -3,9 +3,9 @@ import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { Dialog, Transition } from '@headlessui/react';
 import { Buttons } from '@/components/UI';
 import { uiActions } from '@/store/ui';
-import { ModalSettingProps } from '@/lib/types/PropTypes';
+import { ModalProps } from '@/lib/types/PropTypes';
 
-const ModalSettingTheme: React.FC<ModalSettingProps> = ({
+const ModalSettingTheme: React.FC<ModalProps> = ({
   onClose,
   isShow,
 }) => {
@@ -16,13 +16,6 @@ const ModalSettingTheme: React.FC<ModalSettingProps> = ({
 
   const changeThemeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isDark = e.target.value === 'Dark';
-
-    if (isDark) {
-      localStorage.setItem('darkMode', 'dark');
-    } else {
-      localStorage.removeItem('darkMode');
-    }
-
     themeSelected.current = e.target.value;
     dispatch(uiActions.toggleTheme(isDark));
   };
@@ -73,8 +66,9 @@ const ModalSettingTheme: React.FC<ModalSettingProps> = ({
                         value={item}
                         onChange={changeThemeHandler}
                         checked={themeSelected.current === item}
+                        className="cursor-pointer"
                       />
-                      <label htmlFor={item}>{item}</label>
+                      <label htmlFor={item} className="cursor-pointer">{item}</label>
                     </div>
                   ))}
                 </div>

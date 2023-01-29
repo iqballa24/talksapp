@@ -43,3 +43,10 @@ export type PopoverProps = {
   className: string;
   menus: MenuProfileTypes[];
 };
+
+export type NewFriendsItemProps = {
+  name: string;
+  image: string;
+  onClick: () => void;
+  isFriends: boolean;
+};
