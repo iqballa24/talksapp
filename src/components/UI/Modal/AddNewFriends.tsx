@@ -12,7 +12,7 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
   const [searchVal, setSearchVal] = useState<string>('');
   const { resultSearch } = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
-  const deb = useDebounce(searchVal, 500);
+  const deb = useDebounce(searchVal, 800);
 
   useEffect(() => {
     dispatch(asyncSearchUsers(searchVal));
@@ -62,9 +62,9 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
                     placeholder="Search username"
                   />
                   <ul className="flex flex-col">
-                    {resultSearch.length > 0 &&
+                    {resultSearch.length > 0 ?
                       resultSearch.map((item: userTypes, index) => {
-                        const { displayName, photoURL } = item;
+                        const { displayName, photoURL,email } = item;
                         const srcImage =
                           item.photoURL !== ''
                             ? photoURL
@@ -73,13 +73,14 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
                         return (
                           <NewFriendsItem
                             key={index}
-                            name={item.displayName}
+                            name={displayName}
+                            email={email}
                             image={srcImage}
                             onClick={() => console.log()}
                             isFriends={false}
                           />
                         );
-                      })}
+                      }): <p className='text-xs text-gray-400 text-center py-3'>-- No items are displayed --</p>}
                   </ul>
                 </div>
                 <div className="flex justify-end space-x-2 mt-4">

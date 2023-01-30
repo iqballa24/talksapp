@@ -64,7 +64,7 @@ const securityPageContent: securityContentTypes = {
   id: {
     title: 'Obrolan Anda tidak bersifat pribadi',
     description:
-      'Enkripsi end-to-end menyimpan pesan dan panggilan pribadi Anda antara Anda dan orang yang Anda pilih. Bahkan WhatsApp tidak dapat membaca atau mendengarkannya. Ini termasuk Anda:',
+      'Enkripsi end-to-end menyimpan pesan dan panggilan pribadi Anda antara Anda dan orang yang Anda pilih. Bahkan WhatsApp tidak dapat membaca atau mendengarkannya. Ini termasuk:',
     featured: [
       {
         id: 1,
@@ -128,7 +128,7 @@ const aboutPageContent: aboutPage = {
   id: {
     logo: Logo,
     version: 'Versi 1.0',
-    content: `<p>TalksApp adalah web yang dapat digunakan untuk mengirim pesan dan tetap berhubungan dengan teman dan keluarga, kapan pun dan di mana pun. Antarmuka pengguna TalksApp mirip dengan WhatsApp, tetapi tidak semua fitur WhatsApp ada di TalksApp. Ini hanya digunakan untuk proyek pribadi dan bukan untuk tujuan komersial.</p><br/><p>Jika Anda memiliki pertanyaan atau minat untuk bekerja sama dengan saya, Anda dapat menghubungi saya di bawah ini:</p>`,
+    content: `<p>TalksApp adalah web yang dapat digunakan untuk mengirim pesan dan tetap terhubung dengan teman dan keluarga, kapan pun dan di mana pun. Antarmuka pengguna TalksApp mirip dengan WhatsApp, tetapi tidak semua fitur WhatsApp ada di TalksApp. Ini hanya digunakan untuk proyek pribadi dan bukan untuk tujuan komersial.</p><br/><p>Jika Anda memiliki pertanyaan atau minat untuk bekerja sama dengan saya, Anda dapat menghubungi saya di bawah ini:</p>`,
     contactList: [
       {
         id: 'email',

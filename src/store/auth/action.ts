@@ -1,7 +1,14 @@
 import { Dispatch } from '@reduxjs/toolkit';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { registerTypes, FormLoginTypes } from '@/lib/types/index';
 import { toast } from 'react-hot-toast';
-import { registerUser, loginUser, onAuthStateChanged, signOut } from '@/lib/firebase/API';
+import {
+  registerUser,
+  loginUser,
+  onAuthStateChanged,
+  signOut,
+  getUserById,
+} from '@/lib/firebase/API';
 import { auth } from '@/lib/firebase';
 import { authSliceAction } from '@/store/auth';
 
@@ -26,9 +33,11 @@ function asyncRegisterUser({ email, password, username }: registerTypes) {
 function asyncLoginUser({ email, password }: FormLoginTypes) {
   return async (dispatch: Dispatch) => {
     try {
-      const res = await loginUser({email, password});
+      const res = await loginUser({ email, password });
+      const { uid, emailVerified } = res.user;
 
-      const { displayName, photoURL, uid, emailVerified } = res.user;
+      const user = await getUserById(uid);
+      const { displayName, photoURL, about } = user[0];
 
       if (!emailVerified) {
         return toast.error('Verify your email to activate your account');
@@ -41,6 +50,7 @@ function asyncLoginUser({ email, password }: FormLoginTypes) {
           email,
           photoURL,
           uid,
+          about,
           emailVerified,
         })
       );
@@ -58,18 +68,30 @@ function asyncLoginUser({ email, password }: FormLoginTypes) {
 
 function asyncPreloaderProcess() {
   return async (dispatch: Dispatch) => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const { displayName, email, photoURL, uid, emailVerified } = user;
-        dispatch(
-          authSliceAction.setCurrentUser({
-            displayName,
-            email,
-            photoURL,
-            uid,
-            emailVerified,
-          })
-        );
+        const { uid, emailVerified } = user;
+
+        try {
+          dispatch(showLoading());
+          const res = await getUserById(uid);
+          const { displayName, photoURL, about, email } = res[0];
+
+          await dispatch(
+            authSliceAction.setCurrentUser({
+              displayName,
+              email,
+              photoURL,
+              about,
+              uid,
+              emailVerified,
+            })
+          );
+        } catch (err) {
+          dispatch(authSliceAction.unSetCurrentUser());
+        } finally {
+          dispatch(hideLoading());
+        }
       } else {
         dispatch(authSliceAction.unSetCurrentUser());
       }

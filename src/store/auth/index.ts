@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   isAuthenticate: !!localStorage.getItem('isAuthenticate'),
   user: {
-    uid: '',
-    displayName: '',
-    email: '',
+    uid: '-',
+    displayName: '-',
+    email: '-',
     photoURL: '',
-    about: '',
+    about: '-',
   },
 };
 
@@ -30,6 +30,10 @@ const authSlice = createSlice({
       state.user = initialState.user;
       state.isAuthenticate = false;
       localStorage.removeItem('isAuthenticate');
+    },
+
+    updateCurrentUser(state, { payload }) {
+      state.user = { ...state.user, ...payload };
     },
   },
 });

@@ -5,7 +5,12 @@ import { useAppSelector } from '@/lib/hooks/useRedux';
 import { configColors } from '@/constant/configColors';
 import { EditBoxProps } from '@/lib/types/PropTypes';
 
-const Editbox: React.FC<EditBoxProps> = ({ title, value, onChange }) => {
+const Editbox: React.FC<EditBoxProps> = ({
+  title,
+  value,
+  onChange,
+  onSave,
+}) => {
   const { accentColor } = useAppSelector((state) => state.ui);
   const selectedColor = configColors[accentColor as keyof typeof configColors];
   const textColor = selectedColor.textColor.default;
@@ -19,6 +24,11 @@ const Editbox: React.FC<EditBoxProps> = ({ title, value, onChange }) => {
 
   const editInputToggler = () => {
     setIsEdit((prev) => !prev);
+  };
+
+  const onClickSave = () => {
+    editInputToggler();
+    onSave()
   };
 
   return (
@@ -42,7 +52,7 @@ const Editbox: React.FC<EditBoxProps> = ({ title, value, onChange }) => {
               id={`${title}-edit`}
               size={22}
               className="text-gray-400 cursor-pointer"
-              onClick={editInputToggler}
+              onClick={onClickSave}
             />
             <Tooltip
               className="z-20"

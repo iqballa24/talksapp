@@ -11,7 +11,7 @@ const ChatItem = () => {
         />
       </div>
       <div className="w-8/12 h-full flex flex-col justify-start">
-        <h1 className='text-base text-dark dark:text-white'>Tester</h1>
+        <span className='text-base text-dark dark:text-white'>Tester</span>
         <p className='text-sm text-gray-400'>Tester</p>
       </div>
       <div className='w-2/12 h-full flex justify-end'>

@@ -23,6 +23,7 @@ const ContentSettings = () => {
   const dispatch = useAppDispatch();
   const { showModalColors, showModalLang, showModalTheme, language } =
     useAppSelector((state) => state.ui);
+  const { user } = useAppSelector((state) => state.auth);
 
   const toggleModalTheme = () => {
     dispatch(uiActions.toggleModalTheme());
@@ -76,7 +77,7 @@ const ContentSettings = () => {
 
   return (
     <section className="flex flex-col w-full h-full bg-white dark:bg-dark-third">
-      <Profile />
+      <Profile {...user} />
       <ul className="flex flex-col">
         {menusSetting.map((menu) => (
           <ItemMenuSetting

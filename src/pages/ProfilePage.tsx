@@ -1,32 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Header } from '@/components/UI';
 import { Editbox, EditAvatar } from '@/components/Profile';
-import { useAppSelector } from '@/lib/hooks/useRedux';
+import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
+import { asyncUpdateImageUser, asyncUpdateUser } from '@/store/users/action';
 
 const ProfilePage = () => {
+  const dispatch = useAppDispatch();
   const { ui, auth } = useAppSelector((state) => state);
   const { language } = ui;
-  const { displayName, about: aboutUser } = auth.user;
+  const { uid, displayName, about: aboutUser, photoURL } = auth.user;
   const nameHeader = language === 'en' ? 'Profile' : 'Profil';
 
-  const [name, setName] = useState<string>(displayName || '-');
-  const [about, setAbout] = useState<string>(aboutUser || '-');
+  const [name, setName] = useState<string>('');
+  const [about, setAbout] = useState<string>('');
   const [img, setImg] = useState<string>(
-    'https://www.w3schools.com/howto/img_avatar.png'
+    `https://ui-avatars.com/api/?name=${displayName}&background=09A683&color=fff`
   );
 
   const imgChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
       return;
     }
-    const reader = new FileReader();
     const file = e.target.files[0];
-    reader.onloadend = () => {
-      const imgUrl: string = reader.result as string;
-      setImg(imgUrl);
-    };
-    reader.readAsDataURL(file);
+    dispatch(asyncUpdateImageUser({ uid, displayName: name, file }));
   };
 
   const nameChangeHandler = (name: string) => {
@@ -36,6 +33,32 @@ const ProfilePage = () => {
   const aboutChangeHandler = (about: string) => {
     setAbout(about);
   };
+
+  const onSaveName = () => {
+    dispatch(asyncUpdateUser(uid, { displayName: name }));
+  };
+
+  const onSaveAbout = () => {
+    dispatch(asyncUpdateUser(uid, { about: about }));
+  };
+
+  useEffect(() => {
+    setName(displayName);
+  }, [displayName]);
+
+  useEffect(() => {
+    setAbout(aboutUser);
+  }, [aboutUser]);
+
+  useEffect(() => {
+    if (photoURL === '') {
+      setImg(
+        `https://ui-avatars.com/api/?name=${displayName}&background=09A683&color=fff`
+      );
+    } else {
+      setImg(photoURL);
+    }
+  }, [photoURL, displayName]);
 
   return (
     <>
@@ -53,16 +76,18 @@ const ProfilePage = () => {
           title={language === 'en' ? 'Your name' : 'Nama kamu'}
           value={name}
           onChange={nameChangeHandler}
+          onSave={onSaveName}
         />
         <p className="text-sm text-gray-400 px-4 sm:px-7 pt-3 pb-6 leading-6">
           {language === 'en'
-            ? 'This is not your username or ID. This name will be visible to your TalksApp Contacts.'
-            : 'Ini bukan nama pengguna atau ID Anda. Nama ini akan terlihat oleh Kontak TalksApp Anda.'}
+            ? 'This is your username. This name will be visible to your TalksApp Contacts.'
+            : 'Ini username Anda. Nama ini akan terlihat oleh Kontak TalksApp Anda.'}
         </p>
         <Editbox
           title={language === 'en' ? 'About' : 'Tentang'}
           value={about}
           onChange={aboutChangeHandler}
+          onSave={onSaveAbout}
         />
       </motion.section>
     </>

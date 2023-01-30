@@ -9,6 +9,7 @@ export type InputProps = {
 export type EditBoxProps = {
   title: string;
   value: string;
+  onSave: () => void;
   onChange: (e: string) => void;
 };
 
@@ -46,7 +47,14 @@ export type PopoverProps = {
 
 export type NewFriendsItemProps = {
   name: string;
+  email: string;
   image: string;
   onClick: () => void;
   isFriends: boolean;
+};
+
+export type ProfileProps = {
+  displayName: string;
+  about: string;
+  photoURL: string;
 };
