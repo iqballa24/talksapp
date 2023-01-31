@@ -4,15 +4,16 @@ import React from 'react';
 const WrapperMessages: React.FC<{ children: React.ReactElement[] }> = ({
   children,
 }) => {
-  const { language } = useAppSelector((state) => state.ui);
-  const data = true;
+  const { ui, chats } = useAppSelector((state) => state);
+  const { language, accentColor } = ui;
+  const { selectedChat } = chats;
 
   return (
     <div className="relative hidden md:flex flex-col md:w-6/12 lg:w-8/12 bg-grey-secondary dark:bg-dark">
-      {!data && (
+      {!selectedChat.chatId && (
         <div className="absolute w-full max-w-md top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 flex flex-col justify-center items-center text-center text-dark-secondary dark:text-grey">
           <img
-            src="cuate.svg"
+            src={`cuate-${accentColor}.png`}
             alt="talksapp background"
             className="w-3/4 py-8"
           />
@@ -29,7 +30,7 @@ const WrapperMessages: React.FC<{ children: React.ReactElement[] }> = ({
           </p>
         </div>
       )}
-      {data && children}
+      {selectedChat.chatId && children}
     </div>
   );
 };

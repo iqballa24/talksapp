@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { DocumentData } from 'firebase/firestore';
 import { Dialog, Transition } from '@headlessui/react';
 import { asyncSearchUsers } from '@/store/users/action';
 import { Buttons } from '@/components/UI';
@@ -7,10 +8,12 @@ import { userTypes } from '@/lib/types';
 import { ModalProps } from '@/lib/types/PropTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import useDebounce from '@/lib/hooks/useDebounce';
+import { asyncAddNewChat } from '@/store/chats/action';
 
 const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
   const [searchVal, setSearchVal] = useState<string>('');
-  const { resultSearch } = useAppSelector((state) => state.users);
+  const { users } = useAppSelector((state) => state);
+  const { resultSearch } = users;
   const dispatch = useAppDispatch();
   const deb = useDebounce(searchVal, 800);
 
@@ -21,6 +24,10 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
   const onSearch = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     setSearchVal(target.value);
+  };
+
+  const onClickAdd = async ({ uid, displayName, photoURL }: DocumentData) => {
+    dispatch(asyncAddNewChat({ uid, displayName, photoURL }));
   };
 
   return (
@@ -62,9 +69,9 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
                     placeholder="Search username"
                   />
                   <ul className="flex flex-col">
-                    {resultSearch.length > 0 ?
+                    {resultSearch.length > 0 ? (
                       resultSearch.map((item: userTypes, index) => {
-                        const { displayName, photoURL,email } = item;
+                        const { displayName, photoURL, email, uid } = item;
                         const srcImage =
                           item.photoURL !== ''
                             ? photoURL
@@ -73,14 +80,20 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
                         return (
                           <NewFriendsItem
                             key={index}
+                            uid={uid}
                             name={displayName}
                             email={email}
                             image={srcImage}
-                            onClick={() => console.log()}
+                            onClick={onClickAdd}
                             isFriends={false}
                           />
                         );
-                      }): <p className='text-xs text-gray-400 text-center py-3'>-- No items are displayed --</p>}
+                      })
+                    ) : (
+                      <p className="text-xs text-gray-400 text-center py-3">
+                        -- No items are displayed --
+                      </p>
+                    )}
                   </ul>
                 </div>
                 <div className="flex justify-end space-x-2 mt-4">

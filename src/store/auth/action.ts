@@ -11,6 +11,7 @@ import {
 } from '@/lib/firebase/API';
 import { auth } from '@/lib/firebase';
 import { authSliceAction } from '@/store/auth';
+import { chatsSliceAction } from '@/store/chats';
 
 function asyncRegisterUser({ email, password, username }: registerTypes) {
   return async () => {
@@ -102,6 +103,7 @@ function asyncPreloaderProcess() {
 function unSetAuthUser() {
   return async (dispatch: Dispatch) => {
     signOut(auth);
+    dispatch(chatsSliceAction.resetChatsUser());
     dispatch(authSliceAction.unSetCurrentUser());
   };
 }

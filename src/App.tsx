@@ -25,8 +25,12 @@ function App() {
   }, [ui.isDarkMode]);
 
   useEffect(() => {
-    dispatch(asyncPreloaderProcess());
-  }, [dispatch]);
+    const unsub = () => dispatch(asyncPreloaderProcess());
+
+    return () => {
+      unsub();
+    };
+  }, []);
 
   if (auth.isAuthenticate) {
     return (

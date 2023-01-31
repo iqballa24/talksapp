@@ -7,8 +7,8 @@ import ModalAddNewFriends from '@/components/UI/Modal/AddNewFriends';
 
 import {
   MdGroups,
-  MdOutlineDonutLarge,
-  MdChat,
+  MdGroupWork,
+  MdPersonAdd,
   MdMoreVert,
 } from 'react-icons/md';
 import { menuProfile } from '@/constant';
@@ -48,24 +48,28 @@ const ChatsHeader = () => {
         content={language === 'en' ? 'Profile' : 'Profil'}
       />
       <ul className="relative flex flex-row items-center space-x-7 text-dark-secondary dark:text-grey">
-        <li id="group" className="cursor-pointer">
+        <li id="friends" className="cursor-pointer">
           <MdGroups size={22} role="button" />
+          <Tooltip
+            className="z-20"
+            anchorId="friends"
+            content={language === 'en' ? 'Friends' : 'Teman'}
+          />
+        </li>
+        <li id="group" className="cursor-pointer">
+          <MdGroupWork size={22} role="button" />
           <Tooltip
             className="z-20"
             anchorId="group"
             content={language === 'en' ? 'Create group' : 'Buat grup'}
           />
         </li>
-        <li id="status" className="cursor-pointer">
-          <MdOutlineDonutLarge size={22} role="button" />
-          <Tooltip className="z-20" anchorId="status" content="Status" />
-        </li>
         <li id="newChat" className="cursor-pointer" onClick={toggleModal}>
-          <MdChat size={22} role="button" />
+          <MdPersonAdd size={22} role="button" />
           <Tooltip
             className="z-20"
             anchorId="newChat"
-            content={language === 'en' ? 'New chat' : 'Buat chat'}
+            content={language === 'en' ? 'Add friends' : 'Tambah teman'}
           />
         </li>
         <li id="menu" className="cursor-pointer">

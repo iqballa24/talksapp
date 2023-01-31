@@ -8,6 +8,10 @@ import {
   where,
   doc,
   setDoc,
+  getDoc,
+  updateDoc,
+  serverTimestamp,
+  onSnapshot,
 } from 'firebase/firestore';
 import {
   sendEmailVerification,
@@ -22,7 +26,6 @@ import {
 import { db } from '@/lib/firebase';
 import { registerTypes, FormLoginTypes } from '@/lib/types/index';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { toast } from 'react-hot-toast';
 
 const registerUser = async ({ email, password, username }: registerTypes) => {
   try {
@@ -40,6 +43,8 @@ const registerUser = async ({ email, password, username }: registerTypes) => {
       photoURL: '',
       about: 'Hey theree! I am using TalksApp.',
     });
+
+    await setDoc(doc(db, 'usersFriends', res.user.uid), {});
 
     await setDoc(doc(db, 'usersChats', res.user.uid), {});
 
@@ -159,6 +164,44 @@ const uploadImage = async ({ uid, displayName, file }: DocumentData) => {
   }
 };
 
+const postNewChat = async ({ uid, displayName, photoURL }: DocumentData) => {
+  const user = auth.currentUser!;
+  const combineId = user.uid > uid ? user.uid + uid : uid + user.uid;
+
+  try {
+    const res = await getDoc(doc(db, 'chats', combineId));
+
+    if (!res.exists()) {
+      await setDoc(doc(db, 'chats', combineId), { messages: [] });
+
+      await updateDoc(doc(db, 'usersChats', user.uid), {
+        [combineId + '.userInfo']: {
+          uid,
+          displayName,
+          photoURL,
+        },
+        [combineId + '.date']: serverTimestamp(),
+      });
+
+      await updateDoc(doc(db, 'usersChats', uid), {
+        [combineId + '.userInfo']: {
+          uid: user.uid,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        },
+        [combineId + '.date']: serverTimestamp(),
+      });
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -168,4 +211,5 @@ export {
   getUserById,
   updateDocument,
   uploadImage,
+  postNewChat,
 };

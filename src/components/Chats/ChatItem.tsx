@@ -1,21 +1,36 @@
 import React from 'react';
+import { ChatItemProps } from '@/lib/types/PropTypes';
 
-const ChatItem = () => {
+const ChatItem: React.FC<ChatItemProps> = ({
+  uid,
+  displayName,
+  lastMessage,
+  photoURL,
+  time,
+  onSelect,
+}) => {
   return (
-    <li className="p-3 flex flex-row space-x-2 items-center hover:bg-gray-50 dark:hover:bg-dark cursor-pointer">
+    <li
+      className="p-3 flex flex-row space-x-2 items-center hover:bg-gray-50 dark:hover:bg-dark cursor-pointer"
+      onClick={() => onSelect({ uid, displayName, photoURL })}
+    >
       <div className="w-2/12">
         <img
-          src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=461&q=80"
+          src={photoURL}
           alt="profile user"
           className="w-[49px] h-[49px] rounded-[50%]"
         />
       </div>
       <div className="w-8/12 h-full flex flex-col justify-start">
-        <span className='text-base text-dark dark:text-white'>Tester</span>
-        <p className='text-sm text-gray-400'>Tester</p>
+        <span className="text-base text-dark dark:text-white">
+          {displayName}
+        </span>
+        <p className="text-sm text-gray-400">
+          {lastMessage || 'click to start the conversation'}
+        </p>
       </div>
-      <div className='w-2/12 h-full flex justify-end'>
-        <time className='text-xs text-gray-400'>4:42pm</time>
+      <div className="w-2/12 h-full flex justify-end">
+        <time className="text-xs text-gray-400">4:42pm</time>
       </div>
     </li>
   );

@@ -1,4 +1,5 @@
-import { MenuProfileTypes } from '@/lib/types';
+import { MenuProfileTypes, userTypes } from '@/lib/types';
+import { DocumentData } from 'firebase/firestore';
 
 export type InputProps = {
   id: string;
@@ -46,10 +47,11 @@ export type PopoverProps = {
 };
 
 export type NewFriendsItemProps = {
+  uid: string;
   name: string;
   email: string;
   image: string;
-  onClick: () => void;
+  onClick: ({ uid, displayName, photoURL }: DocumentData) => void;
   isFriends: boolean;
 };
 
@@ -57,4 +59,13 @@ export type ProfileProps = {
   displayName: string;
   about: string;
   photoURL: string;
+};
+
+export type ChatItemProps = {
+  uid: string;
+  displayName: string;
+  lastMessage: string;
+  photoURL: string;
+  time: string;
+  onSelect: ({ uid, displayName, photoURL }: DocumentData) => void;
 };
