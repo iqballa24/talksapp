@@ -19,6 +19,13 @@ export type userTypes = {
   email: string;
 };
 
+export type messageTypes = {
+  date: string;
+  id: string;
+  senderId: string;
+  text: string;
+};
+
 export interface FormRegisterTypes extends registerTypes {
   confirmPassword: string;
 }

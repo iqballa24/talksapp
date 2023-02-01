@@ -10,6 +10,17 @@ const ChatsList = () => {
   const { uid: currUserId } = auth.user;
   const dispatch = useAppDispatch();
 
+  const handleSelect = ({
+    chatId,
+    uid,
+    displayName,
+    photoURL,
+  }: DocumentData) => {
+    dispatch(
+      chatsSliceAction.selectChat({ chatId, uid, displayName, photoURL })
+    );
+  };
+
   useEffect(() => {
     if (currUserId !== '-') {
       dispatch(
@@ -18,7 +29,7 @@ const ChatsList = () => {
     }
   }, [currUserId]);
 
-  if (Object.keys(chats.list).length === 0) {
+  if (chats.list.length === 0) {
     return (
       <p className="font-light text-sm text-center text-dark-secondary dark:text-grey mt-5">
         {ui.language === 'en'
@@ -28,22 +39,20 @@ const ChatsList = () => {
     );
   }
 
-  const handleSelect = ({ uid, displayName, photoURL }: DocumentData) => {
-    const chatId = currUserId > uid ? currUserId + uid : uid + currUserId;
-    console.log(chatId);
-    dispatch(chatsSliceAction.selectChat({ uid, displayName, photoURL }));
-  };
+  const chatsSorted = [...chats.list];
+  chatsSorted.sort((a, b) => b.date - a.date);
 
   return (
     <ul className="flex flex-col h-[600px] overflowy-scroll divide-y dark:divide-dark-secondary/50 bg-white dark:bg-dark-third">
-      {Object.entries(chats.list).map((chat: DocumentData) => (
+      {chatsSorted.map((chat: DocumentData) => (
         <ChatItem
-          key={chat[0]}
-          uid={chat[0]}
-          displayName={chat[1].userInfo.displayName}
-          lastMessage={chat[1].lastMessage?.text}
-          photoURL={chat[1].userInfo.photoURL}
-          time={''}
+          key={chat.chatId}
+          chatId={chat.chatId}
+          uid={chat.userInfo.uid}
+          displayName={chat.userInfo.displayName}
+          lastMessage={chat.lastMessage}
+          photoURL={chat.userInfo.photoURL}
+          time={chat.date}
           onSelect={handleSelect}
         />
       ))}

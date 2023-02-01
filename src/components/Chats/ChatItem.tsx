@@ -1,7 +1,11 @@
 import React from 'react';
+import { format } from 'date-fns';
+import isYesterday from 'date-fns/isYesterday';
 import { ChatItemProps } from '@/lib/types/PropTypes';
+import { formatedDate } from '@/utils/formatedDate';
 
 const ChatItem: React.FC<ChatItemProps> = ({
+  chatId,
   uid,
   displayName,
   lastMessage,
@@ -9,10 +13,12 @@ const ChatItem: React.FC<ChatItemProps> = ({
   time,
   onSelect,
 }) => {
+  const date = formatedDate(time);
+
   return (
     <li
       className="p-3 flex flex-row space-x-2 items-center hover:bg-gray-50 dark:hover:bg-dark cursor-pointer"
-      onClick={() => onSelect({ uid, displayName, photoURL })}
+      onClick={() => onSelect({ chatId, uid, displayName, photoURL })}
     >
       <div className="w-2/12">
         <img
@@ -30,7 +36,7 @@ const ChatItem: React.FC<ChatItemProps> = ({
         </p>
       </div>
       <div className="w-2/12 h-full flex justify-end">
-        <time className="text-xs text-gray-400">4:42pm</time>
+        <time className="text-xs text-gray-400">{date}</time>
       </div>
     </li>
   );

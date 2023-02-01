@@ -6,7 +6,7 @@ import { Buttons } from '@/components/UI';
 import { ModalProps } from '@/lib/types/PropTypes';
 import { uiActions } from '@/store/ui';
 import { useAppDispatch } from '@/lib/hooks/useRedux';
-import namedHexColor from '@/util/namedHexColor';
+import namedHexColor from '@/utils/namedHexColor';
 
 const ModalSettingColors: React.FC<ModalProps> = ({
   onClose,

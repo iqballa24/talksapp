@@ -1,8 +1,8 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import {
   getUserByUserName,
-  updateDocument,
-  uploadImage,
+  updateDocumentUsers,
+  uploadProfileImage,
 } from '@/lib/firebase/API';
 import { usersSliceAction } from '@/store/users';
 import { authSliceAction } from '@/store/auth';
@@ -32,9 +32,17 @@ function asyncSearchUsers(username: string) {
 function asyncUpdateUser(id: string, data: DocumentData) {
   return async (dispatch: Dispatch) => {
     try {
-      toast.success('Saved');
+      const promise = updateDocumentUsers(id, data);
+
+      toast.promise(promise, {
+        loading: 'Loading..',
+        success: 'Saved',
+        error: 'Failed',
+      });
+
+      const res = promise;
       dispatch(authSliceAction.updateCurrentUser(data));
-      const res = await updateDocument(id, data);
+
       return res;
     } catch (err) {
       if (err instanceof Error) {
@@ -50,7 +58,7 @@ function asyncUpdateUser(id: string, data: DocumentData) {
 function asyncUpdateImageUser({ uid, displayName, file }: DocumentData) {
   return async (dispatch: Dispatch) => {
     try {
-      const promise = uploadImage({ uid, displayName, file });
+      const promise = uploadProfileImage({ uid, displayName, file });
 
       toast.promise(promise, {
         loading: 'Loading..',

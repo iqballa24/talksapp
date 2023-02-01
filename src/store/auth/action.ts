@@ -103,7 +103,7 @@ function asyncPreloaderProcess() {
 function unSetAuthUser() {
   return async (dispatch: Dispatch) => {
     signOut(auth);
-    dispatch(chatsSliceAction.resetChatsUser());
+    dispatch(chatsSliceAction.resetChatsState());
     dispatch(authSliceAction.unSetCurrentUser());
   };
 }

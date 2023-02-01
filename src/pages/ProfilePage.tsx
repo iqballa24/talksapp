@@ -35,11 +35,11 @@ const ProfilePage = () => {
   };
 
   const onSaveName = () => {
-    dispatch(asyncUpdateUser(uid, { displayName: name }));
+    dispatch(asyncUpdateUser(uid, { displayName: name.trim() }));
   };
 
   const onSaveAbout = () => {
-    dispatch(asyncUpdateUser(uid, { about: about }));
+    dispatch(asyncUpdateUser(uid, { about: about.trim() }));
   };
 
   useEffect(() => {

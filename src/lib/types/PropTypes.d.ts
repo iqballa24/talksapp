@@ -4,7 +4,10 @@ import { DocumentData } from 'firebase/firestore';
 export type InputProps = {
   id: string;
   name: string;
+  value: string;
   placeholder: string;
+  changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  enterHandler: () => void;
 };
 
 export type EditBoxProps = {
@@ -62,10 +65,17 @@ export type ProfileProps = {
 };
 
 export type ChatItemProps = {
+  chatId: string;
   uid: string;
   displayName: string;
   lastMessage: string;
   photoURL: string;
-  time: string;
+  time: any;
   onSelect: ({ uid, displayName, photoURL }: DocumentData) => void;
+};
+
+export type MessageItemProps = {
+  sender: boolean;
+  text: string;
+  time: any;
 };

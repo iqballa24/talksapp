@@ -4,6 +4,7 @@ import uiSlice from '@/store/ui';
 import AuthSlice from '@/store/auth';
 import usersSlice from '@/store/users';
 import chatsSlice from '@/store/chats';
+import messagesSlice from '@/store/messages';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     auth: AuthSlice.reducer,
     users: usersSlice.reducer,
     chats: chatsSlice.reducer,
+    messages: messagesSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -11,7 +11,6 @@ import {
   getDoc,
   updateDoc,
   serverTimestamp,
-  onSnapshot,
 } from 'firebase/firestore';
 import {
   sendEmailVerification,
@@ -41,7 +40,7 @@ const registerUser = async ({ email, password, username }: registerTypes) => {
       displayName: username,
       email,
       photoURL: '',
-      about: 'Hey theree! I am using TalksApp.',
+      about: 'Hey there! I am using TalksApp.',
     });
 
     await setDoc(doc(db, 'usersFriends', res.user.uid), {});
@@ -119,9 +118,17 @@ const getUserByUserName = async (userName: string) => {
   return { data, error };
 };
 
-const updateDocument = async (uid: string, data: DocumentData) => {
+const updateDocumentUsers = async (uid: string, data: DocumentData) => {
+  const user = auth.currentUser!;
+
   try {
     const res = await setDoc(doc(db, 'users', uid), data, { merge: true });
+
+    if (data.displayName) {
+      await updateProfile(user, {
+        displayName: data.displayName,
+      });
+    }
 
     return res;
   } catch (err) {
@@ -134,7 +141,7 @@ const updateDocument = async (uid: string, data: DocumentData) => {
   }
 };
 
-const uploadImage = async ({ uid, displayName, file }: DocumentData) => {
+const uploadProfileImage = async ({ uid, displayName, file }: DocumentData) => {
   const storageRef = ref(storage, `${displayName + uid}`);
   const user = auth.currentUser!;
 
@@ -202,6 +209,20 @@ const postNewChat = async ({ uid, displayName, photoURL }: DocumentData) => {
   }
 };
 
+const updateDocument = async ({ collection, data, id }: DocumentData) => {
+  try {
+    const res = await updateDoc(doc(db, collection, id), data);
+    return res;
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -209,7 +230,8 @@ export {
   onAuthStateChanged,
   signOut,
   getUserById,
-  updateDocument,
-  uploadImage,
+  updateDocumentUsers,
+  uploadProfileImage,
   postNewChat,
+  updateDocument,
 };

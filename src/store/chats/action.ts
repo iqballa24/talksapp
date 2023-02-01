@@ -1,12 +1,12 @@
 import { db } from '@/lib/firebase';
-import { postNewChat } from '@/lib/firebase/API';
+import { getUserById, postNewChat } from '@/lib/firebase/API';
 import { chatsSliceAction } from '@/store/chats';
 import { Dispatch } from '@reduxjs/toolkit';
-import { doc, DocumentData, onSnapshot } from 'firebase/firestore';
+import { doc, DocumentData, onSnapshot, Timestamp } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 
 function asyncAddNewChat({ uid, displayName, photoURL }: DocumentData) {
-  return async (dispatch: Dispatch) => {
+  return async () => {
     try {
       const promise = postNewChat({ uid, displayName, photoURL });
 
@@ -32,8 +32,28 @@ function asyncAddNewChat({ uid, displayName, photoURL }: DocumentData) {
 function asyncGetListChats({ uid, collection }: DocumentData) {
   return async (dispatch: Dispatch) => {
     try {
-      const unsubscriber = onSnapshot(doc(db, collection, uid), (doc) => {
-        dispatch(chatsSliceAction.receiveChatsUser(doc.data()));
+      const unsubscriber = onSnapshot(doc(db, collection, uid), async (doc) => {
+
+        const res = Object.entries(doc.data() || []).map((item) => {
+          return item;
+        });
+
+        const listUser = await Promise.all(
+          res.map((item) => {
+            const user = getUserById(item[1].userInfo.uid);
+            return user;
+          })
+        );
+
+        const data = res.map((item, index) => {
+          return {
+            chatId: item[0],
+            date: item[1].date || Timestamp.now(),
+            lastMessage: item[1].lastMessage,
+            userInfo: listUser[index][0],
+          };
+        });
+        dispatch(chatsSliceAction.receiveChatsUser(data));
       });
 
       return () => {
