@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MdFilterList } from 'react-icons/md';
 import { Searchbar } from '@/components/UI';
+import { useAppDispatch } from '@/lib/hooks/useRedux';
+import { chatsSliceAction } from '@/store/chats';
 
 const FilterBar = () => {
-  const [searchVal, setSearchVal] = useState<string>('');
+  const dispatch = useAppDispatch();
 
   const onSearch = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
-    setSearchVal(target.value);
+    dispatch(chatsSliceAction.changeFilterChat(target.value))
   };
   return (
     <React.Fragment>

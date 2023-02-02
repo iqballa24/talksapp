@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ChatItem from '@/components/Chats/ChatItem';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
-import { asyncGetListChats } from '@/store/chats/action';
 import { DocumentData } from '@firebase/firestore';
 import { chatsSliceAction } from '@/store/chats';
+import useListenerChats from '@/lib/hooks/useListenerChats';
 
 const ChatsList = () => {
   const { auth, chats, ui } = useAppSelector((state) => state);
@@ -21,13 +21,9 @@ const ChatsList = () => {
     );
   };
 
-  useEffect(() => {
-    if (currUserId !== '-') {
-      dispatch(
-        asyncGetListChats({ uid: currUserId, collection: 'usersChats' })
-      );
-    }
-  }, [currUserId]);
+  if (currUserId) {
+    useListenerChats(currUserId);
+  }
 
   if (chats.list.length === 0) {
     return (
@@ -40,11 +36,18 @@ const ChatsList = () => {
   }
 
   const chatsSorted = [...chats.list];
-  chatsSorted.sort((a, b) => b.date - a.date);
+
+  const chatsFilter = chatsSorted
+    .sort((a, b) => b.date - a.date)
+    .filter((chat) =>
+      chat.userInfo.displayName
+        .toLowerCase()
+        .includes(chats.filter.toLowerCase())
+    );
 
   return (
     <ul className="flex flex-col h-[600px] overflowy-scroll divide-y dark:divide-dark-secondary/50 bg-white dark:bg-dark-third">
-      {chatsSorted.map((chat: DocumentData) => (
+      {chatsFilter.map((chat: DocumentData) => (
         <ChatItem
           key={chat.chatId}
           chatId={chat.chatId}

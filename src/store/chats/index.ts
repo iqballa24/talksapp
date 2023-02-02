@@ -11,6 +11,7 @@ export type chatsSliceTypes = {
     chatId: string | null;
     user: userTypes;
   };
+  filter: string;
 };
 
 const initialState: chatsSliceTypes = {
@@ -19,6 +20,7 @@ const initialState: chatsSliceTypes = {
     chatId: null,
     user: { uid: '', displayName: '', photoURL: '', about: '', email: '' },
   },
+  filter: '',
 };
 
 const chatsSlice = createSlice({
@@ -41,6 +43,10 @@ const chatsSlice = createSlice({
       state.selectedChat.chatId = payload.chatId;
       state.selectedChat.user = payload;
     },
+
+    changeFilterChat(state, {payload}){
+      state.filter = payload;
+    }
   },
 });
 
