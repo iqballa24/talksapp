@@ -50,7 +50,8 @@ const ModalSettingLang: React.FC<ModalProps> = ({ onClose, isShow }) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-dark dark:text-grey"
                 >
-                  Choose Language
+                  {language === 'en' ? "Change language" :"Ganti bahasa"}
+                  
                 </Dialog.Title>
                 <div className="flex flex-col space-y-2 mt-4">
                   {theme.map((item, index) => (

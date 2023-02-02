@@ -71,7 +71,6 @@ export type ChatItemProps = {
   lastMessage: string;
   photoURL: string;
   time: any;
-  onSelect: ({ uid, displayName, photoURL }: DocumentData) => void;
 };
 
 export type MessageItemProps = {

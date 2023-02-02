@@ -1,8 +1,10 @@
 import React from 'react';
 import { MdInsertPhoto } from 'react-icons/md';
 import { EditAvatarProps } from '@/lib/types/PropTypes';
+import { useAppSelector } from '@/lib/hooks/useRedux';
 
 const EditAvatar: React.FC<EditAvatarProps> = ({ img, onImgChange }) => {
+  const { language } = useAppSelector((state) => state.ui);
   return (
     <div className="w-full py-7 flex justify-center transition-all relative">
       <label
@@ -11,8 +13,8 @@ const EditAvatar: React.FC<EditAvatarProps> = ({ img, onImgChange }) => {
       >
         <MdInsertPhoto size={26} color="white" />
         <span className="text-white text-xs text-center">
-          CHANGE <br />
-          PROFILE PHOTO
+          {language === 'en' ? `CHANGE PROFILE PICTURE` : `GANTI GAMBAR PROFIL`}
+          
         </span>
       </label>
       <input id="file" type="file" className="hidden" onChange={onImgChange} />

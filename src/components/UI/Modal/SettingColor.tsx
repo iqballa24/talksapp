@@ -5,14 +5,12 @@ import { colors } from '@/constant';
 import { Buttons } from '@/components/UI';
 import { ModalProps } from '@/lib/types/PropTypes';
 import { uiActions } from '@/store/ui';
-import { useAppDispatch } from '@/lib/hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import namedHexColor from '@/utils/namedHexColor';
 
-const ModalSettingColors: React.FC<ModalProps> = ({
-  onClose,
-  isShow,
-}) => {
+const ModalSettingColors: React.FC<ModalProps> = ({ onClose, isShow }) => {
   const dispatch = useAppDispatch();
+  const { language } = useAppSelector((state) => state.ui);
 
   const handleChangeComplete = (color: { hex: string }) => {
     const selectedColor = namedHexColor(color.hex);
@@ -50,7 +48,9 @@ const ModalSettingColors: React.FC<ModalProps> = ({
                   as="h3"
                   className="text-lg font-medium leading-6 text-dark dark:text-grey pb-5"
                 >
-                  Choose Accent Colors
+                  {language === 'en'
+                    ? 'Change accent colors'
+                    : 'Ganti warna aksen'}
                 </Dialog.Title>
                 <CirclePicker
                   colors={colors}

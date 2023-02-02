@@ -8,6 +8,7 @@ const initialState = {
   showModalLang: false,
   showModalColors: false,
   showModalAddNewFriends: false,
+  showModalFilterMessage: false,
 };
 
 const uiSlice = createSlice({
@@ -43,9 +44,12 @@ const uiSlice = createSlice({
     toggleModalColors(state) {
       state.showModalColors = !state.showModalColors;
     },
-    toggleModalAddNewFriends(state){
+    toggleModalAddNewFriends(state) {
       state.showModalAddNewFriends = !state.showModalAddNewFriends;
-    }
+    },
+    toggleModalFilterMessages(state) {
+      state.showModalFilterMessage = !state.showModalFilterMessage;
+    },
   },
 });
 

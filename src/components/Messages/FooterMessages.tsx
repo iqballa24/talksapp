@@ -9,7 +9,7 @@ import { asyncSendMessages } from '@/store/messages/action';
 const FooterMessages = () => {
   const [textMessage, setTextMessage] = useState('');
   const dispatch = useAppDispatch();
-  const { chats, auth } = useAppSelector((state) => state);
+  const { chats, auth, ui } = useAppSelector((state) => state);
   const { chatId, user } = chats.selectedChat;
   const { uid } = auth.user;
 
@@ -55,7 +55,7 @@ const FooterMessages = () => {
       <Tooltip
         className="z-10"
         anchorId="sendIcon"
-        content="Send"
+        content={`${ui.language === 'en' ? 'Send' : 'Kirim'}`}
         place="top"
       />
     </div>

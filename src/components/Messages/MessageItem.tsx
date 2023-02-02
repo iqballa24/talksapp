@@ -14,7 +14,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ sender, text, time }) => {
   const date = formatedDate(time);
 
   useEffect(() => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+    ref.current?.scrollIntoView();
   }, [text]);
 
   return (

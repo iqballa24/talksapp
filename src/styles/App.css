@@ -7,14 +7,14 @@
   --font-color: #1f2c33;
   --background-color: #4ba485;
   --scrollbar-color: #eff2f5;
-  --background-img: url('bg-light.jfif');
+  --background-img: url('/bg-light.jfif');
 }
 
 .dark {
   --font-color: #ffffff;
   --background-color: #1f2c33;
   --scrollbar-color: #54646F;
-  --background-img: url('bg-dark.jpg');
+  --background-img: url('/bg-dark.jpg');
 }
 
 * {

@@ -1,17 +1,20 @@
 import { messageTypes } from '@/lib/types';
 import { createSlice } from '@reduxjs/toolkit';
 
-type SliceState = { data: messageTypes[] };
+type SliceState = { data: messageTypes[]; filter: string };
 
 const messagesSlice = createSlice({
   name: 'messages',
-  initialState: { data: [] } as SliceState,
+  initialState: { data: [], filter: '' } as SliceState,
   reducers: {
     clearMessages(state) {
       state.data = [];
     },
     receiveMessages(state, { payload }) {
       state.data = payload.messages;
+    },
+    changeFilterMessage(state, { payload }) {
+      state.filter = payload;
     },
   },
 });

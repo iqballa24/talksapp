@@ -11,7 +11,7 @@ const ModalSettingTheme: React.FC<ModalProps> = ({
 }) => {
   const theme = ['Dark', 'Light'];
   const dispatch = useAppDispatch();
-  const { isDarkMode } = useAppSelector((state) => state.ui);
+  const { isDarkMode, language } = useAppSelector((state) => state.ui);
   const themeSelected = useRef(isDarkMode ? 'Dark' : 'Light');
 
   const changeThemeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,7 @@ const ModalSettingTheme: React.FC<ModalProps> = ({
                   as="h3"
                   className="text-lg font-medium leading-6 text-dark dark:text-grey"
                 >
-                  Choose Theme
+                  {language ==='en' ? "Change Theme" : "Ganti Tema"}
                 </Dialog.Title>
                 <div className="flex flex-col space-y-2 mt-4">
                   {theme.map((item, index) => (

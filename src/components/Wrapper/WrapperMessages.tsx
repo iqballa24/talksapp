@@ -13,7 +13,7 @@ const WrapperMessages: React.FC<{ children: React.ReactElement[] }> = ({
       {!selectedChat.chatId && (
         <div className="absolute w-full max-w-md top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 flex flex-col justify-center items-center text-center text-dark-secondary dark:text-grey">
           <img
-            src={`cuate-${accentColor}.png`}
+            src={`/cuate-${accentColor}.png`}
             alt="talksapp background"
             className="w-3/4 py-8"
           />
