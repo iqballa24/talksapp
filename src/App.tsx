@@ -15,6 +15,7 @@ const ProfilePage = React.lazy(() => import('./pages/ProfilePage'));
 const SecurityPage = React.lazy(() => import('./pages/SecurityPage'));
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 const MessagePage = React.lazy(() => import('./pages/MessagePage'));
+const UserPage = React.lazy(() => import('./pages/UserPage'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -44,6 +45,7 @@ function App() {
             <Route path="/security" element={<SecurityPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/message/*" element={<MessagePage />} />
+            <Route path="/user/*" element={<UserPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

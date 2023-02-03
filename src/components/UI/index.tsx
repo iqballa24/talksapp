@@ -9,6 +9,8 @@ import Buttons from '@/components/UI/Buttons';
 import Loader from '@/components/UI/Loader';
 import BoxMessage from '@/components/UI/BoxMessage';
 import NewFriendsItem from '@/components/UI/NewFriendsItem';
+import RoundedImage from '@/components/UI/RoundedImage';
+import BoxText from '@/components/UI/BoxText';
 
 export {
   Searchbar,
@@ -21,5 +23,7 @@ export {
   Buttons,
   Loader,
   BoxMessage,
-  NewFriendsItem
+  NewFriendsItem,
+  RoundedImage,
+  BoxText
 };

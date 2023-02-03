@@ -9,10 +9,8 @@ import useWindowSize from '@/lib/hooks/useWindowSize';
 
 const ChatItem: React.FC<ChatItemProps> = ({
   chatId,
-  uid,
-  displayName,
   lastMessage,
-  photoURL,
+  userInfo,
   time,
 }) => {
   const dispatch = useAppDispatch();
@@ -20,14 +18,25 @@ const ChatItem: React.FC<ChatItemProps> = ({
   const date = formatedDate(time);
   const size = useWindowSize();
 
+  const { uid, displayName, about, email, photoURL } = userInfo;
+
   const handleSelect = ({
     chatId,
     uid,
     displayName,
     photoURL,
+    about,
+    email,
   }: DocumentData) => {
     dispatch(
-      chatsSliceAction.selectChat({ chatId, uid, displayName, photoURL })
+      chatsSliceAction.selectChat({
+        chatId,
+        uid,
+        displayName,
+        photoURL,
+        about,
+        email,
+      })
     );
     if (size.width < 560) {
       return navigate(`/message/${chatId}`);
@@ -37,7 +46,9 @@ const ChatItem: React.FC<ChatItemProps> = ({
   return (
     <li
       className="p-3 flex flex-row space-x-2 items-center hover:bg-gray-50 dark:hover:bg-dark cursor-pointer"
-      onClick={() => handleSelect({ chatId, uid, displayName, photoURL })}
+      onClick={() =>
+        handleSelect({ chatId, uid, displayName, photoURL, about, email })
+      }
     >
       <div className="w-2/12">
         <img

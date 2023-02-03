@@ -15,7 +15,6 @@ const MessagePage = () => {
 
   useEffect(() => {
     if (!selectedChat.chatId || size.width > 560) {
-      console.log('tester');
       navigate('/');
     }
   }, [selectedChat.chatId, size.width]);

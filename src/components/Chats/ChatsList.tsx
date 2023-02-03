@@ -38,10 +38,8 @@ const ChatsList = () => {
         <ChatItem
           key={chat.chatId}
           chatId={chat.chatId}
-          uid={chat.userInfo.uid}
-          displayName={chat.userInfo.displayName}
           lastMessage={chat.lastMessage}
-          photoURL={chat.userInfo.photoURL}
+          userInfo={chat.userInfo}
           time={chat.date}
         />
       ))}

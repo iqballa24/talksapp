@@ -28,7 +28,7 @@ const HeaderMessages = () => {
       className="flex flex-row items-center justify-between min-h-[62px] px-4 bg-grey-secondary dark:bg-dark"
       role="figure"
     >
-      <div className="flex flex-row items-center space-x-5">
+      <div className="flex flex-row items-center space-x-2">
         <MdKeyboardArrowLeft
           id="back"
           size={22}
@@ -41,14 +41,30 @@ const HeaderMessages = () => {
           content={ui.language === 'en' ? 'Back' : 'Kembali'}
           place="bottom"
         />
-        <img
-          src={selectedChat.user.photoURL}
-          alt="profile picture"
-          className="rounded-[50%] w-10 h-10"
+        <div
+          id="detailUser"
+          className="flex flex-row items-center space-x-4 cursor-pointer"
+          onClick={() => navigate(`/user/${selectedChat.user.uid}`)}
+        >
+          <img
+            src={selectedChat.user.photoURL}
+            alt="profile picture"
+            className="rounded-[50%] w-10 h-10"
+          />
+          <h1 className="text-dark dark:text-grey text-base truncate">
+            {selectedChat.user.displayName}
+          </h1>
+        </div>
+        <Tooltip
+          className="z-20"
+          anchorId="detailUser"
+          content={
+            ui.language === 'en'
+              ? `See ${selectedChat.user.displayName}'s profile`
+              : `Lihat profil ${selectedChat.user.displayName}`
+          }
+          place="bottom"
         />
-        <h1 className="text-dark dark:text-grey text-base truncate">
-          {selectedChat.user.displayName}
-        </h1>
       </div>
       <div className="flex flex-row justify-center items-center text-dark-secondary dark:text-grey h-full">
         <AnimatePresence>

@@ -1,5 +1,5 @@
 import { MenuProfileTypes, userTypes } from '@/lib/types';
-import { DocumentData } from 'firebase/firestore';
+import { DocumentData, Timestamp } from 'firebase/firestore';
 
 export type InputProps = {
   id: string;
@@ -66,15 +66,13 @@ export type ProfileProps = {
 
 export type ChatItemProps = {
   chatId: string;
-  uid: string;
-  displayName: string;
   lastMessage: string;
-  photoURL: string;
-  time: any;
+  userInfo: userTypes;
+  time: Timestamp;
 };
 
 export type MessageItemProps = {
   sender: boolean;
   text: string;
-  time: any;
+  time: Timestamp;
 };

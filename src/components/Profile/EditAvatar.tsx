@@ -2,6 +2,7 @@ import React from 'react';
 import { MdInsertPhoto } from 'react-icons/md';
 import { EditAvatarProps } from '@/lib/types/PropTypes';
 import { useAppSelector } from '@/lib/hooks/useRedux';
+import { RoundedImage } from '@/components/UI';
 
 const EditAvatar: React.FC<EditAvatarProps> = ({ img, onImgChange }) => {
   const { language } = useAppSelector((state) => state.ui);
@@ -14,15 +15,10 @@ const EditAvatar: React.FC<EditAvatarProps> = ({ img, onImgChange }) => {
         <MdInsertPhoto size={26} color="white" />
         <span className="text-white text-xs text-center">
           {language === 'en' ? `CHANGE PROFILE PICTURE` : `GANTI GAMBAR PROFIL`}
-          
         </span>
       </label>
       <input id="file" type="file" className="hidden" onChange={onImgChange} />
-      <img
-        src={img}
-        alt="profile picture"
-        className="absolute rounded-[50%] w-[200px] h-[200px] z-0"
-      />
+      <RoundedImage src={img} className="absolute" />
     </div>
   );
 };
