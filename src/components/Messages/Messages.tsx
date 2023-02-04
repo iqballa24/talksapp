@@ -1,7 +1,9 @@
 import React from 'react';
+import { DocumentData } from 'firebase/firestore';
 import { useAppSelector } from '@/lib/hooks/useRedux';
 import MessageItem from '@/components/Messages/MessageItem';
 import useListenerMessages from '@/lib/hooks/useListenerMessages';
+import { formatedDate } from '@/utils/formatedDate';
 
 const Messages = () => {
   const { chats, messages, auth } = useAppSelector((state) => state);
@@ -18,16 +20,18 @@ const Messages = () => {
   );
 
   return (
-    <div className="bg-chat w-full h-full overflow-y-scroll px-6 md:px-10 pt-3">
-      {filterMessages.map((item) => (
-        <div key={item.id}>
+    <div className="bg-chat w-full h-full overflow-y-scroll px-6 md:px-10 pt-3 flex flex-col space-y-5">
+      {filterMessages.map((item: DocumentData) => {
+        const date = formatedDate(item.date);
+        return (
           <MessageItem
+            key={item.id}
             text={item.text}
-            time={item.date}
+            time={date}
             sender={item.senderId === uid}
           />
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

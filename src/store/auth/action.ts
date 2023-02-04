@@ -12,6 +12,7 @@ import {
 import { auth } from '@/lib/firebase';
 import { authSliceAction } from '@/store/auth';
 import { chatsSliceAction } from '@/store/chats';
+import { usersSliceAction } from '@/store/users';
 
 function asyncRegisterUser({ email, password, username }: registerTypes) {
   return async () => {
@@ -105,6 +106,7 @@ function unSetAuthUser() {
     signOut(auth);
     dispatch(chatsSliceAction.resetChatsState());
     dispatch(authSliceAction.unSetCurrentUser());
+    dispatch(usersSliceAction.resetListFriends());
   };
 }
 

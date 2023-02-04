@@ -9,6 +9,7 @@ import { asyncPreloaderProcess } from '@/store/auth/action';
 
 import LoginPage from '@/pages/LoginPage';
 import RegisterPage from '@/pages/RegisterPage';
+import useListenerFriends from '@/lib/hooks/useListenerFriends';
 const ChatsPage = React.lazy(() => import('./pages/ChatsPage'));
 const SettingsPage = React.lazy(() => import('./pages/SettingsPage'));
 const ProfilePage = React.lazy(() => import('./pages/ProfilePage'));
@@ -16,10 +17,13 @@ const SecurityPage = React.lazy(() => import('./pages/SecurityPage'));
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 const MessagePage = React.lazy(() => import('./pages/MessagePage'));
 const UserPage = React.lazy(() => import('./pages/UserPage'));
+const FriendsPage = React.lazy(() => import('./pages/FriendsPage'));
 
 function App() {
   const dispatch = useAppDispatch();
   const { ui, auth } = useAppSelector((state) => state);
+
+  useListenerFriends(auth.user.uid);
 
   useEffect(() => {
     if (ui.isDarkMode) document.body.classList.add('dark');
@@ -46,6 +50,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/message/*" element={<MessagePage />} />
             <Route path="/user/*" element={<UserPage />} />
+            <Route path="/friends" element={<FriendsPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

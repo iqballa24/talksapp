@@ -10,6 +10,7 @@ const Buttons: React.FC<ButtonsProps> = ({
   onClick,
   isPrimary,
   isSecondary,
+  isDanger,
 }) => {
   const { accentColor } = useAppSelector((state) => state.ui);
   const className = [
@@ -26,6 +27,8 @@ const Buttons: React.FC<ButtonsProps> = ({
     className.push(
       `bg-transparent border border-grey text-${accentColor} hover:shadow-md dark:hover:bg-dark-third`
     );
+
+  isDanger && className.push('border border-red text-red dark:text-white hover:bg-red-500 hover:text-white');
 
   return (
     <button

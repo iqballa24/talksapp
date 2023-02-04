@@ -9,6 +9,8 @@ const useListenerChats = (uid: string) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    if (uid === '-') return;
+
     const unsubscriber = onSnapshot(doc(db, 'usersChats', uid), async (doc) => {
       const res = Object.entries(doc.data() || []).map((item) => {
         return item;

@@ -1,14 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore';
 import { Dialog, Transition } from '@headlessui/react';
-import { asyncSearchUsers } from '@/store/users/action';
+import { asyncAddNewFriends, asyncSearchUsers } from '@/store/users/action';
 import { Buttons } from '@/components/UI';
 import { Searchbar, NewFriendsItem } from '@/components/UI';
 import { userTypes } from '@/lib/types';
 import { ModalProps } from '@/lib/types/PropTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import useDebounce from '@/lib/hooks/useDebounce';
-import { asyncAddNewChat } from '@/store/chats/action';
 
 const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
   const [searchVal, setSearchVal] = useState<string>('');
@@ -26,8 +25,8 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
     setSearchVal(target.value);
   };
 
-  const onClickAdd = async ({ uid, displayName, photoURL }: DocumentData) => {
-    dispatch(asyncAddNewChat({ uid, displayName, photoURL }));
+  const onClickAdd = async (uid: string) => {
+    dispatch(asyncAddNewFriends(uid));
   };
 
   return (
@@ -70,25 +69,14 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
                   />
                   <ul className="flex flex-col">
                     {resultSearch.length > 0 ? (
-                      resultSearch.map((item: userTypes, index) => {
-                        const { displayName, photoURL, email, uid } = item;
-                        const srcImage =
-                          item.photoURL !== ''
-                            ? photoURL
-                            : `https://ui-avatars.com/api/?name=${displayName}`;
-
-                        return (
-                          <NewFriendsItem
-                            key={index}
-                            uid={uid}
-                            name={displayName}
-                            email={email}
-                            image={srcImage}
-                            onClick={onClickAdd}
-                            isFriends={false}
-                          />
-                        );
-                      })
+                      resultSearch.map((item: userTypes, index) => (
+                        <NewFriendsItem
+                          key={index}
+                          userInfo={item}
+                          onAdd={onClickAdd}
+                          status=""
+                        />
+                      ))
                     ) : (
                       <p className="text-xs text-gray-400 text-center py-3">
                         -- No items are displayed --

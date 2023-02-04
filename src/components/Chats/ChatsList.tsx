@@ -8,9 +8,7 @@ const ChatsList = () => {
   const { auth, chats, ui } = useAppSelector((state) => state);
   const { uid: currUserId } = auth.user;
 
-  if (currUserId) {
-    useListenerChats(currUserId);
-  }
+  useListenerChats(currUserId);
 
   if (chats.list.length === 0) {
     return (
@@ -22,9 +20,7 @@ const ChatsList = () => {
     );
   }
 
-  const chatsSorted = [...chats.list];
-
-  const chatsFilter = chatsSorted
+  const chatsFilter = [...chats.list]
     .sort((a, b) => b.date - a.date)
     .filter((chat) =>
       chat.userInfo.displayName

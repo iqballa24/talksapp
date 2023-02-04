@@ -5,12 +5,7 @@ import { Popover } from '@headlessui/react';
 import PopOverItem from '@/components/UI/Popoveritem';
 import ModalAddNewFriends from '@/components/UI/Modal/AddNewFriends';
 
-import {
-  MdGroups,
-  MdGroupWork,
-  MdPersonAdd,
-  MdMoreVert,
-} from 'react-icons/md';
+import { MdGroups, MdGroupWork, MdPersonAdd, MdMoreVert } from 'react-icons/md';
 import { menuProfile } from '@/constant';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { uiActions } from '@/store/ui';
@@ -48,7 +43,11 @@ const ChatsHeader = () => {
         content={language === 'en' ? 'Profile' : 'Profil'}
       />
       <ul className="relative flex flex-row items-center space-x-7 text-dark-secondary dark:text-grey">
-        <li id="friends" className="cursor-pointer">
+        <li
+          id="friends"
+          className="cursor-pointer"
+          onClick={() => navigate('/friends')}
+        >
           <MdGroups size={22} role="button" />
           <Tooltip
             className="z-20"

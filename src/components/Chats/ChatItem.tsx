@@ -28,12 +28,17 @@ const ChatItem: React.FC<ChatItemProps> = ({
     about,
     email,
   }: DocumentData) => {
+    const srcImage =
+      photoURL === ''
+        ? `https://ui-avatars.com/api/?name=${displayName}`
+        : photoURL;
+
     dispatch(
       chatsSliceAction.selectChat({
         chatId,
         uid,
         displayName,
-        photoURL,
+        photoURL: srcImage,
         about,
         email,
       })
@@ -52,7 +57,11 @@ const ChatItem: React.FC<ChatItemProps> = ({
     >
       <div className="w-2/12">
         <img
-          src={photoURL}
+          src={
+            photoURL !== ''
+              ? photoURL
+              : `https://ui-avatars.com/api/?name=${displayName}`
+          }
           alt="profile user"
           className="w-[49px] h-[49px] rounded-[50%]"
         />

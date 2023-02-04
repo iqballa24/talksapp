@@ -17,7 +17,7 @@ const EditAvatar: React.FC<EditAvatarProps> = ({ img, onImgChange }) => {
           {language === 'en' ? `CHANGE PROFILE PICTURE` : `GANTI GAMBAR PROFIL`}
         </span>
       </label>
-      <input id="file" type="file" className="hidden" onChange={onImgChange} />
+      <input id="file" type="file" className="hidden" onChange={onImgChange} accept="image/png, image/gif, image/jpeg"/>
       <RoundedImage src={img} className="absolute" />
     </div>
   );

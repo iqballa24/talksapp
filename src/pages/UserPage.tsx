@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@/lib/hooks/useRedux';
 import useWindowSize from '@/lib/hooks/useWindowSize';
 import { Header, RoundedImage, BoxText } from '@/components/UI';
-import { useNavigate } from 'react-router-dom';
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -22,7 +23,14 @@ const UserPage = () => {
   return (
     <>
       <Header name={selectedChat.user.displayName} pathBack={pathBack} />
-      <section className="flex flex-col bg-white dark:bg-dark-third h-full">
+      <motion.section
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{
+          default: { ease: 'linear' },
+        }}
+        className="flex flex-col bg-white dark:bg-dark-third h-full"
+      >
         <div className="flex ml-auto mr-auto py-7">
           <RoundedImage src={selectedChat.user.photoURL} />
         </div>
@@ -32,7 +40,7 @@ const UserPage = () => {
           text={selectedChat.user.about}
         />
         <BoxText title="Email" text={selectedChat.user.email} />
-      </section>
+      </motion.section>
     </>
   );
 };

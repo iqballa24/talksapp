@@ -11,6 +11,8 @@ import {
   getDoc,
   updateDoc,
   serverTimestamp,
+  arrayRemove,
+  arrayUnion,
 } from 'firebase/firestore';
 import {
   sendEmailVerification,
@@ -171,11 +173,18 @@ const uploadProfileImage = async ({ uid, displayName, file }: DocumentData) => {
   }
 };
 
-const postNewChat = async ({ uid, displayName, photoURL }: DocumentData) => {
+const acceptRequestFriend = async ({
+  uid,
+  displayName,
+  photoURL,
+}: DocumentData) => {
   const user = auth.currentUser!;
   const combineId = user.uid > uid ? user.uid + uid : uid + user.uid;
 
   try {
+    await deleteRequestFriend(uid);
+    await sendRequestFriend(uid, 'accepted');
+
     const res = await getDoc(doc(db, 'chats', combineId));
 
     if (!res.exists()) {
@@ -223,6 +232,86 @@ const updateDocument = async ({ collection, data, id }: DocumentData) => {
   }
 };
 
+const sendRequestFriend = async (uid: string, status = 'pending') => {
+  const user = auth.currentUser!;
+
+  const dataCurrUser = {
+    data: arrayUnion({
+      userId: uid,
+      requestBy: user.uid,
+      status: status,
+    }),
+  };
+
+  const ReqUser = {
+    data: arrayUnion({
+      userId: user.uid,
+      requestBy: user.uid,
+      status: status,
+    }),
+  };
+
+  try {
+    await updateDocument({
+      collection: 'usersFriends',
+      data: dataCurrUser,
+      id: user.uid,
+    });
+
+    await updateDocument({
+      collection: 'usersFriends',
+      data: ReqUser,
+      id: uid,
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
+const deleteRequestFriend = async (uid: string) => {
+  const user = auth.currentUser!;
+
+  try {
+    const getFriendsCurrUser = await getDoc(doc(db, 'usersFriends', user.uid));
+    const dataDeleteCurrUser = getFriendsCurrUser
+      .data()
+      ?.data.filter((item: DocumentData) => item.userId === uid);
+
+    const getFriendsUser = await getDoc(doc(db, 'usersFriends', uid));
+    const dataDeleteUser = getFriendsUser
+      .data()
+      ?.data.filter((item: DocumentData) => item.userId === user.uid);
+
+    await updateDocument({
+      collection: 'usersFriends',
+      data: {
+        data: arrayRemove(dataDeleteCurrUser[0]),
+      },
+      id: user.uid,
+    });
+
+    await updateDocument({
+      collection: 'usersFriends',
+      data: {
+        data: arrayRemove(dataDeleteUser[0]),
+      },
+      id: uid,
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -232,6 +321,8 @@ export {
   getUserById,
   updateDocumentUsers,
   uploadProfileImage,
-  postNewChat,
+  acceptRequestFriend,
   updateDocument,
+  deleteRequestFriend,
+  sendRequestFriend,
 };

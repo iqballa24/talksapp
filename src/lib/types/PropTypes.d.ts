@@ -34,6 +34,7 @@ export type ButtonsProps = {
   title: string;
   isPrimary?: boolean;
   isSecondary?: boolean;
+  isDanger?: boolean;
   onClick: () => void;
 };
 
@@ -50,12 +51,13 @@ export type PopoverProps = {
 };
 
 export type NewFriendsItemProps = {
-  uid: string;
-  name: string;
-  email: string;
-  image: string;
-  onClick: ({ uid, displayName, photoURL }: DocumentData) => void;
-  isFriends: boolean;
+  userInfo: userTypes;
+  status: string;
+  requestBy?: string;
+  onAdd?: (uid: string) => void;
+  onAccept?: ({ uid, displayName, photoURL }: DocumentData) => void;
+  onChat?: ({ uid, displayName, photoURL }: DocumentData) => void;
+  onReject?: (uid: string) => void;
 };
 
 export type ProfileProps = {
@@ -74,5 +76,5 @@ export type ChatItemProps = {
 export type MessageItemProps = {
   sender: boolean;
   text: string;
-  time: Timestamp;
+  time: string;
 };
