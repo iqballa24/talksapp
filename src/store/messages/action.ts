@@ -10,7 +10,8 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { db } from '@/lib/firebase';
 import toast from 'react-hot-toast';
 import { messageSliceAction } from '@/store/messages';
-import { updateDocument } from '@/lib/firebase/API';
+import { updateDocument, uploadFile } from '@/lib/firebase/API';
+import { ref } from 'firebase/storage';
 
 function asyncGetMessages({ chatId, collection }: DocumentData) {
   return async (dispatch: Dispatch) => {
@@ -39,27 +40,44 @@ function asyncSendMessages({
   chatId,
   senderId,
   receiverId,
+  image,
 }: DocumentData) {
   return async () => {
     const id = +new Date();
     const date = Timestamp.now();
 
-    const data = {
-      messages: arrayUnion({
-        id,
-        text,
-        senderId,
-        date,
-      }),
-    };
-
     try {
-      await updateDocument({ collection, data, id: chatId });
+      if (image) {
+        const res = await uploadFile({ file: image });
+
+        const data = {
+          messages: arrayUnion({
+            id,
+            text,
+            senderId,
+            date,
+            image: res,
+          }),
+        };
+
+        await updateDocument({ collection, data, id: chatId });
+      } else {
+        const data = {
+          messages: arrayUnion({
+            id,
+            text,
+            senderId,
+            date,
+          }),
+        };
+
+        await updateDocument({ collection, data, id: chatId });
+      }
 
       await updateDocument({
         collection: 'usersChats',
         data: {
-          [chatId + '.lastMessage']: text,
+          [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
           [chatId + '.date']: serverTimestamp(),
         },
         id: senderId,
@@ -68,7 +86,7 @@ function asyncSendMessages({
       await updateDocument({
         collection: 'usersChats',
         data: {
-          [chatId + '.lastMessage']: text,
+          [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
           [chatId + '.date']: serverTimestamp(),
         },
         id: receiverId,

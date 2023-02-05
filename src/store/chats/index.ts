@@ -21,7 +21,7 @@ const initialState: chatsSliceTypes = {
   list: [],
   selectedChat: {
     chatId: null,
-    status: "",
+    status: '',
     user: { uid: '', displayName: '', photoURL: '', about: '', email: '' },
   },
   hasArchive: false,
@@ -49,6 +49,10 @@ const chatsSlice = createSlice({
       state.selectedChat.chatId = payload.chatId;
       state.selectedChat.status = payload.status;
       state.selectedChat.user = payload;
+    },
+
+    toggleStatusChat(state, { payload }) {
+      state.selectedChat.status = payload;
     },
 
     changeFilterChat(state, { payload }) {

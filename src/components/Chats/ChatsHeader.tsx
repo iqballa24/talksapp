@@ -6,13 +6,14 @@ import PopOverItem from '@/components/UI/Popoveritem';
 import ModalAddNewFriends from '@/components/UI/Modal/AddNewFriends';
 
 import { MdGroups, MdGroupWork, MdPersonAdd, MdMoreVert } from 'react-icons/md';
+import { BsDot } from 'react-icons/bs';
 import { menuProfile } from '@/constant';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { uiActions } from '@/store/ui';
 
 const ChatsHeader = () => {
   const dispatch = useAppDispatch();
-  const { ui, auth } = useAppSelector((state) => state);
+  const { ui, auth, users } = useAppSelector((state) => state);
   const { language } = ui;
   const { photoURL, displayName } = auth.user;
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const ChatsHeader = () => {
       <ul className="relative flex flex-row items-center space-x-7 text-dark-secondary dark:text-grey">
         <li
           id="friends"
-          className="cursor-pointer"
+          className="cursor-pointer relative"
           onClick={() => navigate('/friends')}
         >
           <MdGroups size={22} role="button" />
@@ -54,6 +55,12 @@ const ChatsHeader = () => {
             anchorId="friends"
             content={language === 'en' ? 'Friends' : 'Teman'}
           />
+          {users.totalRequests > 0 && (
+            <BsDot
+              className="absolute -top-3 -right-4 text-red-600"
+              size={32}
+            />
+          )}
         </li>
         <li id="group" className="cursor-pointer">
           <MdGroupWork size={22} role="button" />

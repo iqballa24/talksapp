@@ -24,6 +24,10 @@ const useListenerFriends = (uid: string) => {
             })
           );
 
+          const totalRequests = res.filter(
+            (item: DocumentData) => item.status === 'pending'
+          ).length;
+
           const data = res.map((item: DocumentData, index: number) => {
             return {
               ...item,
@@ -32,6 +36,7 @@ const useListenerFriends = (uid: string) => {
           });
 
           dispatch(usersSliceAction.receiveListFriends(data));
+          dispatch(usersSliceAction.receiveTotalRequests(totalRequests));
         }
       }
     );

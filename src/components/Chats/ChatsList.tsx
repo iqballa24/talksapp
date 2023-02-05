@@ -40,7 +40,7 @@ const ChatsList = () => {
         >
           <MdOutlineArchive size={22} className={`text-${ui.accentColor}`} />
           <p className="text-dark-secondary dark:text-white">
-            {ui.language === 'en' ? 'Archive' : 'Arsip'}
+            {ui.language === 'en' ? 'Archived' : 'Diarsipkan'}
           </p>
         </Link>
       )}

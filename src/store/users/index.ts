@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   resultSearch: [],
   listFriends: [],
+  totalRequests: 0,
 };
 
 const usersSlice = createSlice({
@@ -14,6 +15,9 @@ const usersSlice = createSlice({
     },
     receiveListFriends(state, { payload }) {
       state.listFriends = payload;
+    },
+    receiveTotalRequests(state, { payload }) {
+      state.totalRequests = payload;
     },
     resetListFriends(state) {
       state.listFriends = [];

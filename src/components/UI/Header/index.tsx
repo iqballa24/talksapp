@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ pathBack, name }) => {
 
   return (
     <header
-      className={`flex flex-col-reverse ${bgColor} dark:bg-dark md:h-full md:max-h-[108px] p-5 z-20`}
+      className={`flex flex-col-reverse ${bgColor} dark:bg-dark md:min-h-[108px] p-5 z-20`}
     >
       <motion.div
         initial={{ x: -30 }}

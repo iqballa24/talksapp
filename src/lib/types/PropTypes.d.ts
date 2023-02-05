@@ -78,4 +78,5 @@ export type MessageItemProps = {
   sender: boolean;
   text: string;
   time: string;
+  img?: string;
 };

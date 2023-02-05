@@ -1,8 +1,10 @@
-import {  changeStatusChat } from '@/lib/firebase/API';
+import { changeStatusChat } from '@/lib/firebase/API';
+import { chatsSliceAction } from '@/store/chats';
+import { Dispatch } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 
 function asycnChangeStatusChat(uid: string, status: string) {
-  return async () => {
+  return async (dispatch: Dispatch) => {
     try {
       const promise = changeStatusChat(uid, status);
 
@@ -13,6 +15,7 @@ function asycnChangeStatusChat(uid: string, status: string) {
       });
 
       const res = await promise;
+      dispatch(chatsSliceAction.toggleStatusChat(status));
       return res;
     } catch (err) {
       if (err instanceof Error) {

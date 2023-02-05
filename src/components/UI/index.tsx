@@ -11,6 +11,7 @@ import BoxMessage from '@/components/UI/BoxMessage';
 import NewFriendsItem from '@/components/UI/NewFriendsItem';
 import RoundedImage from '@/components/UI/RoundedImage';
 import BoxText from '@/components/UI/BoxText';
+import Tabs from '@/components/UI/Tabs';
 
 export {
   Searchbar,
@@ -25,5 +26,6 @@ export {
   BoxMessage,
   NewFriendsItem,
   RoundedImage,
-  BoxText
+  BoxText,
+  Tabs,
 };

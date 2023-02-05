@@ -173,6 +173,28 @@ const uploadProfileImage = async ({ uid, displayName, file }: DocumentData) => {
   }
 };
 
+const uploadFile = async ({file}: DocumentData) => {
+  const user = auth.currentUser!;
+  const storageRef = ref(storage, `${+new Date()}`);
+
+  try {
+    const res = await uploadBytesResumable(storageRef, file).then(() => {
+      return getDownloadURL(storageRef).then((downloadURL) => {
+        return downloadURL;
+      });
+    });
+
+    return res;
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
 const acceptRequestFriend = async ({
   uid,
   displayName,
@@ -346,4 +368,5 @@ export {
   deleteRequestFriend,
   sendRequestFriend,
   changeStatusChat,
+  uploadFile
 };

@@ -107,6 +107,7 @@ function unSetAuthUser() {
     dispatch(chatsSliceAction.resetChatsState());
     dispatch(authSliceAction.unSetCurrentUser());
     dispatch(usersSliceAction.resetListFriends());
+    dispatch(usersSliceAction.receiveTotalRequests(0));
   };
 }
 
