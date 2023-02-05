@@ -34,7 +34,7 @@ const PopOverItem: React.FC<PopoverProps> = ({ className, menus }) => {
                 return (
                   <li
                     key={menu.id}
-                    className="pl-6 py-3 hover:bg-gray-50 dark:hover:bg-dark-third"
+                    className="pl-6 py-3 hover:bg-gray-50 dark:hover:bg-dark-third cursor-pointer"
                     onClick={() => navigate(menu.path)}
                   >
                     {menu.name[language as keyof typeof menu.name]}
@@ -44,7 +44,7 @@ const PopOverItem: React.FC<PopoverProps> = ({ className, menus }) => {
               return (
                 <li
                   key={menu.id}
-                  className="pl-6 py-3 hover:bg-gray-50 dark:hover:bg-dark-third"
+                  className="pl-6 py-3 hover:bg-gray-50 dark:hover:bg-dark-third cursor-pointer"
                   onClick={() => dispatch(unSetAuthUser())}
                 >
                   {menu.name[language as keyof typeof menu.name]}

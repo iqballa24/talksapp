@@ -11,7 +11,6 @@ const FriendsPage = () => {
   const { ui, users } = useAppSelector((state) => state);
 
   const clickRejectHandler = (uid: string) => {
-    console.log(uid);
     dispatch(asyncRejectFriend(uid));
   };
 
@@ -22,6 +21,13 @@ const FriendsPage = () => {
   return (
     <>
       <Header name={ui.language === 'en' ? 'Friends' : 'Teman'} pathBack="/" />
+      {users.listFriends.length === 0 && (
+        <p className="font-light text-sm text-center text-dark-secondary dark:text-grey mt-8  ">
+          {ui.language === 'en'
+            ? '-- You don`t have any friends yet --'
+            : '-- Anda belum punya teman --'}
+        </p>
+      )}
       <ul className="flex flex-col h-[100vh] w-full overflow-y-scroll scrollbar-hide">
         {users.listFriends.map((item: DocumentData, index: number) => (
           <NewFriendsItem

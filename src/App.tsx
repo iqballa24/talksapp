@@ -18,6 +18,7 @@ const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 const MessagePage = React.lazy(() => import('./pages/MessagePage'));
 const UserPage = React.lazy(() => import('./pages/UserPage'));
 const FriendsPage = React.lazy(() => import('./pages/FriendsPage'));
+const ArchivePage = React.lazy(() => import('./pages/ArchivePage'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -51,6 +52,7 @@ function App() {
             <Route path="/message/*" element={<MessagePage />} />
             <Route path="/user/*" element={<UserPage />} />
             <Route path="/friends" element={<FriendsPage />} />
+            <Route path="/archive" element={<ArchivePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

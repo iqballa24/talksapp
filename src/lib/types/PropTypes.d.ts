@@ -69,6 +69,7 @@ export type ProfileProps = {
 export type ChatItemProps = {
   chatId: string;
   lastMessage: string;
+  status: string;
   userInfo: userTypes;
   time: Timestamp;
 };

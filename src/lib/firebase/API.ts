@@ -191,6 +191,7 @@ const acceptRequestFriend = async ({
       await setDoc(doc(db, 'chats', combineId), { messages: [] });
 
       await updateDoc(doc(db, 'usersChats', user.uid), {
+        [combineId + '.status']: 'active',
         [combineId + '.userInfo']: {
           uid,
           displayName,
@@ -200,6 +201,7 @@ const acceptRequestFriend = async ({
       });
 
       await updateDoc(doc(db, 'usersChats', uid), {
+        [combineId + '.status']: 'active',
         [combineId + '.userInfo']: {
           uid: user.uid,
           displayName: user.displayName,
@@ -208,6 +210,24 @@ const acceptRequestFriend = async ({
         [combineId + '.date']: serverTimestamp(),
       });
     }
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
+const changeStatusChat = async (uid: string, status: string) => {
+  const user = auth.currentUser!;
+  const combineId = user.uid > uid ? user.uid + uid : uid + user.uid;
+
+  try {
+    await updateDoc(doc(db, 'usersChats', user.uid), {
+      [combineId + '.status']: status,
+    });
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message);
@@ -325,4 +345,5 @@ export {
   updateDocument,
   deleteRequestFriend,
   sendRequestFriend,
+  changeStatusChat,
 };

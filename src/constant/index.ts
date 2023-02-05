@@ -155,6 +155,11 @@ const aboutPageContent: aboutPage = {
   },
 };
 
+const notificationPrivacy = {
+  en: 'Messages to self are not end-to-end encrypted. So don`t send private chats and things that are confidential (ex: ID card, password, etc)',
+  id: 'Pesan ke diri sendiri tidak dienkripsi end-to-end. Jadi jangan mengirim percakapan pribadi dan hal-hal yang bersifat rahasia (ex: KTP, password, dll)',
+};
+
 const colors: string[] = [
   '#008069',
   '#FF6900',
@@ -168,4 +173,10 @@ const colors: string[] = [
   '#795548',
 ];
 
-export { menuProfile, securityPageContent, colors, aboutPageContent };
+export {
+  menuProfile,
+  securityPageContent,
+  colors,
+  aboutPageContent,
+  notificationPrivacy,
+};

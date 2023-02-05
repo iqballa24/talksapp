@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
-import { MdSearch, MdKeyboardArrowLeft, MdClose } from 'react-icons/md';
+import {
+  MdSearch,
+  MdKeyboardArrowLeft,
+  MdClose,
+  MdOutlineArchive,
+  MdOutlineUnarchive,
+} from 'react-icons/md';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Searchbar } from '@/components/UI';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { messageSliceAction } from '@/store/messages';
+import { asycnChangeStatusChat } from '@/store/chats/action';
 
 const HeaderMessages = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +28,10 @@ const HeaderMessages = () => {
 
   const toggleSearch = () => {
     setShowSearch((prev) => !prev);
+  };
+
+  const changeStatusChat = (uid: string, status: string) => {
+    dispatch(asycnChangeStatusChat(uid, status));
   };
 
   return (
@@ -66,7 +77,7 @@ const HeaderMessages = () => {
           place="bottom"
         />
       </div>
-      <div className="flex flex-row justify-center items-center text-dark-secondary dark:text-grey h-full">
+      <div className="relative flex flex-row gap-5 justify-center items-center text-dark-secondary dark:text-grey h-full">
         <AnimatePresence>
           {showSearch ? (
             <motion.div
@@ -99,6 +110,37 @@ const HeaderMessages = () => {
             />
           )}
         </AnimatePresence>
+        {selectedChat.status === 'active' ? (
+          <>
+            <MdOutlineArchive
+              id="archive"
+              size={24}
+              className="h-full cursor-pointer min-w-['42px']"
+              onClick={() => changeStatusChat(selectedChat.user.uid, 'archive')}
+            />
+            <Tooltip
+              className="z-20"
+              anchorId="archive"
+              content={ui.language === 'en' ? 'Archive' : 'Arsip'}
+              place="bottom"
+            />
+          </>
+        ) : (
+          <>
+            <MdOutlineUnarchive
+              id="Unarchive"
+              size={24}
+              className="h-full cursor-pointer min-w-['42px']"
+              onClick={() => changeStatusChat(selectedChat.user.uid, 'active')}
+            />
+            <Tooltip
+              className="z-20"
+              anchorId="Unarchive"
+              content={ui.language === 'en' ? 'Unarchive' : 'Batalkan arsip'}
+              place="bottom"
+            />
+          </>
+        )}
       </div>
     </div>
   );

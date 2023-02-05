@@ -23,15 +23,21 @@ const useListenerChats = (uid: string) => {
         })
       );
 
+      const hasArchive =
+        res.filter((chat) => chat[1].status === 'archive').length > 0;
+
       const data = res.map((item, index) => {
         return {
           chatId: item[0],
           date: item[1].date || Timestamp.now(),
           lastMessage: item[1].lastMessage,
+          status: item[1].status,
           userInfo: listUser[index][0],
+          hasArchive,
         };
       });
       dispatch(chatsSliceAction.receiveChatsUser(data));
+      dispatch(chatsSliceAction.hasArchive(hasArchive));
     });
 
     return () => {

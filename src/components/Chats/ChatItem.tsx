@@ -10,6 +10,7 @@ import useWindowSize from '@/lib/hooks/useWindowSize';
 const ChatItem: React.FC<ChatItemProps> = ({
   chatId,
   lastMessage,
+  status,
   userInfo,
   time,
 }) => {
@@ -27,6 +28,7 @@ const ChatItem: React.FC<ChatItemProps> = ({
     photoURL,
     about,
     email,
+    status,
   }: DocumentData) => {
     const srcImage =
       photoURL === ''
@@ -41,6 +43,7 @@ const ChatItem: React.FC<ChatItemProps> = ({
         photoURL: srcImage,
         about,
         email,
+        status,
       })
     );
     if (size.width < 560) {
@@ -52,7 +55,15 @@ const ChatItem: React.FC<ChatItemProps> = ({
     <li
       className="p-3 flex flex-row space-x-2 items-center hover:bg-gray-50 dark:hover:bg-dark cursor-pointer"
       onClick={() =>
-        handleSelect({ chatId, uid, displayName, photoURL, about, email })
+        handleSelect({
+          chatId,
+          uid,
+          displayName,
+          photoURL,
+          about,
+          email,
+          status,
+        })
       }
     >
       <div className="w-2/12">
