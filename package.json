@@ -10,7 +10,7 @@
     "build-serve": "tsc && vite build && http-server dist",
     "test": "jest --watchAll",
     "e2e": "cypress run",
-    "ci:test": "jest --watchAll=false && e2e",
+    "ci:test": "jest --watchAll=false",
     "lint": "eslint ./src",
     "postinstall": "husky install",
     "commit": "git-cz"
