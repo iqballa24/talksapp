@@ -28,6 +28,11 @@ const ArchivePage = () => {
   return (
     <>
       <Header name={ui.language === 'en' ? 'Archive' : 'Arsip'} pathBack="/" />
+      <span className="p-5 text-sm text-center border-b dark:border-dark-secondary text-dark-secondary dark:text-white">
+        {ui.language === 'en'
+          ? 'These chats stay archived when new message are received.'
+          : 'Obrolan ini tetap diarsipkan saat pesan baru diterima.'}
+      </span>
       <ul className="flex flex-col h-[600px] overflowy-scroll divide-y dark:divide-dark-secondary/50 bg-white dark:bg-dark-third">
         {chatsFilter.map((chat: DocumentData) => (
           <ChatItem
