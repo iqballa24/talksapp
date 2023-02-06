@@ -15,9 +15,15 @@ const Messages = () => {
     useListenerMessages(selectedChat.chatId);
   }
 
-  const filterMessages = data.filter((message) =>
+  const filterMessages = data.filter((message: DocumentData) =>
     message.text.toLowerCase().includes(filter.toLowerCase())
   );
+
+  const groupDates = [
+    ...new Set(
+      filterMessages.map((message: DocumentData) => formatedDate(message.date))
+    ),
+  ];
 
   return (
     <>
@@ -27,18 +33,27 @@ const Messages = () => {
             ? `Messages to ${selectedChat.user.displayName} are not end-to-end encrypted. So don't send private chats and things that are confidential (ex: ID card, password, etc)`
             : `Pesan ke ${selectedChat.user.displayName} tidak dienkripsi end-to-end. Jadi jangan mengirim percakapan pribadi dan hal-hal yang bersifat rahasia (ex: KTP, password, dll)`}
         </span>
-        {filterMessages.map((item: DocumentData) => {
-          const date = formatedDate(item.date);
-          return (
-            <MessageItem
-              key={item.id}
-              text={item.text}
-              time={date}
-              sender={item.senderId === uid}
-              img={item.image}
-            />
-          );
-        })}
+        {groupDates.map((date, index) => (
+          <div key={index}>
+            <span className="flex justify-center mb-7">
+              <p className='w-fit text-sm py-1 px-3 rounded-md dark:text-white bg-white dark:bg-dark text-dark-secondary'>{date}</p>
+            </span>
+            {filterMessages.map((item: DocumentData) => {
+              const dateChat = formatedDate(item.date, false);
+              if (formatedDate(item.date) === date) {
+                return (
+                  <MessageItem
+                    key={item.id}
+                    text={item.text}
+                    time={dateChat}
+                    sender={item.senderId === uid}
+                    img={item.image}
+                  />
+                );
+              }
+            })}
+          </div>
+        ))}
       </div>
     </>
   );

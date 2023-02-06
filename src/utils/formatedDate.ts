@@ -1,15 +1,16 @@
 import { format } from 'date-fns';
+import isToday from 'date-fns/isToday';
 import isYesterday from 'date-fns/isYesterday';
 import { Timestamp } from 'firebase/firestore';
 
-export const formatedDate = (time: Timestamp) => {
-  const now = +new Date();
+export const formatedDate = (time: Timestamp, todayFormat = true) => {
   const dateCreated = time.toDate();
-  const isOneDay = format(dateCreated, 'd') === format(now, 'd');
-  
+
   return isYesterday(dateCreated)
     ? 'Yesterday'
-    : isOneDay
-    ? format(dateCreated, 'HH:mm')
+    : isToday(dateCreated)
+    ? todayFormat
+      ? 'Today'
+      : format(dateCreated, 'HH:mm')
     : format(dateCreated, 'L/d/yy');
 };
