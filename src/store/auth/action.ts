@@ -69,10 +69,8 @@ function asyncLoginUser({ email, password }: FormLoginTypes) {
 }
 
 function asyncPreloaderProcess() {
-  console.log('tester');
   return async (dispatch: Dispatch) => {
     onAuthStateChanged(auth, async (user) => {
-      console.log(user);
       if (user) {
         const { uid, emailVerified } = user;
 
