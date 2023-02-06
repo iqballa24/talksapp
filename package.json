@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test": "jest --watchAll",
     "e2e": "cypress run",
+    "ci:test": "jest --watchAll=false && e2e",
     "lint": "eslint ./src",
     "postinstall": "husky install",
     "commit": "git-cz"
