@@ -58,7 +58,12 @@ const MessageItem: React.FC<MessageItemProps> = ({
         </div>
       )}
       <ModalCustom isShow={zoomImage} onClose={toggleZoomImage}>
-        <img src={selectedImage} alt="" className="w-full" />
+        <img
+          src={selectedImage}
+          alt=""
+          className="w-full cursor-zoom-out"
+          onClick={toggleZoomImage}
+        />
       </ModalCustom>
     </React.Fragment>
   );

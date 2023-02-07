@@ -6,11 +6,16 @@ import { Input } from '@/components/UI';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { asyncSendMessages } from '@/store/messages/action';
 
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
+import { AnimatePresence, motion } from 'framer-motion';
+
 const FooterMessages = () => {
   const dispatch = useAppDispatch();
   const [textMessage, setTextMessage] = useState<string>('');
   const [srcImage, setSrcImage] = useState<string | null>(null);
   const [uploadImage, setUploadImage] = useState<File | null>(null);
+  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
   const { chats, auth, ui } = useAppSelector((state) => state);
   const { chatId, user } = chats.selectedChat;
   const { uid } = auth.user;
@@ -53,6 +58,14 @@ const FooterMessages = () => {
     setUploadImage(e.target.files[0]);
   };
 
+  const onEmojiClick = (emoji: string) => {
+    setTextMessage((prev) => prev + emoji);
+  };
+
+  const toggleEmojiPicker = () => {
+    setShowEmojiPicker((prev) => !prev);
+  };
+
   useEffect(() => {
     setSrcImage('');
   }, [chatId]);
@@ -68,8 +81,12 @@ const FooterMessages = () => {
           />
         </span>
       )}
-      <div className="flex flex-row px-4 py-1 justify-between min-h-[62px] items-center text-dark-secondary bg-grey-secondary gap-5 dark:text-grey/50 dark:bg-dark">
-        <MdOutlineEmojiEmotions size={30} />
+      <div className="relative flex flex-row px-4 py-1 justify-between min-h-[62px] items-center text-dark-secondary bg-grey-secondary gap-5 dark:text-grey/50 dark:bg-dark">
+        <MdOutlineEmojiEmotions
+          size={30}
+          onClick={toggleEmojiPicker}
+          className="cursor-pointer"
+        />
         <label htmlFor="uploadImage" className="cursor-pointer">
           <FiPaperclip id="attachIcon" size={20} />
           <input
@@ -110,6 +127,26 @@ const FooterMessages = () => {
           content={`${ui.language === 'en' ? 'Send' : 'Kirim'}`}
           place="top"
         />
+        <AnimatePresence>
+          {showEmojiPicker && (
+            <motion.div
+              key="emojiPicker"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute -top-[450px] z-30"
+            >
+              <Picker
+                data={data}
+                emojiButtonSize="34"
+                emojiSize="16"
+                perLine="9"
+                previewPosition="none"
+                onEmojiSelect={(e: any) => onEmojiClick(e.native)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </React.Fragment>
   );
