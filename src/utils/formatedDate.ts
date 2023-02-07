@@ -3,14 +3,28 @@ import isToday from 'date-fns/isToday';
 import isYesterday from 'date-fns/isYesterday';
 import { Timestamp } from 'firebase/firestore';
 
-export const formatedDate = (time: Timestamp, todayFormat = true) => {
+export type formatDate = {
+  time: Timestamp;
+  showTime?: boolean;
+  showTodayTime?: boolean;
+};
+
+export const formatedDate = ({
+  time,
+  showTime = true,
+  showTodayTime = true,
+}: formatDate) => {
   const dateCreated = time.toDate();
 
   return isYesterday(dateCreated)
-    ? 'Yesterday'
+    ? showTime
+      ? format(dateCreated, 'HH:mm')
+      : 'Yesterday'
     : isToday(dateCreated)
-    ? todayFormat
-      ? 'Today'
-      : format(dateCreated, 'HH:mm')
+    ? showTodayTime
+      ? format(dateCreated, 'HH:mm')
+      : 'Today'
+    : showTime
+    ? format(dateCreated, 'HH:mm')
     : format(dateCreated, 'L/d/yy');
 };

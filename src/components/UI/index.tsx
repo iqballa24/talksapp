@@ -5,6 +5,7 @@ import Header from '@/components/UI/Header';
 import ModalSettingTheme from '@/components/UI/Modal/SettingTheme';
 import ModalSettingLang from '@/components/UI/Modal/SettingLang';
 import ModalSettingColors from '@/components/UI/Modal/SettingColor';
+import ModalCustom from '@/components/UI/Modal/ModalCustom';
 import Buttons from '@/components/UI/Buttons';
 import Loader from '@/components/UI/Loader';
 import BoxMessage from '@/components/UI/BoxMessage';
@@ -21,6 +22,7 @@ export {
   ModalSettingTheme,
   ModalSettingLang,
   ModalSettingColors,
+  ModalCustom,
   Buttons,
   Loader,
   BoxMessage,

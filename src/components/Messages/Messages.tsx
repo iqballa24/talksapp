@@ -21,7 +21,13 @@ const Messages = () => {
 
   const groupDates = [
     ...new Set(
-      filterMessages.map((message: DocumentData) => formatedDate(message.date))
+      filterMessages.map((message: DocumentData) =>
+        formatedDate({
+          time: message.date,
+          showTime: false,
+          showTodayTime: false,
+        })
+      )
     ),
   ];
 
@@ -36,11 +42,21 @@ const Messages = () => {
         {groupDates.map((date, index) => (
           <div key={index}>
             <span className="flex justify-center mb-7">
-              <p className='w-fit text-sm py-1 px-3 rounded-md dark:text-white bg-white dark:bg-dark text-dark-secondary'>{date}</p>
+              <p className="w-fit text-sm py-1 px-3 rounded-md dark:text-white bg-white dark:bg-dark text-dark-secondary">
+                {date}
+              </p>
             </span>
             {filterMessages.map((item: DocumentData) => {
-              const dateChat = formatedDate(item.date, false);
-              if (formatedDate(item.date) === date) {
+              const dateChat = formatedDate({
+                time: item.date,
+              });
+              if (
+                formatedDate({
+                  time: item.date,
+                  showTime: false,
+                  showTodayTime: false,
+                }) === date
+              ) {
                 return (
                   <MessageItem
                     key={item.id}

@@ -41,6 +41,7 @@ export type ButtonsProps = {
 export type ModalProps = {
   onClose: () => void;
   isShow: boolean;
+  children?: React.ReactNode;
 };
 
 export type HeaderProps = { pathBack: string; name: string };

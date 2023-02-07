@@ -16,7 +16,7 @@ const ChatItem: React.FC<ChatItemProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const date = formatedDate(time);
+  const date = formatedDate({ time, showTime: false, showTodayTime: true });
   const size = useWindowSize();
 
   const { uid, displayName, about, email, photoURL } = userInfo;

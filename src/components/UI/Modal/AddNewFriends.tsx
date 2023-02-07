@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { DocumentData } from 'firebase/firestore';
 import { Dialog, Transition } from '@headlessui/react';
 import { asyncAddNewFriends, asyncSearchUsers } from '@/store/users/action';
 import { Buttons } from '@/components/UI';
@@ -11,7 +10,7 @@ import useDebounce from '@/lib/hooks/useDebounce';
 
 const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
   const [searchVal, setSearchVal] = useState<string>('');
-  const { users } = useAppSelector((state) => state);
+  const { users, ui } = useAppSelector((state) => state);
   const { resultSearch } = users;
   const dispatch = useAppDispatch();
   const deb = useDebounce(searchVal, 800);
@@ -60,12 +59,16 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-dark dark:text-grey"
                 >
-                  Add new friends
+                  {ui.language === 'en'
+                    ? 'Add new friends'
+                    : 'Tambah teman baru'}
                 </Dialog.Title>
                 <div className="flex flex-col space-y-2 mt-4">
                   <Searchbar
                     onSearch={onSearch}
-                    placeholder="Search username"
+                    placeholder={
+                      ui.language === 'en' ? 'Search username' : 'Cari username'
+                    }
                   />
                   <ul className="flex flex-col">
                     {resultSearch.length > 0 ? (
@@ -79,7 +82,9 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
                       ))
                     ) : (
                       <p className="text-xs text-gray-400 text-center py-3">
-                        -- No items are displayed --
+                        {ui.language === 'en'
+                          ? 'No items are displayed'
+                          : 'Tidak ada item yang ditampilkan'}
                       </p>
                     )}
                   </ul>
@@ -91,7 +96,7 @@ const ModalAddNewFriends: React.FC<ModalProps> = ({ onClose, isShow }) => {
                     onClick={onClose}
                     isSecondary
                   >
-                    Close
+                    {ui.language === 'en' ? 'Close' : 'Tutup'}
                   </Buttons>
                 </div>
               </Dialog.Panel>
