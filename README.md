@@ -3,7 +3,7 @@
 </p>
 
 ## TalksApp
-<p>TalksApp is a web that can be used to send messages and stay in touch with friends and family, anytime and anywhere. The user interface TalksApp is similar to WhatsApp, but not all WhatsApp features are in TalksApp. It is only used for personal projects and not for commercial purposes.<p>
+<p>TalksApp is a Chats application based on the web that can be used to send messages and stay in touch with friends and family, anytime and anywhere. The user interface TalksApp is similar to WhatsApp, but not all WhatsApp features are in TalksApp. It is only used for personal projects and not for commercial purposes.<p>
 
 ## Table of contents
 
