@@ -5,6 +5,7 @@ import AuthSlice from '@/store/auth';
 import usersSlice from '@/store/users';
 import chatsSlice from '@/store/chats';
 import messagesSlice from '@/store/messages';
+import groupsSlice from '@/store/groups';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     users: usersSlice.reducer,
     chats: chatsSlice.reducer,
     messages: messagesSlice.reducer,
+    group: groupsSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -12,10 +12,10 @@ const WrapperMessages: React.FC<{ children: React.ReactElement[] }> = ({
     <div className="relative hidden md:flex flex-col md:w-6/12 lg:w-8/12 bg-grey-secondary dark:bg-dark">
       {!selectedChat.chatId && (
         <div className={`w-full h-full border-b-4 border-${accentColor}`}>
-          <div className="absolute w-full max-w-md top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 flex flex-col justify-center items-center text-center text-dark-secondary dark:text-grey">
+          <div className="absolute w-full max-w-md top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 flex flex-col justify-center items-center text-center text-dark-secondary dark:text-grey select-none">
             <img
               src={`/cuate-${accentColor}.png`}
-              alt="talksapp background"
+              alt=""
               className="w-3/4 py-8"
             />
             <h1 className="text-3xl mb-3">TalksApp Web</h1>

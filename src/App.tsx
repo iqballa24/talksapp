@@ -19,6 +19,9 @@ const MessagePage = React.lazy(() => import('./pages/MessagePage'));
 const UserPage = React.lazy(() => import('./pages/UserPage'));
 const FriendsPage = React.lazy(() => import('./pages/FriendsPage'));
 const ArchivePage = React.lazy(() => import('./pages/ArchivePage'));
+const CreateGroupPage = React.lazy(() => import('./pages/CreateGroupPage'));
+const GroupsPage = React.lazy(() => import('./pages/GroupsPage'));
+const DetaiGroupPage = React.lazy(() => import('./pages/DetailGroupPage'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -46,9 +49,12 @@ function App() {
             <Route path="/security" element={<SecurityPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/message/*" element={<MessagePage />} />
-            <Route path="/user/*" element={<UserPage />} />
+            <Route path="/detail-user/*" element={<UserPage />} />
             <Route path="/friends" element={<FriendsPage />} />
             <Route path="/archive" element={<ArchivePage />} />
+            <Route path="/groups" element={<GroupsPage />} />
+            <Route path="/create-group" element={<CreateGroupPage />} />
+            <Route path="/detail-group/*" element={<DetaiGroupPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

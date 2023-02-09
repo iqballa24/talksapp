@@ -41,6 +41,7 @@ function asyncSendMessages({
   senderId,
   receiverId,
   image,
+  isGroup,
 }: DocumentData) {
   return async () => {
     const id = +new Date();
@@ -74,23 +75,34 @@ function asyncSendMessages({
         await updateDocument({ collection, data, id: chatId });
       }
 
-      await updateDocument({
-        collection: 'usersChats',
-        data: {
-          [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
-          [chatId + '.date']: serverTimestamp(),
-        },
-        id: senderId,
-      });
+      if (isGroup) {
+        await updateDocument({
+          collection: 'usersGroups',
+          data: {
+            [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
+            [chatId + '.date']: serverTimestamp(),
+          },
+          id: senderId,
+        });
+      } else {
+        await updateDocument({
+          collection: 'usersChats',
+          data: {
+            [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
+            [chatId + '.date']: serverTimestamp(),
+          },
+          id: senderId,
+        });
 
-      await updateDocument({
-        collection: 'usersChats',
-        data: {
-          [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
-          [chatId + '.date']: serverTimestamp(),
-        },
-        id: receiverId,
-      });
+        await updateDocument({
+          collection: 'usersChats',
+          data: {
+            [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
+            [chatId + '.date']: serverTimestamp(),
+          },
+          id: receiverId,
+        });
+      }
     } catch (err) {
       if (err instanceof Error) {
         toast.error(err.message);

@@ -27,6 +27,7 @@ import {
 import { db } from '@/lib/firebase';
 import { registerTypes, FormLoginTypes } from '@/lib/types/index';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 const registerUser = async ({ email, password, username }: registerTypes) => {
   try {
@@ -96,6 +97,44 @@ const getUserById = async (id: string) => {
   }
 
   return data;
+};
+
+const getGroupById = async (id: string) => {
+  const data: DocumentData = [];
+  try {
+    const q = query(collection(db, 'groups'), where('idGroup', '==', id));
+
+    const querySnapShot = await getDocs(q);
+    querySnapShot.forEach((doc) => {
+      data.push(doc.data());
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+  return data;
+};
+
+const getDetailMember = async (member: string[]) => {
+  try {
+    return await Promise.all(
+      member.map((item) => {
+        const user = getUserById(item);
+        return user;
+      })
+    );
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
 };
 
 const getUserByUserName = async (userName: string) => {
@@ -173,7 +212,7 @@ const uploadProfileImage = async ({ uid, displayName, file }: DocumentData) => {
   }
 };
 
-const uploadFile = async ({file}: DocumentData) => {
+const uploadFile = async ({ file }: DocumentData) => {
   const user = auth.currentUser!;
   const storageRef = ref(storage, `${+new Date()}`);
 
@@ -354,6 +393,47 @@ const deleteRequestFriend = async (uid: string) => {
   }
 };
 
+const createGroup = async ({ subject, description, photo }: DocumentData) => {
+  const user = auth.currentUser!;
+  const id = uuidv4();
+  const storageRef = ref(storage, `${subject + id}`);
+
+  try {
+    await uploadBytesResumable(storageRef, photo).then(() => {
+      return getDownloadURL(storageRef).then(async (downloadURL) => {
+        await setDoc(doc(db, 'groups', id), {
+          idGroup: id,
+          subject,
+          description,
+          photoURL: downloadURL,
+          member: [user.uid],
+          createdBy: user.uid,
+          createdAt: serverTimestamp(),
+        });
+
+        await setDoc(doc(db, 'usersGroups', user.uid), {});
+
+        await updateDoc(doc(db, 'usersGroups', user.uid), {
+          [id + '.idGroup']: id,
+          [id + '.invitedBy']: user.uid,
+          [id + '.status']: 'accept',
+          [id + '.date']: serverTimestamp(),
+          [id + '.lastMessage']: '',
+        });
+
+        await setDoc(doc(db, 'chats', id), { messages: [] });
+      });
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -368,5 +448,8 @@ export {
   deleteRequestFriend,
   sendRequestFriend,
   changeStatusChat,
-  uploadFile
+  uploadFile,
+  createGroup,
+  getGroupById,
+  getDetailMember,
 };

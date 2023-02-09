@@ -7,12 +7,13 @@ import { Header, RoundedImage, BoxText } from '@/components/UI';
 
 const UserPage = () => {
   const navigate = useNavigate();
-  const { ui, chats } = useAppSelector((state) => state);
+  const { ui, chats, users } = useAppSelector((state) => state);
   const { selectedChat } = chats;
+  const { selectedUser } = users;
   const { language } = ui;
 
   const size = useWindowSize();
-  const pathBack = size.width > 560 ? '/' : `/message/${selectedChat.user.uid}`;
+  const pathBack = size.width > 560 ? '/' : `/message/${selectedUser.uid}`;
 
   useEffect(() => {
     if (!selectedChat.chatId) {
@@ -22,7 +23,7 @@ const UserPage = () => {
 
   return (
     <>
-      <Header name={selectedChat.user.displayName} pathBack={pathBack} />
+      <Header name={selectedUser.displayName} pathBack={pathBack} />
       <motion.section
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -32,14 +33,14 @@ const UserPage = () => {
         className="flex flex-col bg-white dark:bg-dark-third h-full"
       >
         <div className="flex ml-auto mr-auto py-7">
-          <RoundedImage src={selectedChat.user.photoURL} />
+          <RoundedImage src={selectedUser.photoURL} />
         </div>
-        <BoxText title="Username" text={selectedChat.user.displayName} />
+        <BoxText title="Username" text={selectedUser.displayName} />
         <BoxText
           title={language === 'en' ? 'About' : 'Tentang'}
-          text={selectedChat.user.about}
+          text={selectedUser.about}
         />
-        <BoxText title="Email" text={selectedChat.user.email} />
+        <BoxText title="Email" text={selectedUser.email} />
       </motion.section>
     </>
   );

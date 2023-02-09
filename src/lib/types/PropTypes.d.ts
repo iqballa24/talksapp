@@ -35,6 +35,7 @@ export type ButtonsProps = {
   isPrimary?: boolean;
   isSecondary?: boolean;
   isDanger?: boolean;
+  isFull?: boolean;
   onClick: () => void;
 };
 
@@ -80,4 +81,11 @@ export type MessageItemProps = {
   text: string;
   time: string;
   img?: string;
+};
+
+export type GroupsItemProps = {
+  chatId: string;
+  groupInfo: groupInfoTypes;
+  lastMessage: string;
+  time: Timestamp;
 };

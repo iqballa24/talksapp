@@ -19,6 +19,16 @@ export type userTypes = {
   email: string;
 };
 
+export type groupInfoTypes = {
+  idGroup: string;
+  subject: string;
+  description: string;
+  createdBy: string;
+  createdAt: number;
+  member: string[];
+  photoURL: string;
+};
+
 export type messageTypes = {
   date: string;
   id: string;

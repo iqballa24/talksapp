@@ -4,6 +4,13 @@ const initialState = {
   resultSearch: [],
   listFriends: [],
   totalRequests: 0,
+  selectedUser: {
+    uid: '',
+    displayName: '',
+    photoURL: '',
+    about: '',
+    email: '',
+  },
 };
 
 const usersSlice = createSlice({
@@ -21,6 +28,9 @@ const usersSlice = createSlice({
     },
     resetListFriends(state) {
       state.listFriends = [];
+    },
+    selectUser(state, { payload }) {
+      state.selectedUser = payload;
     },
   },
 });

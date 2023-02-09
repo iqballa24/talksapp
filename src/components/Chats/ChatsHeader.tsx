@@ -62,7 +62,11 @@ const ChatsHeader = () => {
             />
           )}
         </li>
-        <li id="group" className="cursor-pointer">
+        <li
+          id="group"
+          className="cursor-pointer"
+          onClick={() => navigate('/groups')}
+        >
           <MdGroupWork size={22} role="button" />
           <Tooltip
             className="z-20"

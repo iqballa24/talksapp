@@ -6,6 +6,7 @@ import { chatsSliceAction } from '@/store/chats';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@/lib/hooks/useRedux';
 import useWindowSize from '@/lib/hooks/useWindowSize';
+import { usersSliceAction } from '@/store/users';
 
 const ChatItem: React.FC<ChatItemProps> = ({
   chatId,
@@ -38,12 +39,19 @@ const ChatItem: React.FC<ChatItemProps> = ({
     dispatch(
       chatsSliceAction.selectChat({
         chatId,
+        photoURL: srcImage,
+        status,
+        isGroup: false,
+      })
+    );
+
+    dispatch(
+      usersSliceAction.selectUser({
         uid,
         displayName,
-        photoURL: srcImage,
         about,
+        photoURL,
         email,
-        status,
       })
     );
     if (size.width < 560) {

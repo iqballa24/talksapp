@@ -12,7 +12,7 @@ export type chatsSliceTypes = {
   selectedChat: {
     chatId: string | null;
     status: string;
-    user: userTypes;
+    isGroup: boolean;
   };
   filter: string;
 };
@@ -22,7 +22,7 @@ const initialState: chatsSliceTypes = {
   selectedChat: {
     chatId: null,
     status: '',
-    user: { uid: '', displayName: '', photoURL: '', about: '', email: '' },
+    isGroup: false,
   },
   hasArchive: false,
   filter: '',
@@ -41,14 +41,14 @@ const chatsSlice = createSlice({
       state.selectedChat = {
         chatId: null,
         status: '',
-        user: { uid: '', displayName: '', photoURL: '', about: '', email: '' },
+        isGroup: false,
       };
     },
 
     selectChat(state, { payload }) {
       state.selectedChat.chatId = payload.chatId;
       state.selectedChat.status = payload.status;
-      state.selectedChat.user = payload;
+      state.selectedChat.isGroup = payload.isGroup;
     },
 
     toggleStatusChat(state, { payload }) {
