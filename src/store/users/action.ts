@@ -13,6 +13,7 @@ import { toast } from 'react-hot-toast';
 import { DocumentData } from 'firebase/firestore';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { RootState } from '@/store';
+
 function asyncSearchUsers(username: string) {
   return async (dispatch: Dispatch) => {
     try {
@@ -32,10 +33,10 @@ function asyncSearchUsers(username: string) {
   };
 }
 
-function asyncUpdateUser(id: string, data: DocumentData) {
+function asyncUpdateUser(uid: string, data: DocumentData) {
   return async (dispatch: Dispatch) => {
     try {
-      const promise = updateDocumentUsers(id, data);
+      const promise = updateDocumentUsers(uid, data);
 
       toast.promise(promise, {
         loading: 'Loading..',

@@ -20,7 +20,7 @@ const HeaderPersonal = () => {
   const { chats, ui, users } = useAppSelector((state) => state);
   const [showSearch, setShowSearch] = useState(false);
   const { selectedChat } = chats;
-  const { selectedUser } = users
+  const { selectedUser } = users;
 
   const onSearch = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
@@ -59,7 +59,11 @@ const HeaderPersonal = () => {
           onClick={() => navigate(`/detail-user/${selectedUser.displayName}`)}
         >
           <img
-            src={selectedUser.photoURL}
+            src={
+              selectedUser.photoURL === ''
+                ? `https://ui-avatars.com/api/?name=${selectedUser.displayName}`
+                : selectedUser.photoURL
+            }
             alt="profile picture"
             className="rounded-[50%] w-10 h-10"
           />

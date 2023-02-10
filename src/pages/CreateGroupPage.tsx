@@ -1,18 +1,21 @@
 import { EditAvatar, Editbox } from '@/components/Profile';
 import { Buttons, Header } from '@/components/UI';
-import { useAppDispatch } from '@/lib/hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { asyncCreateNewGroup } from '@/store/groups/action';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CreateGroupPage = () => {
+  const navigate = useNavigate();
+  const { language } = useAppSelector((state) => state.ui);
   const dispatch = useAppDispatch();
   const [img, setImg] = useState<string>(
     'https://ui-avatars.com/api/?name=group&background=09A683&color=fff'
   );
   const [uploadImage, setUploadImage] = useState<File | null>(null);
-  const [subject, setSubject] = useState<string>('-');
-  const [description, setDescription] = useState<string>('-');
+  const [subject, setSubject] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
 
   const imgChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
@@ -36,13 +39,23 @@ const CreateGroupPage = () => {
     setDescription(desc);
   };
 
-  const submitHandler = () => {
-    dispatch(asyncCreateNewGroup({ photo: uploadImage, subject, description }));
+  const submitHandler = async () => {
+    try {
+      const res = await dispatch(
+        asyncCreateNewGroup({ photo: uploadImage, subject, description })
+      );
+
+      if (res) return navigate('/groups');
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const titlePage = language === 'en' ? 'Create new Group' : 'Buat grup baru';
 
   return (
     <>
-      <Header name="New Group" pathBack="/groups" />
+      <Header name={titlePage} pathBack="/groups" />
       <motion.section
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -53,7 +66,7 @@ const CreateGroupPage = () => {
       >
         <EditAvatar img={img} onImgChange={imgChangeHandler} />
         <Editbox
-          title={'Group Subject'}
+          title={'Subject'}
           value={subject}
           onChange={subjectChangeHandler}
           onSave={() => console.log()}
@@ -72,7 +85,7 @@ const CreateGroupPage = () => {
             isFull
             onClick={submitHandler}
           >
-            Create Group
+            {titlePage}
           </Buttons>
         </div>
       </motion.section>

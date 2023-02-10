@@ -13,6 +13,7 @@ import {
   serverTimestamp,
   arrayRemove,
   arrayUnion,
+  Timestamp,
 } from 'firebase/firestore';
 import {
   sendEmailVerification,
@@ -49,6 +50,8 @@ const registerUser = async ({ email, password, username }: registerTypes) => {
     await setDoc(doc(db, 'usersFriends', res.user.uid), {});
 
     await setDoc(doc(db, 'usersChats', res.user.uid), {});
+
+    await setDoc(doc(db, 'usersGroups', res.user.uid), {});
 
     return res;
   } catch (err) {
@@ -213,7 +216,6 @@ const uploadProfileImage = async ({ uid, displayName, file }: DocumentData) => {
 };
 
 const uploadFile = async ({ file }: DocumentData) => {
-  const user = auth.currentUser!;
   const storageRef = ref(storage, `${+new Date()}`);
 
   try {
@@ -434,6 +436,155 @@ const createGroup = async ({ subject, description, photo }: DocumentData) => {
   }
 };
 
+const sendRequestMember = async ({ uid, idGroup, data }: DocumentData) => {
+  const user = auth.currentUser!;
+
+  try {
+    await setDoc(doc(db, 'groups', idGroup), data, {
+      merge: true,
+    });
+
+    await setDoc(doc(db, 'usersGroups', uid), {});
+
+    await updateDoc(doc(db, 'usersGroups', uid), {
+      [idGroup + '.idGroup']: idGroup,
+      [idGroup + '.invitedBy']: user.uid,
+      [idGroup + '.status']: 'pending',
+      [idGroup + '.date']: serverTimestamp(),
+      [idGroup + '.lastMessage']: '',
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
+const sendMessagePersonal = async ({
+  text,
+  chatId,
+  senderId,
+  receiverId,
+  image,
+}: DocumentData) => {
+  const id = +new Date();
+  const date = Timestamp.now();
+
+  try {
+    if (image) {
+      const res = await uploadFile({ file: image });
+
+      const data = {
+        messages: arrayUnion({
+          id,
+          text,
+          senderId,
+          date,
+          image: res,
+        }),
+      };
+
+      await updateDocument({ collection: 'chats', data, id: chatId });
+    } else {
+      const data = {
+        messages: arrayUnion({
+          id,
+          text,
+          senderId,
+          date,
+        }),
+      };
+
+      await updateDocument({ collection: 'chats', data, id: chatId });
+    }
+    await updateDocument({
+      collection: 'usersChats',
+      data: {
+        [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
+        [chatId + '.date']: serverTimestamp(),
+      },
+      id: senderId,
+    });
+
+    await updateDocument({
+      collection: 'usersChats',
+      data: {
+        [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
+        [chatId + '.date']: serverTimestamp(),
+      },
+      id: receiverId,
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
+const sendMessageGroup = async ({
+  text,
+  chatId,
+  senderId,
+  image,
+  member,
+}: DocumentData) => {
+  const id = +new Date();
+  const date = Timestamp.now();
+
+  try {
+    if (image) {
+      const res = await uploadFile({ file: image });
+
+      const data = {
+        messages: arrayUnion({
+          id,
+          text,
+          senderId,
+          date,
+          image: res,
+        }),
+      };
+
+      await updateDocument({ collection: 'chats', data, id: chatId });
+    } else {
+      const data = {
+        messages: arrayUnion({
+          id,
+          text,
+          senderId,
+          date,
+        }),
+      };
+
+      await updateDocument({ collection: 'chats', data, id: chatId });
+    }
+
+    for (let idx = 0; idx < member.length; idx++) {
+      await updateDocument({
+        collection: 'usersGroups',
+        data: {
+          [chatId + '.lastMessage']: text === '' ? 'Send image' : text,
+          [chatId + '.date']: serverTimestamp(),
+        },
+        id: member[idx],
+      });
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -452,4 +603,7 @@ export {
   createGroup,
   getGroupById,
   getDetailMember,
+  sendRequestMember,
+  sendMessagePersonal,
+  sendMessageGroup
 };

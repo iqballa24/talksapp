@@ -33,7 +33,13 @@ const UserPage = () => {
         className="flex flex-col bg-white dark:bg-dark-third h-full"
       >
         <div className="flex ml-auto mr-auto py-7">
-          <RoundedImage src={selectedUser.photoURL} />
+          <RoundedImage
+            src={
+              selectedUser.photoURL === ''
+                ? `https://ui-avatars.com/api/?name=${selectedUser.displayName}`
+                : selectedUser.photoURL
+            }
+          />
         </div>
         <BoxText title="Username" text={selectedUser.displayName} />
         <BoxText

@@ -7,20 +7,34 @@
 
   .msgContent {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
+    flex-direction: column;
+    gap: 4px;
     border-radius: 0.5em;
     padding: 6px 7px 8px 9px;
     font-size: 14px;
     @apply bg-white dark:bg-dark;
     @apply text-dark dark:text-grey-secondary;
 
-    time {
-      z-index: 10;
+    .nameUser {
+      color: expression(
+        'rgb(' + Math.floor(Math.random() * 255) + ',' +
+          Math.floor(Math.random() * 255) + ',' +
+          Math.floor(Math.random() * 255) + ')'
+      );
+    }
+
+    .message {
       display: flex;
-      align-items: flex-end;
-      font-size: 11px;
-      @apply text-dark dark:text-grey-secondary;
+      flex-direction: row;
+      gap: 1rem;
+
+      time {
+        z-index: 10;
+        display: flex;
+        align-items: flex-end;
+        font-size: 11px;
+        @apply text-dark dark:text-grey-secondary;
+      }
     }
 
     .triangle {
@@ -51,4 +65,3 @@
     }
   }
 }
-

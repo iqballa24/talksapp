@@ -16,8 +16,9 @@ const FooterMessages = () => {
   const [srcImage, setSrcImage] = useState<string | null>(null);
   const [uploadImage, setUploadImage] = useState<File | null>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
-  const { chats, auth, ui } = useAppSelector((state) => state);
-  const { chatId, user, isGroup } = chats.selectedChat;
+  const { chats, auth, ui, users } = useAppSelector((state) => state);
+  const { chatId, isGroup } = chats.selectedChat;
+  const { uid: receiverId } = users.selectedUser;
   const { uid } = auth.user;
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,13 +32,12 @@ const FooterMessages = () => {
 
     dispatch(
       asyncSendMessages({
-        collection: 'chats',
         text,
         chatId,
         senderId: uid,
-        receiverId: user?.uid,
+        receiverId,
         image: uploadImage,
-        isGroup
+        isGroup,
       })
     );
     setTextMessage('');

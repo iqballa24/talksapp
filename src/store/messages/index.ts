@@ -11,7 +11,7 @@ const messagesSlice = createSlice({
       state.data = [];
     },
     receiveMessages(state, { payload }) {
-      state.data = payload.messages;
+      state.data = payload;
     },
     changeFilterMessage(state, { payload }) {
       state.filter = payload;

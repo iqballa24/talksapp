@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Header } from '@/components/UI';
 import { configColors } from '@/constant/configColors';
-import { useAppSelector } from '@/lib/hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { MdAdd } from 'react-icons/md';
 import { Tooltip } from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
 import GroupsList from '@/components/Groups/GroupsList';
+import { asyncGetDetailMember } from '@/store/groups/action';
 
 const GroupsPage = () => {
   const navigate = useNavigate();
-  const { ui } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+  const { ui, group } = useAppSelector((state) => state);
+  const { selectedGroup } = group;
   const { accentColor, language } = ui;
   const afterBgColor =
     configColors[accentColor as keyof typeof configColors].button;
+
+  useEffect(() => {
+    if (selectedGroup.idGroup) {
+      dispatch(asyncGetDetailMember(selectedGroup.member));
+    }
+  }, [selectedGroup.idGroup]);
 
   return (
     <>

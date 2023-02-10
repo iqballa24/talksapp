@@ -13,6 +13,7 @@ import { auth } from '@/lib/firebase';
 import { authSliceAction } from '@/store/auth';
 import { chatsSliceAction } from '@/store/chats';
 import { usersSliceAction } from '@/store/users';
+import { messageSliceAction } from '@/store/messages';
 
 function asyncRegisterUser({ email, password, username }: registerTypes) {
   return async () => {
@@ -108,6 +109,7 @@ function unSetAuthUser() {
     dispatch(authSliceAction.unSetCurrentUser());
     dispatch(usersSliceAction.resetListFriends());
     dispatch(usersSliceAction.receiveTotalRequests(0));
+    dispatch(messageSliceAction.clearMessages());
   };
 }
 

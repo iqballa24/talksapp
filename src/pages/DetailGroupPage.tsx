@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Tooltip } from 'react-tooltip';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import useWindowSize from '@/lib/hooks/useWindowSize';
 import { userTypes } from '@/lib/types';
-import { Header, RoundedImage, BoxText } from '@/components/UI';
-import { asyncGetDetailMember } from '@/store/groups/action';
+import {
+  Header,
+  RoundedImage,
+  BoxText,
+  ModalAddNewMembers,
+} from '@/components/UI';
 import { usersSliceAction } from '@/store/users';
+import MembersAction from '@/components/Groups/MembersAction';
+import { uiActions } from '@/store/ui';
+import { asyncGetDetailMember } from '@/store/groups/action';
 
 const DetailGroupPage = () => {
   const dispatch = useAppDispatch();
@@ -22,18 +28,12 @@ const DetailGroupPage = () => {
     size.width > 560 ? '/groups' : `/message/${selectedGroup.idGroup}`;
 
   useEffect(() => {
-    if (selectedGroup.idGroup) {
-      dispatch(asyncGetDetailMember(selectedGroup.member));
-    }
-  }, [selectedGroup.idGroup]);
-
-  useEffect(() => {
     if (!selectedChat.chatId) {
       navigate('/');
     }
   }, [selectedChat.chatId]);
 
-  const clickUserHandler = ({
+  const clickMemberHandler = ({
     uid,
     displayName,
     about,
@@ -45,6 +45,16 @@ const DetailGroupPage = () => {
     );
     navigate(`/detail-user/${displayName}`);
   };
+
+  const toggleModalAddNewMembers = () => {
+    dispatch(uiActions.toggleModalAddNewMembers());
+  };
+
+  useEffect(() => {
+    if (selectedGroup.idGroup) {
+      dispatch(asyncGetDetailMember(selectedGroup.member));
+    }
+  }, [selectedGroup.idGroup, selectedGroup.member]);
 
   return (
     <>
@@ -60,42 +70,20 @@ const DetailGroupPage = () => {
         <div className="flex ml-auto mr-auto py-7">
           <RoundedImage src={selectedGroup.photoURL} />
         </div>
-        <BoxText title="Username" text={selectedGroup.subject} />
+        <BoxText title="Subject" text={selectedGroup.subject} />
         <BoxText
           title={language === 'en' ? 'Description' : 'Deskripsi'}
           text={selectedGroup.description}
         />
-        <div className="flex flex-row flex-wrap px-4 sm:px-7 py-5">
-          {detailMember.map((member) => {
-            const { uid, displayName, email, about, photoURL } = member;
-            return (
-              <>
-                <img
-                  id={uid}
-                  key={uid}
-                  src={photoURL}
-                  className="rounded-[50%] w-9 cursor-pointer hover:-translate-y-2 transition ease-out duration-300"
-                  onClick={() =>
-                    clickUserHandler({
-                      uid,
-                      displayName,
-                      email,
-                      about,
-                      photoURL,
-                    })
-                  }
-                  alt=""
-                />
-                <Tooltip
-                  className="z-30"
-                  anchorId={uid}
-                  content={displayName}
-                  place="bottom"
-                />
-              </>
-            );
-          })}
-        </div>
+        <MembersAction
+          members={detailMember}
+          onClickMember={clickMemberHandler}
+          onClickAddMember={toggleModalAddNewMembers}
+        />
+        <ModalAddNewMembers
+          isShow={ui.showModalAddNewMembers}
+          onClose={toggleModalAddNewMembers}
+        />
       </motion.section>
     </>
   );

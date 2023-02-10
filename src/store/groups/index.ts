@@ -23,7 +23,7 @@ const initialState: groupsSliceTypes = {
     createdBy: '',
     member: [],
   },
-  detailMember: []
+  detailMember: [],
 };
 
 const groupsSlice = createSlice({
@@ -33,11 +33,14 @@ const groupsSlice = createSlice({
     receiveListGroups(state, { payload }) {
       state.list = payload;
     },
-    receiveDetailMember(state, {payload}){
+    receiveDetailMember(state, { payload }) {
       state.detailMember = payload;
     },
     selectGroup(state, { payload }) {
       state.selectedGroup = payload;
+    },
+    addMember(state, { payload }) {
+      state.selectedGroup.member.push(payload);
     },
   },
 });

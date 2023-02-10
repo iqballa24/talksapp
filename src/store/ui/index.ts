@@ -9,6 +9,7 @@ const initialState = {
   showModalColors: false,
   showModalAddNewFriends: false,
   showModalFilterMessage: false,
+  showModalAddNewMembers: false,
 };
 
 const uiSlice = createSlice({
@@ -49,6 +50,9 @@ const uiSlice = createSlice({
     },
     toggleModalFilterMessages(state) {
       state.showModalFilterMessage = !state.showModalFilterMessage;
+    },
+    toggleModalAddNewMembers(state) {
+      state.showModalAddNewMembers = !state.showModalAddNewMembers;
     },
   },
 });

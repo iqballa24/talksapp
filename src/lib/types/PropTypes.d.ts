@@ -81,6 +81,7 @@ export type MessageItemProps = {
   text: string;
   time: string;
   img?: string;
+  name?: string;
 };
 
 export type GroupsItemProps = {

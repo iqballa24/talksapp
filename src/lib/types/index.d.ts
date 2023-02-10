@@ -94,6 +94,13 @@ export type colorsTypes = {
   100: string;
 };
 
+export type listFriendsTypes = {
+  requestBy: string;
+  status: string;
+  userId: string;
+  userInfo: userTypes;
+};
+
 export type configColorsTypes = {
   primary: {
     bgColor: colorsTypes;

@@ -1,5 +1,5 @@
 import { db } from '@/lib/firebase';
-import { getGroupById, getUserById } from '@/lib/firebase/API';
+import { getGroupById } from '@/lib/firebase/API';
 import { useAppDispatch } from '@/lib/hooks/useRedux';
 import { groupsSliceAction } from '@/store/groups';
 import { doc, DocumentData, onSnapshot, Timestamp } from 'firebase/firestore';
