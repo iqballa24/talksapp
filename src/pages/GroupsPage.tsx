@@ -37,7 +37,7 @@ const GroupsPage = () => {
         <Tooltip
           className="z-20"
           anchorId="group"
-          content={language === 'en' ? 'Create groups' : 'Buat group'}
+          content={language === 'en' ? 'Create groups' : 'Buat grup'}
         />
         <GroupsList />
       </div>

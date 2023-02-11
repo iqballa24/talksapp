@@ -68,11 +68,7 @@ const ChatsHeader = () => {
           onClick={() => navigate('/groups')}
         >
           <MdGroupWork size={22} role="button" />
-          <Tooltip
-            className="z-20"
-            anchorId="group"
-            content={language === 'en' ? 'Create group' : 'Buat grup'}
-          />
+          <Tooltip className="z-20" anchorId="group" content="groups" />
         </li>
         <li id="newChat" className="cursor-pointer" onClick={toggleModal}>
           <MdPersonAdd size={22} role="button" />

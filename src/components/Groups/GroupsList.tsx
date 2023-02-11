@@ -13,8 +13,8 @@ const GroupsList = () => {
     return (
       <p className="font-light text-sm text-center text-dark-secondary dark:text-grey mt-5">
         {ui.language === 'en'
-          ? '-- No conversation yet --'
-          : '-- Belum ada percakapan --'}
+          ? '-- You don`t have any groups yet --'
+          : '-- Anda belum memiliki grup --'}
       </p>
     );
   }

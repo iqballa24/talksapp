@@ -5,6 +5,8 @@ import { chatsSliceAction } from '@/store/chats';
 import { formatedDate } from '@/utils/formatedDate';
 import { DocumentData } from 'firebase/firestore';
 import { groupsSliceAction } from '@/store/groups';
+import { useNavigate } from 'react-router-dom';
+import useWindowSize from '@/lib/hooks/useWindowSize';
 
 const GroupsItem = ({
   chatId,
@@ -12,6 +14,8 @@ const GroupsItem = ({
   lastMessage,
   time,
 }: GroupsItemProps) => {
+  const size = useWindowSize();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const date = formatedDate({ time, showTime: false, showTodayTime: true });
 
@@ -26,6 +30,10 @@ const GroupsItem = ({
       })
     );
     dispatch(groupsSliceAction.selectGroup({ ...groupInfo }));
+
+    if (size.width < 560) {
+      return navigate(`/message/${chatId}`);
+    }
   };
 
   return (
