@@ -46,9 +46,9 @@ Users should be able to:
 ### Links
 
 - Live Site URL: [Live Site](https://talksapp.vercel.app/)
-demo :
-email: doduoaj@gmail.com
-password: Doduoaj24
+- demo :
+  - email: doduoaj@gmail.com
+  - password: Doduoaj24
 
 ## My process
 
