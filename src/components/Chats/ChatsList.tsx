@@ -23,7 +23,11 @@ const ChatsList = () => {
   }
 
   const chatsFilter = [...chats.list]
-    .sort((a, b) => b.date - a.date)
+    .sort((a, b) =>
+      chats.isSort
+        ? a.userInfo.displayName.localeCompare(b.userInfo.displayName)
+        : b.date - a.date
+    )
     .filter((chat) => chat.status === 'active')
     .filter((chat) =>
       chat.userInfo.displayName

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   MdSearch,
   MdKeyboardArrowLeft,
@@ -41,19 +41,20 @@ const HeaderPersonal = () => {
       role="figure"
     >
       <div className="flex flex-row items-center space-x-2">
-        <MdKeyboardArrowLeft
-          id="back"
-          size={22}
-          className="flex h-full min-w-['42px'] md:hidden text-dark-secondary dark:text-grey cursor-pointer"
-          onClick={() => navigate('/')}
-        />
-        <Tooltip
-          className="z-20"
-          anchorId="back"
-          content={ui.language === 'en' ? 'Back' : 'Kembali'}
-          place="bottom"
-        />
-        <div
+        <Link to="/">
+          <MdKeyboardArrowLeft
+            id="back"
+            size={22}
+            className="flex h-full min-w-['42px'] md:hidden text-dark-secondary dark:text-grey cursor-pointer"
+          />
+          <Tooltip
+            className="z-20"
+            anchorId="back"
+            content={ui.language === 'en' ? 'Back' : 'Kembali'}
+            place="bottom"
+          />
+        </Link>
+        <button
           id="detailUser"
           className="flex flex-row items-center space-x-4 cursor-pointer"
           onClick={() => navigate(`/detail-user/${selectedUser.displayName}`)}
@@ -70,7 +71,7 @@ const HeaderPersonal = () => {
           <h1 className="text-dark dark:text-grey text-base truncate">
             {selectedUser.displayName}
           </h1>
-        </div>
+        </button>
         <Tooltip
           className="z-20"
           anchorId="detailUser"

@@ -15,6 +15,7 @@ export type chatsSliceTypes = {
     isGroup: boolean;
   };
   filter: string;
+  isSort: boolean;
 };
 
 const initialState: chatsSliceTypes = {
@@ -26,6 +27,7 @@ const initialState: chatsSliceTypes = {
   },
   hasArchive: false,
   filter: '',
+  isSort: false,
 };
 
 const chatsSlice = createSlice({
@@ -57,6 +59,10 @@ const chatsSlice = createSlice({
 
     changeFilterChat(state, { payload }) {
       state.filter = payload;
+    },
+
+    toggleSortChat(state) {
+      state.isSort = !state.isSort;
     },
 
     hasArchive(state, { payload }) {

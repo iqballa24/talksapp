@@ -27,13 +27,14 @@ const GroupsPage = () => {
     <>
       <Header name="Groups" pathBack="/" />
       <div className="relative w-full h-full">
-        <div
+        <button
+          type="button"
           id="group"
           className={`absolute bottom-8 right-10 ${afterBgColor} p-3 w-fit rounded-[50%] cursor-pointer transition`}
           onClick={() => navigate('/create-group')}
         >
           <MdAdd size={28} color="white" />
-        </div>
+        </button>
         <Tooltip
           className="z-20"
           anchorId="group"

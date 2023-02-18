@@ -1,22 +1,21 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
 import { Tooltip } from 'react-tooltip';
 import { Popover } from '@headlessui/react';
 import PopOverItem from '@/components/UI/Popoveritem';
 import ModalAddNewFriends from '@/components/UI/Modal/AddNewFriends';
 
-import { MdGroups, MdGroupWork, MdPersonAdd, MdMoreVert } from 'react-icons/md';
+import { MdGroups, MdPersonAdd, MdMoreVert, MdChat } from 'react-icons/md';
 import { BsDot } from 'react-icons/bs';
 import { menuProfile } from '@/constant';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { uiActions } from '@/store/ui';
+import { Link } from 'react-router-dom';
 
 const ChatsHeader = () => {
   const dispatch = useAppDispatch();
   const { ui, auth, users } = useAppSelector((state) => state);
   const { language } = ui;
   const { photoURL, displayName } = auth.user;
-  const navigate = useNavigate();
 
   const srcImage = photoURL
     ? photoURL
@@ -31,52 +30,51 @@ const ChatsHeader = () => {
       className="flex flex-row items-center justify-between min-h-[62px] px-4 bg-grey-secondary dark:bg-dark"
       role="figure"
     >
-      <img
-        id="profile"
-        src={srcImage}
-        alt="profile picture"
-        className="rounded-[50%] w-10 h-10 cursor-pointer"
-        onClick={() => navigate('/profile')}
-      />
-      <Tooltip
-        className="z-20"
-        anchorId="profile"
-        content={language === 'en' ? 'Profile' : 'Profil'}
-      />
+      <Link to="/profile">
+        <img
+          id="profile"
+          src={srcImage}
+          alt="profile picture"
+          className="rounded-[50%] w-10 h-10 cursor-pointer"
+        />
+        <Tooltip
+          className="z-20"
+          anchorId="profile"
+          content={language === 'en' ? 'Profile' : 'Profil'}
+        />
+      </Link>
       <ul className="relative flex flex-row items-center space-x-7 text-dark-secondary dark:text-grey">
-        <li
-          id="friends"
-          className="cursor-pointer relative"
-          onClick={() => navigate('/friends')}
-        >
-          <MdGroups size={22} role="button" />
-          <Tooltip
-            className="z-20"
-            anchorId="friends"
-            content={language === 'en' ? 'Friends' : 'Teman'}
-          />
-          {users.totalRequests > 0 && (
-            <BsDot
-              className="absolute -top-3 -right-4 text-red-600"
-              size={32}
+        <li id="friends" className="cursor-pointer relative">
+          <Link to="/friends">
+            <MdGroups size={22} role="button" />
+            <Tooltip
+              className="z-20"
+              anchorId="friends"
+              content={language === 'en' ? 'Friends' : 'Teman'}
             />
-          )}
+            {users.totalRequests > 0 && (
+              <BsDot
+                className="absolute -top-3 -right-4 text-red-600"
+                size={32}
+              />
+            )}
+          </Link>
         </li>
-        <li
-          id="group"
-          className="cursor-pointer"
-          onClick={() => navigate('/groups')}
-        >
-          <MdGroupWork size={22} role="button" />
-          <Tooltip className="z-20" anchorId="group" content="groups" />
+        <li id="group" className="cursor-pointer">
+          <Link to="groups">
+            <MdChat size={22} role="button" />
+            <Tooltip className="z-20" anchorId="group" content="groups" />
+          </Link>
         </li>
-        <li id="newChat" className="cursor-pointer" onClick={toggleModal}>
-          <MdPersonAdd size={22} role="button" />
-          <Tooltip
-            className="z-20"
-            anchorId="newChat"
-            content={language === 'en' ? 'Add friends' : 'Tambah teman'}
-          />
+        <li id="newChat" className="cursor-pointer flex my-auto">
+          <button type="button" onClick={toggleModal}>
+            <MdPersonAdd size={22} role="button" />
+            <Tooltip
+              className="z-20"
+              anchorId="newChat"
+              content={language === 'en' ? 'Add friends' : 'Tambah teman'}
+            />
+          </button>
         </li>
         <li id="menu" className="cursor-pointer">
           <Popover className="flex items-center">

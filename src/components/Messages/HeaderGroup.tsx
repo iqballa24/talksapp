@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   MdSearch,
   MdKeyboardArrowLeft,
@@ -17,7 +17,7 @@ const HeaderGroup = () => {
   const dispatch = useAppDispatch();
   const { ui, group } = useAppSelector((state) => state);
   const [showSearch, setShowSearch] = useState(false);
-  const { selectedGroup } = group
+  const { selectedGroup } = group;
 
   const onSearch = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
@@ -34,24 +34,23 @@ const HeaderGroup = () => {
       role="figure"
     >
       <div className="flex flex-row items-center space-x-2">
-        <MdKeyboardArrowLeft
-          id="back"
-          size={22}
-          className="flex h-full min-w-['42px'] md:hidden text-dark-secondary dark:text-grey cursor-pointer"
-          onClick={() => navigate('/')}
-        />
-        <Tooltip
-          className="z-20"
-          anchorId="back"
-          content={ui.language === 'en' ? 'Back' : 'Kembali'}
-          place="bottom"
-        />
-        <div
+        <Link to="/groups">
+          <MdKeyboardArrowLeft
+            id="back"
+            size={22}
+            className="flex h-full min-w-['42px'] md:hidden text-dark-secondary dark:text-grey cursor-pointer"
+          />
+          <Tooltip
+            className="z-20"
+            anchorId="back"
+            content={ui.language === 'en' ? 'Back' : 'Kembali'}
+            place="bottom"
+          />
+        </Link>
+        <button
           id="detailUser"
           className="flex flex-row items-center space-x-4 cursor-pointer"
-          onClick={() =>
-            navigate(`/detail-group/${selectedGroup.subject}`)
-          }
+          onClick={() => navigate(`/detail-group/${selectedGroup.subject}`)}
         >
           <img
             src={selectedGroup.photoURL}
@@ -61,7 +60,7 @@ const HeaderGroup = () => {
           <h1 className="text-dark dark:text-grey text-base truncate">
             {selectedGroup.subject}
           </h1>
-        </div>
+        </button>
         <Tooltip
           className="z-20"
           anchorId="detailUser"

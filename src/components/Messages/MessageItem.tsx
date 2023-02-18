@@ -4,7 +4,6 @@ import { configColors } from '@/constant/configColors';
 import { MessageItemProps } from '@/lib/types/PropTypes';
 import { ModalCustom } from '@/components/UI';
 import '@/styles/Chatbubble.scss';
-import randomColor from '@/utils/randomColor';
 
 const MessageItem: React.FC<MessageItemProps> = ({
   sender,

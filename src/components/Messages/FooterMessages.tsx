@@ -83,29 +83,37 @@ const FooterMessages = () => {
         </span>
       )}
       <div className="relative flex flex-row px-4 py-1 justify-between min-h-[62px] items-center text-dark-secondary bg-grey-secondary gap-5 dark:text-grey/50 dark:bg-dark">
-        <MdOutlineEmojiEmotions
-          size={30}
-          onClick={toggleEmojiPicker}
-          className="cursor-pointer"
-        />
-        <label htmlFor="uploadImage" className="cursor-pointer">
-          <FiPaperclip id="attachIcon" size={20} />
-          <input
-            id="uploadImage"
-            type="file"
-            className="hidden"
-            accept="image/*"
-            onChange={changeImageHandler}
+        <>
+          <button id="emoji" type="button" onClick={toggleEmojiPicker}>
+            <MdOutlineEmojiEmotions size={24} className="cursor-pointer" />
+          </button>
+          <Tooltip
+            className="z-10"
+            anchorId="emoji"
+            content="Emoji"
+            place="top"
           />
-        </label>
-        <Tooltip
-          className="z-10"
-          anchorId="attachIcon"
-          content={`${
-            ui.language === 'en' ? 'Attach picture' : 'Lampirkan gambar'
-          }`}
-          place="top"
-        />
+        </>
+        <>
+          <label htmlFor="uploadImage" className="cursor-pointer">
+            <FiPaperclip id="attachIcon" size={20} />
+            <input
+              id="uploadImage"
+              type="file"
+              className="hidden"
+              accept="image/*"
+              onChange={changeImageHandler}
+            />
+          </label>
+          <Tooltip
+            className="z-10"
+            anchorId="attachIcon"
+            content={`${
+              ui.language === 'en' ? 'Attach picture' : 'Lampirkan gambar'
+            }`}
+            place="top"
+          />
+        </>
         <Input
           id="message"
           value={textMessage}
@@ -116,18 +124,17 @@ const FooterMessages = () => {
           changeHandler={changeHandler}
           enterHandler={() => sendMessageHandler(textMessage)}
         />
-        <MdSend
-          id="sendIcon"
-          className="cursor-pointer"
-          size={30}
-          onClick={() => sendMessageHandler(textMessage)}
-        />
-        <Tooltip
-          className="z-10"
-          anchorId="sendIcon"
-          content={`${ui.language === 'en' ? 'Send' : 'Kirim'}`}
-          place="top"
-        />
+        <>
+          <button onClick={() => sendMessageHandler(textMessage)}>
+            <MdSend id="sendIcon" className="cursor-pointer" size={22} />
+          </button>
+          <Tooltip
+            className="z-10"
+            anchorId="sendIcon"
+            content={`${ui.language === 'en' ? 'Send' : 'Kirim'}`}
+            place="top"
+          />
+        </>
         <AnimatePresence>
           {showEmojiPicker && (
             <motion.div
