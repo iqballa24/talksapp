@@ -413,8 +413,6 @@ const createGroup = async ({ subject, description, photo }: DocumentData) => {
           createdAt: serverTimestamp(),
         });
 
-        await setDoc(doc(db, 'usersGroups', user.uid), {});
-
         await updateDoc(doc(db, 'usersGroups', user.uid), {
           [id + '.idGroup']: id,
           [id + '.invitedBy']: user.uid,
