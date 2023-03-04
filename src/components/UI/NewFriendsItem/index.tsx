@@ -36,7 +36,7 @@ const NewFriendsItem: React.FC<NewFriendsItemProps> = ({
               className="z-20"
               anchorId="pending"
               content={
-                ui.language === 'en' ? 'Waiting request' : 'permintaan menunggu'
+                ui.language === 'en' ? 'Waiting for response' : 'Menunggu tanggapan'
               }
             />
           </>
