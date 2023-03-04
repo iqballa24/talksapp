@@ -36,6 +36,7 @@ export type ButtonsProps = {
   isSecondary?: boolean;
   isDanger?: boolean;
   isFull?: boolean;
+  isDisabled?:boolean
   onClick: () => void;
 };
 

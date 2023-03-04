@@ -35,7 +35,7 @@ const ChatsHeader = () => {
           id="profile"
           src={srcImage}
           alt="profile picture"
-          className="rounded-[50%] w-10 h-10 cursor-pointer"
+          className="rounded-[50%] w-10 h-10 object-cover cursor-pointer"
         />
         <Tooltip
           className="z-20"

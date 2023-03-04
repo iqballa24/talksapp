@@ -583,6 +583,31 @@ const sendMessageGroup = async ({
   }
 };
 
+const updateProfileGroup = async ({ id, subject, file }: DocumentData) => {
+  const storageRef = ref(storage, `${subject + id}`);
+  try {
+    const res = await uploadBytesResumable(storageRef, file).then(() => {
+      return getDownloadURL(storageRef).then(async (downloadURL) => {
+        await setDoc(
+          doc(db, 'groups', id),
+          { photoURL: downloadURL },
+          { merge: true }
+        );
+
+        return downloadURL;
+      });
+    });
+    return res;
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -603,5 +628,6 @@ export {
   getDetailMember,
   sendRequestMember,
   sendMessagePersonal,
-  sendMessageGroup
+  sendMessageGroup,
+  updateProfileGroup
 };

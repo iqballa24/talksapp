@@ -42,6 +42,15 @@ const groupsSlice = createSlice({
     addMember(state, { payload }) {
       state.selectedGroup.member.push(payload);
     },
+    setPhotoSelectedGroup(state, { payload }) {
+      state.selectedGroup.photoURL = payload;
+    },
+    setSubjectSelectedGroup(state, { payload }) {
+      state.selectedGroup.subject = payload;
+    },
+    setDescriptionSelectedGroup(state, { payload }) {
+      state.selectedGroup.description = payload;
+    },
   },
 });
 

@@ -22,6 +22,7 @@ const ArchivePage = React.lazy(() => import('./pages/ArchivePage'));
 const CreateGroupPage = React.lazy(() => import('./pages/CreateGroupPage'));
 const GroupsPage = React.lazy(() => import('./pages/GroupsPage'));
 const DetaiGroupPage = React.lazy(() => import('./pages/DetailGroupPage'));
+const EditGroupPage = React.lazy(() => import('./pages/EditGroupPage'));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -55,6 +56,7 @@ function App() {
             <Route path="/groups" element={<GroupsPage />} />
             <Route path="/create-group" element={<CreateGroupPage />} />
             <Route path="/detail-group/*" element={<DetaiGroupPage />} />
+            <Route path="/edit-group/*" element={<EditGroupPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

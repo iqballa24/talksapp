@@ -4,7 +4,7 @@ const RoundedImage: React.FC<{ src: string; className?: string }> = ({
   src,
   className,
 }) => {
-  const classes = ['rounded-[50%] w-[200px] h-[200px] z-0'];
+  const classes = ['rounded-[50%] w-[200px] h-[200px] object-cover z-0'];
   className && classes.push(className);
 
   return (

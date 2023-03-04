@@ -2,6 +2,8 @@ import {
   createGroup,
   getDetailMember,
   sendRequestMember,
+  updateDocument,
+  updateProfileGroup,
 } from '@/lib/firebase/API';
 import { RootState } from '@/store';
 import { groupsSliceAction } from '@/store/groups';
@@ -98,4 +100,63 @@ function asyncAddNewMembers(uid: string) {
   };
 }
 
-export { asyncCreateNewGroup, asyncGetDetailMember, asyncAddNewMembers };
+function asyncUpdateImageGroup({ id, subject, file }: DocumentData) {
+  return async (dispatch: Dispatch) => {
+    try {
+      const promise = updateProfileGroup({ id, subject, file });
+
+      toast.promise(promise, {
+        loading: 'Loading..',
+        success: 'Photo changed successfully',
+        error: 'Error when uploading',
+      });
+
+      const res = await promise;
+      dispatch(groupsSliceAction.setPhotoSelectedGroup(res));
+      return res;
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error('Ops, Something went wrong');
+        console.log('Unexpected error', err);
+      }
+    }
+  };
+}
+
+function asyncUpdateGroup(id: string, data: DocumentData) {
+  return async (dispatch: Dispatch) => {
+    try {
+      const promise = updateDocument({ collection: 'groups', data, id });
+
+      toast.promise(promise, {
+        loading: 'Loading..',
+        success: 'Saved',
+        error: 'Failed',
+      });
+
+      const res = promise;
+
+      dispatch(groupsSliceAction.setSubjectSelectedGroup(data.subject));
+      dispatch(groupsSliceAction.setDescriptionSelectedGroup(data.description));
+
+      return res;
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error('Ops, Something went wrong');
+        console.log('Unexpected error', err);
+      }
+    }
+  };
+}
+
+export {
+  asyncCreateNewGroup,
+  asyncGetDetailMember,
+  asyncAddNewMembers,
+  asyncUpdateImageGroup,
+  asyncUpdateGroup
+};

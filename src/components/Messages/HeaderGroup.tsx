@@ -6,6 +6,7 @@ import {
   MdKeyboardArrowLeft,
   MdClose,
   MdLogout,
+  MdSettings,
 } from 'react-icons/md';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Searchbar } from '@/components/UI';
@@ -15,9 +16,11 @@ import { messageSliceAction } from '@/store/messages';
 const HeaderGroup = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { ui, group } = useAppSelector((state) => state);
+  const { ui, group, auth } = useAppSelector((state) => state);
   const [showSearch, setShowSearch] = useState(false);
   const { selectedGroup } = group;
+
+  const isAdmin = selectedGroup.createdBy === auth.user.uid;
 
   const onSearch = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
@@ -48,6 +51,7 @@ const HeaderGroup = () => {
           />
         </Link>
         <button
+          type="button"
           id="detailUser"
           className="flex flex-row items-center space-x-4 cursor-pointer"
           onClick={() => navigate(`/detail-group/${selectedGroup.subject}`)}
@@ -55,7 +59,7 @@ const HeaderGroup = () => {
           <img
             src={selectedGroup.photoURL}
             alt="profile picture"
-            className="rounded-[50%] w-10 h-10"
+            className="rounded-[50%] w-10 h-10 object-cover"
           />
           <h1 className="text-dark dark:text-grey text-base truncate">
             {selectedGroup.subject}
@@ -105,7 +109,30 @@ const HeaderGroup = () => {
             />
           )}
         </AnimatePresence>
-        <MdLogout size={20} />
+        {isAdmin ? (
+          <button
+            type="button"
+            onClick={() => navigate(`/edit-group/${selectedGroup.subject}`)}
+          >
+            <MdSettings size={20} id="settings" />
+            <Tooltip
+              className="z-20"
+              anchorId="settings"
+              content={ui.language === 'en' ? `Setting's` : `Pengaturan`}
+              place="bottom"
+            />
+          </button>
+        ) : (
+          <button type="button">
+            <MdLogout size={20} id="exit" />
+            <Tooltip
+              className="z-20"
+              anchorId="exit"
+              content={ui.language === 'en' ? `Exit group` : `Keluar group`}
+              place="bottom"
+            />
+          </button>
+        )}
       </div>
     </div>
   );

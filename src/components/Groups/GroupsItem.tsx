@@ -49,7 +49,7 @@ const GroupsItem = ({
               : `https://ui-avatars.com/api/?name=${subject}`
           }
           alt="profile user"
-          className="w-[49px] h-[49px] rounded-[50%]"
+          className="w-[49px] h-[49px] object-cover rounded-[50%]"
         />
       </div>
       <div className="w-8/12 h-full flex flex-col justify-start">

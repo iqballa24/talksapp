@@ -12,6 +12,7 @@ const Buttons: React.FC<ButtonsProps> = ({
   isSecondary,
   isDanger,
   isFull,
+  isDisabled,
 }) => {
   const { accentColor } = useAppSelector((state) => state.ui);
   const className = [
@@ -33,7 +34,9 @@ const Buttons: React.FC<ButtonsProps> = ({
     className.push(
       'border border-red text-red dark:text-white hover:bg-red-500 hover:text-white'
     );
+
   isFull && className.push('w-full');
+  isDisabled && className.push('cursor-not-allowed disabled:opacity-75');
 
   return (
     <button

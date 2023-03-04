@@ -15,15 +15,19 @@ const MembersAction: React.FC<{
   onClickAddMember: () => void;
 }> = ({ members, onClickMember, onClickAddMember }) => {
   return (
-    <div className="grid grid-cols-6 gap-4 items-center px-4 sm:px-7 py-5">
+    <div className="flex flex-wrap gap-4 items-center px-4 sm:px-7 py-5">
       {members.map((member) => {
         const { uid, displayName, email, about, photoURL } = member;
         return (
-          <div className='w-full h-full' key={uid}>
+          <div className="w-[49px]" key={uid}>
             <img
               id={displayName}
-              src={photoURL}
-              className="rounded-[50%] w-full h-full cursor-pointer hover:-translate-y-2 transition ease-out duration-300"
+              src={
+                photoURL !== ''
+                  ? photoURL
+                  : `https://ui-avatars.com/api/?name=${displayName}`
+              }
+              className="rounded-[50%] w-[49px] h-[49px] object-cover cursor-pointer hover:-translate-y-2 transition ease-out duration-300"
               onClick={() =>
                 onClickMember({
                   uid,
