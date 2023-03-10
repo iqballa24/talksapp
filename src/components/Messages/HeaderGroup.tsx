@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Searchbar } from '@/components/UI';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { messageSliceAction } from '@/store/messages';
+import { asyncLeaveGroup } from '@/store/groups/action';
 
 const HeaderGroup = () => {
   const navigate = useNavigate();
@@ -30,6 +31,10 @@ const HeaderGroup = () => {
   const toggleSearch = () => {
     setShowSearch((prev) => !prev);
   };
+
+  const onLeaveGroup = async() => {
+    dispatch(asyncLeaveGroup())
+  }
 
   return (
     <div
@@ -123,12 +128,12 @@ const HeaderGroup = () => {
             />
           </button>
         ) : (
-          <button type="button">
+          <button type="button" onClick={onLeaveGroup}>
             <MdLogout size={20} id="exit" />
             <Tooltip
               className="z-20"
               anchorId="exit"
-              content={ui.language === 'en' ? `Exit group` : `Keluar group`}
+              content={ui.language === 'en' ? `Leave group` : `Keluar group`}
               place="bottom"
             />
           </button>

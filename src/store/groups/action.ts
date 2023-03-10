@@ -1,12 +1,14 @@
 import {
   createGroup,
+  leaveGroup,
   getDetailMember,
   sendRequestMember,
   updateDocument,
   updateProfileGroup,
 } from '@/lib/firebase/API';
 import { RootState } from '@/store';
-import { groupsSliceAction } from '@/store/groups';
+import { chatsSliceAction } from '@/store/chats';
+import groupsSlice, { groupsSliceAction } from '@/store/groups';
 import { Dispatch } from '@reduxjs/toolkit';
 import { DocumentData } from 'firebase/firestore';
 import toast from 'react-hot-toast';
@@ -71,8 +73,7 @@ function asyncAddNewMembers(uid: string) {
     const checkUserHasAdd = group.selectedGroup.member.includes(uid);
 
     try {
-      if (checkUserHasAdd)
-        throw new Error('User has added');
+      if (checkUserHasAdd) throw new Error('User has added');
 
       const promise = sendRequestMember({
         uid,
@@ -161,10 +162,47 @@ function asyncUpdateGroup(id: string, data: DocumentData) {
   };
 }
 
+function asyncLeaveGroup() {
+  return async (dispatch: Dispatch, getState: () => RootState) => {
+    const { group, auth } = getState();
+    const idGroup = group.selectedGroup.idGroup;
+    const idUser = auth.user.uid;
+
+    toast.success('You have left the group');
+
+    const newListGroup = group.list.filter((item) => item.idGroup !== idGroup);
+
+    dispatch(groupsSliceAction.receiveListGroups(newListGroup));
+    dispatch(chatsSliceAction.resetChatsState());
+
+    try {
+      const data = {
+        member: group.selectedGroup.member.filter((item) => item !== idUser),
+      };
+
+      const res = await leaveGroup({
+        collection: 'usersGroups',
+        idUser,
+        idGroup,
+        data,
+      });
+      return res;
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error('Ops, Something went wrong');
+        console.log('Unexpected error', err);
+      }
+    }
+  };
+}
+
 export {
   asyncCreateNewGroup,
   asyncGetDetailMember,
   asyncAddNewMembers,
   asyncUpdateImageGroup,
   asyncUpdateGroup,
+  asyncLeaveGroup,
 };

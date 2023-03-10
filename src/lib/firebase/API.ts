@@ -14,6 +14,8 @@ import {
   arrayRemove,
   arrayUnion,
   Timestamp,
+  deleteDoc,
+  deleteField,
 } from 'firebase/firestore';
 import {
   sendEmailVerification,
@@ -606,6 +608,31 @@ const updateProfileGroup = async ({ id, subject, file }: DocumentData) => {
   }
 };
 
+const leaveGroup = async ({
+  collection,
+  idUser,
+  idGroup,
+  data,
+}: DocumentData) => {
+  try {
+    const groupsRef = doc(db, collection, idUser);
+    const res = await updateDoc(groupsRef, { [idGroup]: deleteField() });
+
+    await setDoc(doc(db, 'groups', idGroup), data, {
+      merge: true,
+    });
+
+    return res;
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    } else {
+      console.log(err);
+      throw new Error('Ops, something went wrong');
+    }
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -627,5 +654,6 @@ export {
   sendRequestMember,
   sendMessagePersonal,
   sendMessageGroup,
-  updateProfileGroup
+  updateProfileGroup,
+  leaveGroup,
 };
