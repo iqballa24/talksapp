@@ -72,7 +72,7 @@ function asyncAddNewMembers(uid: string) {
 
     try {
       if (checkUserHasAdd)
-        throw new Error('You had sent a request to this user');
+        throw new Error('User has added');
 
       const promise = sendRequestMember({
         uid,
@@ -102,6 +102,14 @@ function asyncAddNewMembers(uid: string) {
 
 function asyncUpdateImageGroup({ id, subject, file }: DocumentData) {
   return async (dispatch: Dispatch) => {
+    if (!file) {
+      return;
+    }
+
+    if (file.size > 2000000) {
+      return toast.error('Please select image size less than 2 MB');
+    }
+
     try {
       const promise = updateProfileGroup({ id, subject, file });
 
@@ -158,5 +166,5 @@ export {
   asyncGetDetailMember,
   asyncAddNewMembers,
   asyncUpdateImageGroup,
-  asyncUpdateGroup
+  asyncUpdateGroup,
 };

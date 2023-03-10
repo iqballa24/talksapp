@@ -28,11 +28,12 @@ const ChatsList = () => {
         ? a.userInfo.displayName.localeCompare(b.userInfo.displayName)
         : b.date - a.date
     )
-    .filter((chat) => chat.status === 'active')
-    .filter((chat) =>
-      chat.userInfo.displayName
-        .toLowerCase()
-        .includes(chats.filter.toLowerCase())
+    .filter(
+      (chat) =>
+        chat.status === 'active' &&
+        chat.userInfo.displayName
+          .toLowerCase()
+          .includes(chats.filter.toLowerCase())
     );
 
   return (

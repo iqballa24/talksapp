@@ -7,6 +7,7 @@ export type groupsSliceTypes = {
     invitedBy: string;
     status: string;
     groupInfo: groupInfoTypes;
+    date: number;
   }[];
   detailMember: userTypes[];
   selectedGroup: groupInfoTypes;

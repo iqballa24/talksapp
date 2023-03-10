@@ -61,6 +61,13 @@ function asyncUpdateUser(uid: string, data: DocumentData) {
 
 function asyncUpdateImageUser({ uid, displayName, file }: DocumentData) {
   return async (dispatch: Dispatch) => {
+    if (!file) {
+      return;
+    }
+
+    if (file.size > 2000000) {
+      return toast.error('Please select image size less than 2 MB');
+    }
     try {
       const promise = uploadProfileImage({ uid, displayName, file });
 

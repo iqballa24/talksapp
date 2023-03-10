@@ -23,7 +23,7 @@ const Profile: React.FC<ProfileProps> = ({ displayName, about, photoURL }) => {
         animate={{ width: 100 }}
         className="w-4/12"
       >
-        <img src={srcImage} className="rounded-[50%] w-[85px] h-[85px]" />
+        <img src={srcImage} className="rounded-[50%] w-[85px] h-[85px] object-cover" />
       </motion.div>
       <div className="w-8/12 flex flex-col">
         <h1 className="text-dark dark:text-grey text-lg">{displayName}</h1>

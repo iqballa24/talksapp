@@ -28,12 +28,13 @@ const RegisterPage = () => {
           text="to complete the registration process please check your email.
             We`ve just sent a verification link to your email."
           visible={t.visible}
+          close={() => toast.dismiss()}
         />
       ));
 
       setTimeout(() => {
         navigate('/');
-      }, 6000);
+      }, 8000);
     } catch (err) {
       console.log(err);
       toast.error('Something went wrong');

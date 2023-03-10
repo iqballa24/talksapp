@@ -20,7 +20,7 @@ const GroupsList = () => {
   }
 
   const groupsFilter = [...group.list].sort(
-    (a, b) => b.groupInfo.createdAt - a.groupInfo.createdAt
+    (a, b) => b.date - a.date
   );
 
   return (

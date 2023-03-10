@@ -98,7 +98,7 @@ const NewFriendsItem: React.FC<NewFriendsItemProps> = ({
         <img
           src={srcImage}
           alt=""
-          className="w-[49px] h-[49px] rounded-[50%]"
+          className="w-[49px] h-[49px] rounded-[50%] object-cover"
         />
       </div>
       <div className="w-7/12 flex flex-col justify-start">

@@ -5,7 +5,8 @@ const BoxMessage: React.FC<{
   title: string;
   text: string;
   visible: boolean;
-}> = ({ title, text, visible }) => {
+  close: () => void;
+}> = ({ title, text, visible, close }) => {
   return (
     <Transition appear show={visible} as={Fragment}>
       <Transition.Child
@@ -34,7 +35,10 @@ const BoxMessage: React.FC<{
             </div>
           </div>
           <div className="flex border-l border-gray-200">
-            <button className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <button
+              onClick={close}
+              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
               Close
             </button>
           </div>

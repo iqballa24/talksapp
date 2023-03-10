@@ -442,8 +442,6 @@ const sendRequestMember = async ({ uid, idGroup, data }: DocumentData) => {
       merge: true,
     });
 
-    await setDoc(doc(db, 'usersGroups', uid), {});
-
     await updateDoc(doc(db, 'usersGroups', uid), {
       [idGroup + '.idGroup']: idGroup,
       [idGroup + '.invitedBy']: user.uid,
