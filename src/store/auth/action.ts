@@ -14,6 +14,7 @@ import { authSliceAction } from '@/store/auth';
 import { chatsSliceAction } from '@/store/chats';
 import { usersSliceAction } from '@/store/users';
 import { messageSliceAction } from '@/store/messages';
+import { groupsSliceAction } from '@/store/groups';
 
 function asyncRegisterUser({ email, password, username }: registerTypes) {
   return async () => {
@@ -110,6 +111,7 @@ function unSetAuthUser() {
     dispatch(usersSliceAction.resetListFriends());
     dispatch(usersSliceAction.receiveTotalRequests(0));
     dispatch(messageSliceAction.clearMessages());
+    dispatch(groupsSliceAction.receiveListGroups([]));
   };
 }
 

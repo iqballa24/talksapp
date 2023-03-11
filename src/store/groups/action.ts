@@ -8,7 +8,7 @@ import {
 } from '@/lib/firebase/API';
 import { RootState } from '@/store';
 import { chatsSliceAction } from '@/store/chats';
-import groupsSlice, { groupsSliceAction } from '@/store/groups';
+import { groupsSliceAction } from '@/store/groups';
 import { Dispatch } from '@reduxjs/toolkit';
 import { DocumentData } from 'firebase/firestore';
 import toast from 'react-hot-toast';
@@ -83,7 +83,7 @@ function asyncAddNewMembers(uid: string) {
 
       toast.promise(promise, {
         loading: 'Loading..',
-        success: 'Request send successfully',
+        success: 'Member added successfully',
         error: 'Failed',
       });
 

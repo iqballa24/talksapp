@@ -14,7 +14,6 @@ import {
   arrayRemove,
   arrayUnion,
   Timestamp,
-  deleteDoc,
   deleteField,
 } from 'firebase/firestore';
 import {
