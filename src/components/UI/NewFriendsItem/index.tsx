@@ -28,15 +28,17 @@ const NewFriendsItem: React.FC<NewFriendsItemProps> = ({
         return requestBy === auth.user.uid ? (
           <>
             <MdAccessTime
-              id="pending"
+              id={`pending-${displayName}`}
               size={24}
               className="text-dark-secondary dark:text-white"
             />
             <Tooltip
               className="z-20"
-              anchorId="pending"
+              anchorId={`pending-${displayName}`}
               content={
-                ui.language === 'en' ? 'Waiting for response' : 'Menunggu tanggapan'
+                ui.language === 'en'
+                  ? 'Waiting for response'
+                  : 'Menunggu tanggapan'
               }
             />
           </>
