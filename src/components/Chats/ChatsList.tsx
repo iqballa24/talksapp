@@ -49,7 +49,7 @@ const ChatsList = () => {
           </p>
         </Link>
       )}
-      <ul className="flex flex-col h-full max-h-[600px] overflow-y-scroll divide-y dark:divide-dark-secondary/50 bg-white dark:bg-dark-third">
+      <ul className="flex flex-col h-[600px] overflow-y-scroll divide-y dark:divide-dark-secondary/50 bg-white dark:bg-dark-third">
         {chatsFilter.map((chat: DocumentData) => (
           <ChatItem
             key={chat.chatId}
