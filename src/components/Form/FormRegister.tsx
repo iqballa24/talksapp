@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Buttons } from '@/components/UI';
+import { Buttons, Input } from '@/components/UI';
 
-import { FormRegisterTypes, registerTypes } from '@/lib/types';
+import { registerTypes, FormValues } from '@/lib/types';
 
 const FormRegister: React.FC<{
   submitHandler: (data: registerTypes) => void;
@@ -10,12 +10,25 @@ const FormRegister: React.FC<{
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     getValues,
-  } = useForm<FormRegisterTypes>();
+  } = useForm<FormValues>();
 
   return (
     <form className="flex flex-col space-y-7">
+      <Input
+        type="text"
+        label="Username"
+        placeholder="Your username"
+        form={{
+          control,
+          name: 'username',
+          rules: {
+            required: 'Username field is required',
+          },
+        }}
+      />
       <div className="flex flex-col space-y-3">
         <label className="font-light" htmlFor="username">
           Username

@@ -1,5 +1,12 @@
 import { IconType } from 'react-icons/lib';
 
+export type FormValues = {
+  email: string;
+  password: string;
+  username: string;
+  confirmPassword: string;
+};
+
 export type FormLoginTypes = {
   email: string;
   password: string;

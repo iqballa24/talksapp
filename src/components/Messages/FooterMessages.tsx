@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdOutlineEmojiEmotions, MdSend, MdClose } from 'react-icons/md';
 import { FiPaperclip } from 'react-icons/fi';
 import { Tooltip } from 'react-tooltip';
-import { Input } from '@/components/UI';
+import { InputMessage } from '@/components/UI';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { asyncSendMessages } from '@/store/messages/action';
 
@@ -114,7 +114,7 @@ const FooterMessages = () => {
             place="top"
           />
         </>
-        <Input
+        <InputMessage
           id="message"
           value={textMessage}
           name="message"

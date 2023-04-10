@@ -1,5 +1,5 @@
 import Searchbar from '@/components/UI/Searchbar';
-import Input from '@/components/UI/Input';
+import InputMessage from '@/components/UI/InputMessage';
 import Popover from '@/components/UI/Popoveritem';
 import Header from '@/components/UI/Header';
 import ModalSettingTheme from '@/components/UI/Modal/SettingTheme';
@@ -14,10 +14,11 @@ import NewFriendsItem from '@/components/UI/NewFriendsItem';
 import RoundedImage from '@/components/UI/RoundedImage';
 import BoxText from '@/components/UI/BoxText';
 import Tabs from '@/components/UI/Tabs';
+import Input from '@/components/UI/Input';
 
 export {
   Searchbar,
-  Input,
+  InputMessage,
   Popover,
   Header,
   ModalSettingTheme,
@@ -32,4 +33,5 @@ export {
   RoundedImage,
   BoxText,
   Tabs,
+  Input
 };
