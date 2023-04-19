@@ -82,6 +82,7 @@ const FormRegister: React.FC<{
             validate: (value) =>
               value === getValues('password') || 'The password do not match',
           })}
+          autoComplete="on"
         />
         {errors.confirmPassword && (
           <p className="text-red-500 text-xs">

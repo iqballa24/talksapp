@@ -31,6 +31,7 @@ const Input: React.FC<Props> = ({ label, form, placeholder, type }) => {
         {...field}
         placeholder={placeholder}
         className="bg-transparent border py-3 px-4 rounded-md placeholder:text-gray-400 placeholder:text-sm placeholder:font-light"
+        autoComplete={type === 'password' ? 'on' : 'off'}
       />
       {type === 'password' && (
         <div
