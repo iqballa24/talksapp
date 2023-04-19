@@ -10,6 +10,7 @@ const initialState = {
   showModalAddNewFriends: false,
   showModalFilterMessage: false,
   showModalAddNewMembers: false,
+  showEmoji: false,
 };
 
 const uiSlice = createSlice({
@@ -53,6 +54,9 @@ const uiSlice = createSlice({
     },
     toggleModalAddNewMembers(state) {
       state.showModalAddNewMembers = !state.showModalAddNewMembers;
+    },
+    toggleEmoji(state) {
+      state.showEmoji = !state.showEmoji;
     },
   },
 });

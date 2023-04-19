@@ -9,13 +9,14 @@ import { asyncSendMessages } from '@/store/messages/action';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { uiActions } from '@/store/ui';
 
 const FooterMessages = () => {
   const dispatch = useAppDispatch();
+  const showEmoji = useAppSelector((state) => state.ui.showEmoji);
   const [textMessage, setTextMessage] = useState<string>('');
   const [srcImage, setSrcImage] = useState<string | null>(null);
   const [uploadImage, setUploadImage] = useState<File | null>(null);
-  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
   const { chats, auth, ui, users } = useAppSelector((state) => state);
   const { chatId, isGroup } = chats.selectedChat;
   const { uid: receiverId } = users.selectedUser;
@@ -64,7 +65,7 @@ const FooterMessages = () => {
   };
 
   const toggleEmojiPicker = () => {
-    setShowEmojiPicker((prev) => !prev);
+    dispatch(uiActions.toggleEmoji());
   };
 
   useEffect(() => {
@@ -85,12 +86,16 @@ const FooterMessages = () => {
       <div className="relative flex flex-row px-4 py-1 justify-between min-h-[62px] items-center text-dark-secondary bg-grey-secondary gap-5 dark:text-grey/50 dark:bg-dark">
         <>
           <button id="emoji" type="button" onClick={toggleEmojiPicker}>
-            <MdOutlineEmojiEmotions size={24} className="cursor-pointer" />
+            {showEmoji ? (
+              <MdClose size={24} className="cursor-pointer" />
+            ) : (
+              <MdOutlineEmojiEmotions size={24} className="cursor-pointer" />
+            )}
           </button>
           <Tooltip
             className="z-10"
             anchorId="emoji"
-            content="Emoji"
+            content={showEmoji ? 'Close' : 'Emoji'}
             place="top"
           />
         </>
@@ -136,7 +141,7 @@ const FooterMessages = () => {
           />
         </>
         <AnimatePresence>
-          {showEmojiPicker && (
+          {showEmoji && (
             <motion.div
               key="emojiPicker"
               initial={{ opacity: 0 }}
