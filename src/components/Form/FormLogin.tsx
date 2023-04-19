@@ -11,7 +11,12 @@ const FormLogin: React.FC<{
     handleSubmit,
     control,
     formState: { isSubmitting },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   return (
     <form className="flex flex-col space-y-7">

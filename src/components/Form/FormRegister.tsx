@@ -13,7 +13,14 @@ const FormRegister: React.FC<{
     control,
     formState: { errors, isSubmitting },
     getValues,
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    defaultValues: {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
 
   return (
     <form className="flex flex-col space-y-7">
@@ -29,66 +36,39 @@ const FormRegister: React.FC<{
           },
         }}
       />
-      <div className="flex flex-col space-y-3">
-        <label className="font-light" htmlFor="username">
-          Username
-        </label>
-        <input
-          id="username"
-          type="text"
-          placeholder="Your username"
-          className="bg-transparent border py-2 px-3 rounded"
-          {...register('username', {
-            required: 'Username field is required',
-          })}
-        />
-        {errors.username && (
-          <p className="text-red-500 text-xs">{errors.username.message}</p>
-        )}
-      </div>
-      <div className="flex flex-col space-y-3">
-        <label className="font-light" htmlFor="email">
-          Email address
-        </label>
-        <input
-          id="email"
-          type="text"
-          placeholder="Your email address"
-          className="bg-transparent border py-2 px-3 rounded"
-          {...register('email', {
+      <Input
+        type="email"
+        label="Email"
+        placeholder="Your email address"
+        form={{
+          control,
+          name: 'email',
+          rules: {
             required: 'Email field is required',
             pattern: {
               value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
               message: 'Email must be a valid email',
             },
-          })}
-        />
-        {errors.email && (
-          <p className="text-red-500 text-xs">{errors.email.message}</p>
-        )}
-      </div>
-      <div className="flex flex-col space-y-3">
-        <label className="font-light" htmlFor="password">
-          Password
-        </label>
-        <input
-          id="password"
-          type="password"
-          placeholder="Your password"
-          className="bg-transparent border py-2 px-3 rounded"
-          {...register('password', {
+          },
+        }}
+      />
+      <Input
+        type="password"
+        label="Password"
+        placeholder="Your password"
+        form={{
+          control,
+          name: 'password',
+          rules: {
             required: 'Password field is required',
             pattern: {
               value: /^(?=.*[A-Z])(?=.*\d)[\w@$!%*?&]{6,}$/g,
               message:
                 'Password must be 5 or more character and contain at least one letter and one number',
             },
-          })}
-        />
-        {errors.password && (
-          <p className="text-red-500 text-xs">{errors.password.message}</p>
-        )}
-      </div>
+          },
+        }}
+      />
       <div className="flex flex-col space-y-3">
         <label className="font-light" htmlFor="confirmPassword">
           Confirmation Password
@@ -97,7 +77,7 @@ const FormRegister: React.FC<{
           id="confirmPassword"
           type="password"
           placeholder="Your confirmation password"
-          className="bg-transparent border py-2 px-3 rounded"
+          className="bg-transparent border py-3 px-4 rounded-md placeholder:text-gray-400 placeholder:text-sm placeholder:font-light"
           {...register('confirmPassword', {
             validate: (value) =>
               value === getValues('password') || 'The password do not match',
