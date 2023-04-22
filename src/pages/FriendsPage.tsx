@@ -18,7 +18,7 @@ const FriendsPage = () => {
 
   const data = {
     [`${ui.language === 'en'? "Friends" : "Teman"}`]: (
-      <ul className="flex flex-col h-[600px] w-full overflow-y-scroll scrollbar-hide">
+      <ul className="flex flex-col h-[580px] w-full overflow-y-scroll scrollbar-hide">
         {users.listFriends
           .filter((item: DocumentData) => item.status === 'accepted')
           .map((item: DocumentData, index: number) => (
